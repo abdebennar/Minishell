@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   and_or.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/03 09:51:05 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/05 06:03:39 by bel-oirg         ###   ########.fr       */
+/*   Created: 2024/04/05 03:49:25 by bel-oirg          #+#    #+#             */
+/*   Updated: 2024/04/05 03:54:44 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
-void	_pwd_(char **cmd)
+void	_or_(t_node *node, int exit_stat)
 {
-	char cwd[PATH_MAX];
-	
-	if (cmd[1])
-	{
-		printf("pwd: too many arguments");
-		exit(1);
-	}
-	getcwd(cwd, PATH_MAX);
-	printf("%s\n", cwd);
-	exit(0);
+	if (!node)
+		exit(-1);
+	if (exit_stat)
+		executor(node->lchild);
+}
+
+void	_and_(t_node *node, int exit_stat)
+{
+	if (!node)
+		exit(-1);
+	if (!exit_stat)
+		executor(node->lchild);
 }
