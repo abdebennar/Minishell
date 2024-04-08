@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 03:57:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/05 05:46:42 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/07 04:00:31 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,50 +51,67 @@ static char	*add_path(char *cmd)
 	return (NULL);
 }
 
-int	buddha(char **cmd)
+int	rbuddha(t_node *node, int *piped)
 {
-	int	fd[2];
 	int	forked;
 
-	(pipe(fd) < 0) && (perror("pipe"), my_malloc(0, 0), 0);
 	forked = fork();
-	(forked < 0) && (close(fd[0]), close(fd[1]), perror("fork"), 0);
+	if (forked < 0)
+	{
+		perror("fork");
+		return (-1)
+	}
 	if (!forked)
 	{
-		close(fd[0]);
-		(dup2(fd[1], STDOUT_FILENO) < 0) && (perror("dup2"), my_malloc(0, 0));
-		close(fd[1]);
-		execve(add_path(cmd[0]), cmd, NULL);
+		close(piped[0]);
+		dup2(piped[1], STDOUT_FILENO);
+		close(piped[1]);
+		execve(node->cmd[0], node->cmd, NULL);
 		w_err("Command not found");
 	}
-	else
-	{
-		close(fd[1]);
-		(dup2(fd[0], STDIN_FILENO) < 0) && (perror("dup2"), my_malloc(0, 0), 0);
-		close(fd[1]);
-	}
-	return (0);
+	return (forked);
 }
 
-void	_pipe_(int argc, char *argv[], t_node *cmd)
+int	lbuddha(t_node *node, int *piped)
 {
-	int	fd_in;
-	int	fd_out;
+	int	forked;
 
-	fd_in = open(argv[1], O_RDONLY, 0777);
-	fd_out = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	(fd_in < 0 || fd_out < 0) && (perror("open"), my_malloc(0, 0));
+	forked = fork();
+	if (forked < 0)
+	{
+		perror("fork");
+		return (-1)
+	}
+	if (!forked)
+	{
+		close(piped[1]);
+		dup2(piped[0], STDIN_FILENO);
+		close(piped[0]);
+		execve(node->cmd[0], node->cmd, NULL);
+		w_err("Command not found");
+	}
+	return (forked);
+}
+
+void	_pipe_(t_node *cmd)
+{
+	pid_t		pid[2];
+	int			piped[2];
+
+	if (pipe(piped) < 0)
+		perror("pipe");
+
+	pid[0] = lbuddha(cmd->lchild, piped);
+	if (pid[0] < 0)
+		return (close(pid[0]), close(pid[1]));
+		
+	pid[1] = rbuddha(cmd->rchild, piped);
+	if (pid[1] < 0)
+		return (close(pid[0]), close(pid[1]));
+
+	waitpid(pid[0], NULL, 0);
+	waitpid(pid[1], NULL, 0);
 	
-	if (dup2(fd_in, STDIN_FILENO) < 0)
-		(perror("dup2"), err(&fd_in, &fd_out), 0);
-	close(fd_in);
-	
-	(buddha(cmd->lchild->cmd)) && (err(NULL, &fd_out), 0);
-	
-	if (dup2(fd_out, STDOUT_FILENO) < 0)
-		(perror("dup2"), err(NULL, &fd_out), 0);
-	close(fd_out);
-	
-	execve(add_path(cmd->rchild->cmd[0]), cmd->rchild->cmd, NULL);
-	w_err("Command not found");
+	close(piped[1]);
+	close(piped[0]);
 }
