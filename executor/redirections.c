@@ -6,13 +6,13 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 04:00:45 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/07 06:56:49 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/09 05:45:58 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	_right_(t_node *node)
+int	_right_(t_node *node)
 {
 	t_redir *alter;
 	int		fd;
@@ -22,15 +22,15 @@ void	_right_(t_node *node)
 	{
 		if (alter->tok == OUT)
 		{
+			if (fd > 0)
+				close(fd);
 			fd = open(alter->file, O_WRONLY | O_TRUNC | O_CREAT, 0644);
-			if (fd < 0) // fd change
-				return (-1);
 		}
 		else if (alter->tok == APPEND)
 		{
+			if (fd > 0)
+				close(fd);
 			fd = open(alter->file, O_WRONLY | O_APPEND | O_CREAT, 0644);
-			if (fd < 0)
-				return (-1);
 		}
 		alter = alter->rchild;
 	}
@@ -38,7 +38,7 @@ void	_right_(t_node *node)
 	return (fd);
 }
 
-void	_left_(t_node *node)
+int	_left_(t_node *node)
 {
 	t_redir *alter;
 	int		fd;
@@ -48,15 +48,15 @@ void	_left_(t_node *node)
 	{
 		if (alter->tok == IN)
 		{
+			if (fd > 0)
+				close(fd);
 			fd = open(alter->file, O_RDONLY , 0644);
-			if (fd < 0)
-				return (-1);
 		}
 		else if (alter->tok == HEREDOC)
 		{
+			if (fd > 0)
+				close(fd);
 			fd = alter->fd;
-			if (fd < 0)
-				return (-1);
 		}
 		alter = alter->rchild;
 	}
