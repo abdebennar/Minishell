@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 04:00:45 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/09 05:45:58 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/09 06:40:44 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	_right_(t_node *node)
 				close(fd);
 			fd = open(alter->file, O_WRONLY | O_APPEND | O_CREAT, 0644);
 		}
+		(fd < 0) && (perror("open"), 0);
 		alter = alter->rchild;
 	}
 	node->fd[1] = fd;
@@ -58,6 +59,7 @@ int	_left_(t_node *node)
 				close(fd);
 			fd = alter->fd;
 		}
+		(fd < 0) && (perror("open"), 0);
 		alter = alter->rchild;
 	}
 	node->fd[0] = fd;
