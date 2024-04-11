@@ -12,16 +12,7 @@
 
 #include "../minishell.h"
 
-
-int	in_d_quotes(char *str)
-{
-	if (!str)
-		return (0);
-	if (*str == '\"' && str[ft_strlen(str) - 1] == '\"')
-		return (1);
-}
-
-int check_quotes(char *str)
+int check_quotes_n(char *str)
 {
 	int	s_quotes;
 	int	d_quotes;
@@ -39,13 +30,66 @@ int check_quotes(char *str)
 	return (!((s_quotes % 2) || (d_quotes % 2)));
 }
 
-int	in_s_quotes(char *str)
+int	count_c(char *str, char c)
 {
-	if (!str)
-		return (0);
-	if (*str == '\'' && str[ft_strlen(str) - 1] == '\'')
-		return (1);
+	int counter;
+
+	counter = 0;
+	while (*str)
+	{
+		if (*str++ == c)
+			counter++;
+	}
+	return (counter);
 }
+
+int	check_parral(char *str)
+{
+	int	index;
+	int	r_index;
+	char q[2];
+	int max_s;
+
+	q[0] = '\'';
+	q[1] = '\"';
+	index = -1;
+	max_s = count_c(str, '\'');
+	r_index = strlen(str) - 1;
+	while (str[++index])
+	{
+		if (str[index] == q[0])
+		{
+		    max_s--;
+			while(str[r_index] != q[0])
+			{
+			    if (str[r_index] == q[1])
+			        return (-2);
+			   	r_index--;
+			}
+			printf("r_index %d -- index %d\n", r_index, index);
+			if (index == r_index)
+				return (-1);
+			max_s--;
+			if (!max_s)
+			    return (0);
+		}
+		else if (str[index] == q[1])
+		{
+			while(str[r_index] != q[1])
+				r_index--;
+			if (index >= r_index)
+				return (-1);
+		}
+	}
+	return (0);
+}
+
+int main() {
+    printf("%d \n", check_parral("l\'\'idsa\"ds\"a"));
+
+    return 0;
+}
+
 
 void	_b_expanding_(t_node **node)
 {

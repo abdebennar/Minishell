@@ -1,25 +1,54 @@
 #include "../minishell.h"
 
-void    update_pwd(char *new, t_env **env)
+void    update_pwd(char *new_pwd, t_env **env)
 {
-    while(ft_strcmp((*env)->var, "PWD"))
+    t_env   *new_node;
+
+    while (ft_strcmp((*env)->var, "PWD"))
         *env = (*env)->next;
     if (*env)
-        (*env)->value = new;
+    {
+        (*env)->value = new_pwd;
+		new_node->env = ft_strjoin("PWD=", new_pwd);
+    }
+    else
+    {
+        new_node = my_malloc(sizeof(t_env), 1);
+        new_node->var = ft_strdup("PWD");
+		new_node->value = ft_strdup(new_pwd);
+		new_node->env = ft_strjoin("PWD=", new_pwd);
+		new_node->next = NULL;
+		ft_lstaddback(env, new_node);
+    }
 }
 
-void    update_oldpwd(char *new, t_env **env)
+void    update_oldpwd(char *new_pwd, t_env **env)
 {
-    while (ft_strcmp((*env)->var, "ODLPWD"))
+    t_env   *new_node;
+
+    while (ft_strcmp((*env)->var, "OLDPWD"))
         *env = (*env)->next;
-    (*env) && ((*env)->value = new);
+    if (*env)
+    {
+        (*env)->value = new_pwd;
+		new_node->env = ft_strjoin("OLDPWD=", new_pwd);
+    }
+    else
+    {
+        new_node = my_malloc(sizeof(t_env), 1);
+        new_node->var = ft_strdup("OLDPWD");
+		new_node->value = ft_strdup(new_pwd);
+		new_node->env = ft_strjoin("OLDPWD=", new_pwd);
+		new_node->next = NULL;
+		ft_lstaddback(env, new_node);
+    }
 }
 
 void    _cd_(char **cmd, t_env **env)
 {
-    int 	exit_err;
     char    old_pwd[PATH_MAX];
     char    pwd[PATH_MAX];
+    int 	exit_err;
 
     if (cmd[2])
     {
@@ -28,6 +57,8 @@ void    _cd_(char **cmd, t_env **env)
     }
     if (!cmd[1])
         cmd[1] = getenv("HOME");
+    else if (ft_strcmp(cmd[1], "-"))
+        cmd[1] = getenv("OLDPWD");
     if (getcwd(old_pwd, PATH_MAX))
         return ;
     exit_err = chdir(cmd[1]);

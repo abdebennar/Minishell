@@ -21,12 +21,12 @@ int	find_c(char *str, char c)
 			return (1);
 	return (0);
 }
-void	_env_(char **cmd, t_env **raw_env)
+void	_env_(char **cmd, t_env *raw_env)
 {
-	while(*raw_env)
+	while(raw_env)
 	{
-		if (find_c((*raw_env)->env, '='))
-			printf("%s\n", (*raw_env)->env);
-		*raw_env = (*raw_env)->next;
+		if (find_c((raw_env)->env, '='))
+			printf("%s\n", (raw_env)->env);
+		raw_env = (raw_env)->next;
 	}
 }
