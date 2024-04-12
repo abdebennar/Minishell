@@ -17,7 +17,7 @@ long long	ft_atoll(char *str, int *err)
 	unsigned long long	num;
 	int					sign;
 
-	(1) && (sign = 1, num = 0, *err = 0);
+	(1) && (sign = 1, num = 0);
 	while ((*str >= 9 && *str <= 13) || (*str == ' '))
 		str++;
 	if (*str == '+' || *str == '-')
@@ -53,6 +53,7 @@ void	_exit_(char **cmd)
 		printf("exit\nbash: exit: too many arguments\n");
 		exit(1);
 	}
+	err = 0;
 	num = ft_atoll(cmd[1], &err);
 	if (err)
 	{

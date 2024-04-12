@@ -45,15 +45,18 @@ int	count_c(char *str, char c)
 
 int	check_parral(char *str)
 {
-	int	index;
-	int	r_index;
-	char q[2];
-	int max_s;
+	char	q[2];
+	int		index;
+	int		r_index;
+	int		max_s;
+	int		max_d;
 
 	q[0] = '\'';
 	q[1] = '\"';
+	q = "\'\"";
 	index = -1;
 	max_s = count_c(str, '\'');
+	max_d = count_c(str, '\"');
 	r_index = strlen(str) - 1;
 	while (str[++index])
 	{
@@ -62,11 +65,10 @@ int	check_parral(char *str)
 		    max_s--;
 			while(str[r_index] != q[0])
 			{
-			    if (str[r_index] == q[1])
+			    if (str[r_index--] == q[1])
 			        return (-2);
 			   	r_index--;
 			}
-			printf("r_index %d -- index %d\n", r_index, index);
 			if (index == r_index)
 				return (-1);
 			max_s--;
@@ -75,21 +77,22 @@ int	check_parral(char *str)
 		}
 		else if (str[index] == q[1])
 		{
+			max_d--;
 			while(str[r_index] != q[1])
-				r_index--;
-			if (index >= r_index)
+			{
+			    if (str[r_index] == q[0])
+			        return (-3);
+			   	r_index--;
+			}
+			if (index == r_index)
 				return (-1);
+			max_d--;
+			if (!max_d)
+			    return (0);
 		}
 	}
 	return (0);
 }
-
-int main() {
-    printf("%d \n", check_parral("l\'\'idsa\"ds\"a"));
-
-    return 0;
-}
-
 
 void	_b_expanding_(t_node **node)
 {
