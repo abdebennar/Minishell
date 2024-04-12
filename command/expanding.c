@@ -6,93 +6,11 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 00:29:18 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/09 07:08:43 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:34:27 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int check_quotes_n(char *str)
-{
-	int	s_quotes;
-	int	d_quotes;
-
-	s_quotes = 0;
-	d_quotes = 0;
-	while(*str)
-	{
-		if (*str == '\'')
-			s_quotes++;
-		else if (*str == '\"')
-			d_quotes++;
-		str++;
-	}
-	return (!((s_quotes % 2) || (d_quotes % 2)));
-}
-
-int	count_c(char *str, char c)
-{
-	int counter;
-
-	counter = 0;
-	while (*str)
-	{
-		if (*str++ == c)
-			counter++;
-	}
-	return (counter);
-}
-
-int	check_parral(char *str)
-{
-	char	q[2];
-	int		index;
-	int		r_index;
-	int		max_s;
-	int		max_d;
-
-	q[0] = '\'';
-	q[1] = '\"';
-	q = "\'\"";
-	index = -1;
-	max_s = count_c(str, '\'');
-	max_d = count_c(str, '\"');
-	r_index = strlen(str) - 1;
-	while (str[++index])
-	{
-		if (str[index] == q[0])
-		{
-		    max_s--;
-			while(str[r_index] != q[0])
-			{
-			    if (str[r_index--] == q[1])
-			        return (-2);
-			   	r_index--;
-			}
-			if (index == r_index)
-				return (-1);
-			max_s--;
-			if (!max_s)
-			    return (0);
-		}
-		else if (str[index] == q[1])
-		{
-			max_d--;
-			while(str[r_index] != q[1])
-			{
-			    if (str[r_index] == q[0])
-			        return (-3);
-			   	r_index--;
-			}
-			if (index == r_index)
-				return (-1);
-			max_d--;
-			if (!max_d)
-			    return (0);
-		}
-	}
-	return (0);
-}
 
 void	_b_expanding_(t_node **node)
 {
