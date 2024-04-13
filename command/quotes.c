@@ -6,16 +6,11 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:33:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/13 17:12:15 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/13 19:37:34 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int is_it_space(char c)
-{
-	return (c == ' ' || c == '\t');
-}
 
 int	is_alphanum(char c)
 {
@@ -72,39 +67,37 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 	return (dest);
 }
 
-char	*d_q(char *raw)
+char	*d_q(char *raw, int *index)
 {
-	int		index;
 	char	*tmp;
 	char	*new;
 	char	*possible;
 	size_t		ident;
 
-	raw++;
-	index = 0;
+	(*index)++;
 	new = ft_strdup("");
 	tmp = malloc(ft_strlen(raw) + 2);
-	while (*raw != '"')
+	while (raw[*index] != '"')
 	{
-		if (!*raw)
+		if (!raw[*index])
 		{
 			printf("unclosed quote\n");
 			return (NULL);
 		}
-		if (*raw == '$')
+		if (raw[*index] == '$')
 		{
-			ident = only_identifier(raw + 1);
+			ident = only_identifier(&raw[*index + 1]);
 			if (ident)
 			{
 				possible = malloc(ident + 1);
-				ft_strncpy(possible, raw + 1, ident);
+				ft_strncpy(possible, &raw[*index + 1], ident);
 				if (getenv(possible)) //you can remove this
 					new = ft_strjoin(new, getenv(possible));
-				raw += ident + 1;
+				index += ident + 1;
 			}
 		}
 		else 
-			new = add_c(new, *raw++);
+			new = add_c(new, raw[*(index++)]);
 	}
 	return (new);
 }
@@ -130,10 +123,24 @@ char	*s_q(char *raw)
 	return (clean);
 }
 
-// int main()
+// char *clean_str(char *str)
 // {
-// 	char *raw;
-
-// 	raw = ft_strdup("\"$SHELL$SHELLr d\"");
-// 	printf("|||%s|||\n", d_q(raw));
+// 	char	*clean;
+// 	int		index;
+	
+// 	index = -1;
+// 	while (str[++index])
+// 	{
+// 		if (str[index] == '"')
+// 			d_q(str, ++index);
+// 	}
 // }
+int main()
+{
+	char *raw;
+	int	index;
+
+	index = 0;
+	raw = ft_strdup("\"$SHELL\"");
+	printf("|||%s|||\n", d_q(raw, &index));
+}
