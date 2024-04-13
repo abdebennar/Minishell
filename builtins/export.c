@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 03:29:22 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/03 09:43:56 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/13 12:17:33 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ void	ft_lstaddback(t_env **alst, t_env *new)
 		*alst = new;
 }
 
+int	is_alphanum(char c)
+{
+	return ((c >= 'a' && c <= 'z')
+			|| (c >= 'A' && c <= 'Z')
+			|| (c >= '0' && c <= '9'));
+}
+
 int check_var(char *str)
 {
 	if (!((*str >= 'a' && *str <= 'z')
@@ -47,10 +54,7 @@ int check_var(char *str)
 	{
 		if (*str == '+' && *(str + 1) == '\0')
 			return (1);
-		else if (!((*str >= 'a' && *str <= 'z')
-			|| (*str >= 'A' && *str <= 'Z')
-			|| (*str >= '0' && *str <= '9')
-			|| (*str == '_')))
+		else if (!(is_alphanum(*str) || (*str == '_')))
 			return (-1);
 	}
 	return (0);

@@ -6,82 +6,134 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:33:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/12 22:33:54 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/13 17:12:15 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int	count_c(char *str, char c)
-{
-	int counter;
-
-	counter = 0;
-	while (*str)
-	{
-		if (*str++ == c)
-			counter++;
-	}
-	return (counter);
-}
-
-char	*include_var(char *raw, t_env *raw_env)
-{
-	char	*splited;
-
-	splited = ft_split(raw);
-	if (!ft_strcmp(splited[0], "$"))
-		return ("$");
-	if (is_it_in(raw_env, splited[0]))
-		return (getenv(splited[0]));
-	return (NULL);
-}
 
 int is_it_space(char c)
 {
 	return (c == ' ' || c == '\t');
 }
 
-void	d_q(char *raw, t_env *raw_env)
+int	is_alphanum(char c)
 {
-	char	*splited;
-	char	*clean;
-	char	*simple;
-	int		index;
+	return ((c >= 'a' && c <= 'z')
+			|| (c >= 'A' && c <= 'Z')
+			|| (c >= '0' && c <= '9'));
+}
+
+int	only_identifier(char *str)
+{
+	char *save;
 	
-	simple = malloc(ft_strlen(raw - 2));
-	*raw++;
-	while (*raw && *raw != '"')
+	save = str;
+	if (!((*str >= 'a' && *str <= 'z')
+		|| (*str >= 'A' && *str <= 'Z') || (*str == '_')))	
+		return (0);
+	while(*str)
 	{
+		if (!(is_alphanum(*str) || (*str == '_')))
+			break ;
+		str++;
+	}
+	return ((int)(str - save));
+}
+
+char	*add_c(char *str, char c)
+{
+	char	*new;
+	char	*save;
+	
+	if (!str || !c)
+		return (NULL);
+	new = malloc(ft_strlen(str) + 2);
+	save = new;
+	while (*str)
+		*new++ = *str++;
+	*new++ = c;
+	*new = 0;
+	return (save);
+}
+
+char	*ft_strncpy(char *dest, char *src, unsigned int n)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (src[i] != '\0' && i < n)
+	{
+		dest[i] = src[i];
+		++i;
+	}
+	while (i < n)
+		dest[i++] = '\0';
+	return (dest);
+}
+
+char	*d_q(char *raw)
+{
+	int		index;
+	char	*tmp;
+	char	*new;
+	char	*possible;
+	size_t		ident;
+
+	raw++;
+	index = 0;
+	new = ft_strdup("");
+	tmp = malloc(ft_strlen(raw) + 2);
+	while (*raw != '"')
+	{
+		if (!*raw)
+		{
+			printf("unclosed quote\n");
+			return (NULL);
+		}
 		if (*raw == '$')
 		{
-			if (*(raw + 1) == '?')
-				last_exit_stat();
-			else if (*(raw + 1))
+			ident = only_identifier(raw + 1);
+			if (ident)
 			{
-				clean = ft_strjoin(clean, include_var(raw, raw_env));
-				while (*raw && *raw != '$' && !is_it_space(*raw))
-					raw++;
+				possible = malloc(ident + 1);
+				ft_strncpy(possible, raw + 1, ident);
+				if (getenv(possible)) //you can remove this
+					new = ft_strjoin(new, getenv(possible));
+				raw += ident + 1;
 			}
 		}
-		index = -1;
-		while (*raw && *raw != '$')
-			simple[++index] = *raw++;
-		simple[++index] = 0;
-		clean = ft_strjoin(clean, simple);
+		else 
+			new = add_c(new, *raw++);
 	}
-	return (clean);
+	return (new);
 }
 
-void	s_q(char *raw)
+char	*s_q(char *raw)
 {
 	char	*clean;
 	int		index;
 
-	*raw++;
 	index = -1;
-	clean = my_malloc(ft_strlen(raw - 2), 1);
-	while (*raw && *raw != '\'')
+	clean = my_malloc(ft_strlen(raw - 1), 1);
+	raw++;
+	while (*raw != '\'')
+	{
+		if (!*raw)
+		{
+			printf("unclosed quote\n");
+			return (NULL);
+		}
 		clean[++index] = *raw++;
+	}
+	clean[++index] = 0;
 	return (clean);
 }
+
+// int main()
+// {
+// 	char *raw;
+
+// 	raw = ft_strdup("\"$SHELL$SHELLr d\"");
+// 	printf("|||%s|||\n", d_q(raw));
+// }

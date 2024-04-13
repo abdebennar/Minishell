@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 00:29:18 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/12 16:34:27 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/12 22:47:28 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,24 @@
 
 void	_b_expanding_(t_node **node)
 {
-	char **cmd;
-	int	index;
+	char	**cmd;
+	char	*m_cmd;
+	char	*clean;
+	int		v_index;
 
 	(*node)->cmd = cmd;
-	index = -1;
-	while (cmd[++index])
+	v_index = -1;
+	while (cmd[++v_index])
 	{
-		
+		m_cmd = cmd[v_index];
+		while (*m_cmd)
+		{
+			if (*m_cmd == '\'')
+				clean = ft_strjoin(clean, s_q(m_cmd));
+			else
+				clean = ft_strjoin(clean, d_q(m_cmd));
+
+		}
 	}
 }
 
