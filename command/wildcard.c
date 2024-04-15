@@ -20,7 +20,7 @@ bool check_pattern(char *str, char *pattern)
     return false;
 }
 
-void    _wildcard_()
+void    _wildcard_(char *pattern)
 {
     struct dirent   *entry;
     char            *extracted;
@@ -32,14 +32,16 @@ void    _wildcard_()
         perror("opendir");
         return ;
     }
+    extracted = NULL;
     while (1)
     {
         entry = readdir(dir);
         if (!entry)
             break;
-        if (check_pattern(entry->d_name, "*t*"))
+        if (check_pattern(entry->d_name, pattern))
         {
-            extracted = ft_strjoin(extracted, " ");
+            if (extracted)
+                extracted = ft_strjoin(extracted, " ");
             extracted = ft_strjoin(extracted, entry->d_name);
         }
     }

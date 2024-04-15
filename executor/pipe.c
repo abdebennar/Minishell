@@ -27,30 +27,6 @@ void	w_err(char *str)
 	my_malloc(0, 0);
 }
 
-static char	*add_path(char *cmd)
-{
-	int		index;
-	char	*path;
-	char	*out;
-	char	**path_v;
-
-	if (is_it_in(cmd, '/'))
-		return (cmd);
-	index = -1;
-	path = getenv("PATH");
-	(!path) && (w_err("PATH not found"), 0);
-	path_v = ft_split(path, ":");
-	index = -1;
-	while (path_v[++index])
-	{
-		out = ft_strjoin(path_v[index], "/");
-		out = ft_strjoin(out, cmd);
-		if (!access(out, X_OK))
-			return (out);
-	}
-	return (NULL);
-}
-
 int	rbuddha(t_node *node, int *piped)
 {
 	int	forked;
