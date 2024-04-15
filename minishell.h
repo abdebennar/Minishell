@@ -10,11 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <limits.h>
-# include <fcntl.h>
+#include <stdio.h> // printf
+#include <unistd.h> //write - close - fork - dup2 - chdir
+#include <stdlib.h> //malloc 
+#include <stdbool.h> //true && false
+#include <limits.h> //INT_MAX
+#include <fcntl.h> //open
+#include <dirent.h> //opendir
 
 typedef struct s_data
 {

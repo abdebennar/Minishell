@@ -102,45 +102,34 @@ char	*d_q(char *raw, int *index)
 	return (new);
 }
 
-char	*s_q(char *raw)
+char	*s_q(char *raw, int index)
 {
 	char	*clean;
-	int		index;
+	int		ind;
 
-	index = -1;
+	ind = -1;
 	clean = my_malloc(ft_strlen(raw - 1), 1);
-	raw++;
-	while (*raw != '\'')
+	index++;
+	while (raw[index] != '\'')
 	{
-		if (!*raw)
+		if (!raw[index])
 		{
 			printf("unclosed quote\n");
 			return (NULL);
 		}
-		clean[++index] = *raw++;
+		clean[++ind] = raw[index++];
 	}
-	clean[++index] = 0;
+	clean[++ind] = 0;
 	return (clean);
 }
 
-// char *clean_str(char *str)
+// int main()
 // {
-// 	char	*clean;
-// 	int		index;
-	
-// 	index = -1;
-// 	while (str[++index])
-// 	{
-// 		if (str[index] == '"')
-// 			d_q(str, ++index);
-// 	}
-// }
-int main()
-{
-	char *raw;
-	int	index;
+// 	char *raw;
+// 	int	index;
 
-	index = 0;
-	raw = ft_strdup("\"$SHELL\"");
-	printf("|||%s|||\n", d_q(raw, &index));
-}
+// 	printf("HELLLLL\n");
+// 	index = 0;
+// 	raw = ft_strdup("\"$SHELL\"");
+// 	printf("|||%s|||\n", d_q(raw, &index));
+// }
