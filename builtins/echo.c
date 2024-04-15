@@ -18,10 +18,12 @@ static int  check_flags(char *cmd)
         return (0);
     if (*cmd == '-')
     {
+		cmd++;
         while (*cmd == 'n')
-            cmd++;
-        if (!*cmd)
-            return (1);
+		{
+        	if (!*(++cmd))
+           		return (1);
+		}
     }
     return (0);
 }

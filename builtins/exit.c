@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 10:09:25 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/05 01:23:20 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/15 15:45:06 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	_exit_(char **cmd)
 	if (err)
 	{
 		printf("exit\nbash: exit: %s: numeric argument required", cmd[1]);
-		exit(num);
+		exit(num); //this is incorrent I think
 	}
 	if (num >= 0)
 		num = num % 256;

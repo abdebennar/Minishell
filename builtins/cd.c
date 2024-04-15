@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void    update_pwd(char *new_pwd, t_env **env)
+static void    update_pwd(char *new_pwd, t_env **env)
 {
     t_env   *new_node;
 
@@ -34,7 +34,7 @@ void    update_pwd(char *new_pwd, t_env **env)
     }
 }
 
-void    update_oldpwd(char *new_pwd, t_env **env)
+static void    update_oldpwd(char *new_pwd, t_env **env)
 {
     t_env   *new_node;
 

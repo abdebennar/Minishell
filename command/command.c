@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   command.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
+/*   Updated: 2024/04/15 17:56:05 by bel-oirg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 static char	*add_path(char *cmd)
@@ -11,7 +23,7 @@ static char	*add_path(char *cmd)
 		return (cmd);
 	index = -1;
 	path = getenv("PATH");
-	(!path) && (w_err("PATH not found"), 0);
+	(!path) && (perror("PATH not found"), 0);
 	path_v = ft_split(path, ":");
 	index = -1;
 	while (path_v[++index])
@@ -30,7 +42,7 @@ void    _exec_(t_node *node)
 
     forked = fork();
     if (forked < 0)
-        return ;
+        perror("fork");
     if (!forked)
     {
         execve(add_path(node->cmd[0]), node->cmd, NULL);

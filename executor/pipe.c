@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 03:57:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/12 11:20:35 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/15 15:56:36 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	_pipe_(t_node *cmd)
 
 	if (pipe(piped) < 0)
 		perror("pipe");
-
 	pid[0] = lbuddha(cmd->lchild, piped);
 	if (pid[0] < 0)
 	{
@@ -91,10 +90,8 @@ void	_pipe_(t_node *cmd)
 		close(pid[1]);
 		return ;
 	}
-
 	waitpid(pid[0], NULL, 0);
 	waitpid(pid[1], NULL, 0);
-	
 	close(piped[1]);
 	close(piped[0]);
 }
