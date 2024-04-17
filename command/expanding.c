@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 00:29:18 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/12 22:47:28 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/17 01:58:41 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,48 +17,71 @@ void	_b_expanding_(t_node **node)
 	char	**cmd;
 	char	*m_cmd;
 	char	*clean;
+	int		index;
 	int		v_index;
 
-	(*node)->cmd = cmd;
+	index = 0;
 	v_index = -1;
+	cmd = (*node)->cmd;
+	clean = NULL;
 	while (cmd[++v_index])
 	{
 		m_cmd = cmd[v_index];
-		while (*m_cmd)
+		clean = NULL;
+		index = 0;
+		while (m_cmd[index])
 		{
-			if (*m_cmd == '\'')
-				clean = ft_strjoin(clean, s_q(m_cmd));
+			if (m_cmd[index] == '\'')
+				clean = ft_strjoin(clean, s_q(m_cmd, &index));
+			else if (m_cmd[index] == '"')
+				clean = ft_strjoin(clean, d_q(m_cmd, &index));
 			else
-				clean = ft_strjoin(clean, d_q(m_cmd));
-
+				clean = add_c(clean, m_cmd[index++]);
 		}
+		m_cmd = clean;
+		printf("%s\n", clean);
 	}
 }
 
-void	_expanding_(t_node **node, t_env *env)
+int main()
 {
-	t_env	*tmp_env;
-	int		index;
-	
-	tmp_env = env;
-	while((*node)->cmd)
-	{
-		index = -1;
-		while((*node)->cmd[++index])
-		{
-			if ((*node)->cmd[index][0] == '$')
-			{
-				if (!ft_strcmp((*node)->cmd[index], "$?"))
-					exit_stat();
-				env = tmp_env;
-				while (ft_strcmp(&((*node)->cmd[index][1]), env->var))
-					env = env->next;
-				if (env)
-					(*node)->cmd[index] = ft_strdup(env->value);
-				else
-					(*node)->cmd[index] = ft_strdup("");
-			}
-		}
-		*node = (*node)->rchild;
-	}
+	t_node *node;
+
+	node = malloc(sizeof(t_node));
+	node->cmd = malloc(sizeof(char *) * 3);
+	node->cmd[0] = ft_strdup("ls");
+	node->cmd[1] = ft_strdup("1'2'3456\"7890");
+	node->cmd[2] = NULL;
+	// printf("SEG %s\n", (node)->cmd[2]);
+
+	_b_expanding_(&node);
 }
+
+
+// void	_expanding_(t_node **node, t_env *env)
+// {
+// 	t_env	*tmp_env;
+// 	int		index;
+	
+// 	tmp_env = env;
+// 	while((*node)->cmd)
+// 	{
+// 		index = -1;
+// 		while((*node)->cmd[++index])
+// 		{
+// 			if ((*node)->cmd[index][0] == '$')
+// 			{
+// 				if (!ft_strcmp((*node)->cmd[index], "$?"))
+// 					exit_stat();
+// 				env = tmp_env;
+// 				while (ft_strcmp(&((*node)->cmd[index][1]), env->var))
+// 					env = env->next;
+// 				if (env)
+// 					(*node)->cmd[index] = ft_strdup(env->value);
+// 				else
+// 					(*node)->cmd[index] = ft_strdup("");
+// 			}
+// 		}
+// 		*node = (*node)->rchild;
+// 	}
+// }

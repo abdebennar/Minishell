@@ -6,13 +6,13 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 03:29:22 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/13 12:17:33 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/15 19:57:34 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int is_it_in(t_env *raw_env, char *new_var)
+static int is_it_in(t_env *raw_env, char *new_var)
 {
 	while (raw_env)
 	{
@@ -45,7 +45,7 @@ int	is_alphanum(char c)
 			|| (c >= '0' && c <= '9'));
 }
 
-int check_var(char *str)
+static int check_var(char *str)
 {
 	if (!((*str >= 'a' && *str <= 'z')
 		|| (*str >= 'A' && *str <= 'Z') || (*str == '_')))	
@@ -123,6 +123,8 @@ void	sort_env(t_env **raw_env)
 				swap_env(&(tmp_head->env), &(tmp_env->env));
 				swap_env(&(tmp_head->var), &(tmp_env->var));
 				swap_env(&(tmp_head->value), &(tmp_env->value));
+				//maybe you can swap the entire node
+				//swap_env(tmp_head, tmp_env);
 			}
 			tmp_env = tmp_env->next;
 		}

@@ -20,7 +20,7 @@ bool check_pattern(char *str, char *pattern)
     return false;
 }
 
-void    _wildcard_(char *pattern)
+char	*_wildcard_(char *pattern)
 {
     struct dirent   *entry;
     char            *extracted;
@@ -45,7 +45,7 @@ void    _wildcard_(char *pattern)
             extracted = ft_strjoin(extracted, entry->d_name);
         }
     }
-    printf("%s -\n", extracted);
+	return (extracted);
 }
 
 // int main()

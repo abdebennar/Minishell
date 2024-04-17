@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 03:21:20 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/09 06:15:03 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/17 01:47:29 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ typedef struct s_redir
 typedef struct s_node
 {
 	// char			*pre_cmd;
-	t_token			tok;
 	// int				precedence;
+	t_token			tok;
 	t_redir			*redirections;
 	char			**cmd;
 	int				fd[2];
@@ -79,3 +79,8 @@ char	*ft_strjoin(char *s1, char *s2);
 
 //my_malloc
 void	*my_malloc(size_t size, int mode);
+
+//quotes
+char	*d_q(char *raw, int *index);
+char	*s_q(char *raw, int *index);
+char	*add_c(char *str, char c);

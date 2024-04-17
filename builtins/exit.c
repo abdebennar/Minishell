@@ -6,13 +6,13 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 10:09:25 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/15 15:45:06 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/16 23:35:47 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-long long	ft_atoll(char *str, int *err)
+static long long	ft_atoll(char *str, int *err)
 {
 	unsigned long long	num;
 	int					sign;
@@ -43,8 +43,8 @@ long long	ft_atoll(char *str, int *err)
 
 void	_exit_(char **cmd)
 {
-	int	num;
-	int	err;
+	long long	num;
+	int			err;
 
 	if (!cmd[1])
 		exit(0);
@@ -58,7 +58,7 @@ void	_exit_(char **cmd)
 	if (err)
 	{
 		printf("exit\nbash: exit: %s: numeric argument required", cmd[1]);
-		exit(num); //this is incorrent I think
+		exit(num);
 	}
 	if (num >= 0)
 		num = num % 256;
