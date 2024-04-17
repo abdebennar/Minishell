@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:33:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/17 02:00:58 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/17 03:09:50 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ char	*d_q(char *raw, int *index)
 	size_t		ident;
 
 	new = NULL;
-	printf("this is raw %s\n", raw);
 	if (count_c(raw, '"') % 2)
 	{
 		printf("unclosed quote\n");
@@ -135,6 +134,7 @@ char	*s_q(char *raw, int *index)
 		// printf("%s\n", &raw[*index]);
 		if (raw[(*index)] == '\'')
 		{
+			(*index)++;
 			clean[++ind] = 0;
 			return (clean);
 		}
