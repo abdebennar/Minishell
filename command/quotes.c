@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:33:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/17 03:09:50 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/18 01:16:37 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ char	*d_q(char *raw, int *index)
 	(*index)++;
 	while (raw[*index])
 	{
-		
 		if (raw[*index] == '$')
 		{
 			ident = only_identifier(&raw[*index + 1]);
@@ -105,7 +104,7 @@ char	*d_q(char *raw, int *index)
 				ft_strncpy(possible, &raw[*index + 1], ident);
 				if (getenv(possible)) //you can remove this
 					new = ft_strjoin(new, getenv(possible));
-				index += ident + 1;
+				*index += ident + 1;
 			}
 		}
 		else if (raw[*index] == '"')

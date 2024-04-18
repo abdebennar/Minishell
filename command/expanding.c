@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 00:29:18 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/17 03:10:16 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/18 01:25:36 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,19 @@ void	_b_expanding_(t_node **node)
 	int		index;
 	int		v_index;
 
-	index = 0;
 	v_index = -1;
 	cmd = (*node)->cmd;
-	clean = NULL;
 	while (cmd[++v_index])
 	{
-		m_cmd = cmd[v_index];
-		clean = NULL;
 		index = 0;
+		clean = NULL;
+		m_cmd = cmd[v_index];
 		while (m_cmd[index])
 		{
-			// printf("index %d - %s\n", index, &m_cmd[index]);
 			if (m_cmd[index] == '\'')
 				clean = ft_strjoin(clean, s_q(m_cmd, &index));
 			else if (m_cmd[index] == '"')
-			{
 				clean = ft_strjoin(clean, d_q(m_cmd, &index));
-				// printf("indexed %d\n", index);
-			}
 			else
 				clean = add_c(clean, m_cmd[index++]);
 		}
@@ -54,7 +48,7 @@ int main()
 	node = malloc(sizeof(t_node));
 	node->cmd = malloc(sizeof(char *) * 3);
 	node->cmd[0] = ft_strdup("ls");
-	node->cmd[1] = ft_strdup("123'fds'456\"$SHELL\"7890");
+	node->cmd[1] = ft_strdup("123'fds'456\"$SHfELL\"7890");
 	node->cmd[2] = NULL;
 	// printf("SEG %s\n", (node)->cmd[2]);
 
