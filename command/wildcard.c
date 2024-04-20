@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 01:44:16 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/20 01:19:57 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/20 01:32:55 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*_wildcard_(char *pattern)
         if (check_pattern(entry->d_name, pattern))
         {
             if (extracted)
-                extracted = ft_strjoin(extracted, " ");
+                extracted = ft_strjoin(extracted, "\t");
             extracted = ft_strjoin(extracted, entry->d_name);
         }
     }
@@ -56,5 +56,5 @@ int main()
 {
     // if (check_pattern("quoe", "*q*ye"))
     //     printf("YEpA\n");
-    printf("%s\n", _wildcard_("e*d*.c"));
+    printf("%s\n", _wildcard_("*.c"));
 }
