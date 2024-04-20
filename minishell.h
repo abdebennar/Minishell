@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 03:21:20 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/17 01:47:29 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/20 03:15:00 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,3 +84,6 @@ void	*my_malloc(size_t size, int mode);
 char	*d_q(char *raw, int *index);
 char	*s_q(char *raw, int *index);
 char	*add_c(char *str, char c);
+
+//builtins -> env
+int	find_c(char *str, char c);
