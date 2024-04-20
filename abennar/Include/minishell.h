@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:28:29 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/19 20:45:50 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/20 21:34:45 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include <stdio.h>
 # include <stdbool.h>
-#include "./libft/libft.h"
+#include "../libft/libft.h"
 #include <readline/readline.h>
 #include <readline/history.h>
 
@@ -86,6 +86,11 @@ int	skip_quaout(char *s, char c);
 void	lst_iter(t_node	*lst, void (*f)(t_node *));
 void	get_args(t_node *node);
 
-void	push(t_node **src, t_node **dest);
 t_node	*infix_to_postfix(t_node **lst);
+t_node	*postfix_to_prefex(t_node *node);
+t_node	*tree(t_node	*node);
+
+void	top_push(t_node **src, t_node **dest);
+void	back_push(t_node **src, t_node **dest);
+
 #endif

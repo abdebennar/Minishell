@@ -6,44 +6,51 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 17:59:40 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/19 17:08:41 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/20 21:41:53 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void	push(t_node **src, t_node **dest)
-// {
-// 	t_node	*trget;
-
-// 	trget = *src;
-// 	trget->right = NULL;
-// 	trget->left = NULL;
-// 	if (!*dest)
-// 	{
-// 		*dest = trget;
-// 		return;
-// 	}
-
-// 	(*src)->left = NULL;
-// 	(*src) = (*src)->right;
-// 	trget->right = *dest;
-
-// 	(*dest)->left = trget;
-// }
+t_node	*postfix_to_prefex(t_node *node)
+{
+	while (node->right)
+		node = node->right;
+	return (node);
+}
 
 
-
-void push(t_node **src, t_node **dest) {
-    if (!*src) // If source stack is empty, there's nothing to push
+void top_push(t_node **src, t_node **dest)
+{
+	t_node	*trget;
+    if (!*src)
         return;
 
-    t_node *trget = *src; // Get the node to be pushed
-    *src = (*src)->right; // Move the source stack pointer to the next node
+    trget = *src;
+    *src = (*src)->right;
 
-    trget->right = *dest; // Link trget to the top of destination stack
-    if (*dest) // If destination stack is not empty
-        (*dest)->left = trget; // Update the left pointer of the previous top node
-    *dest = trget; // Update the destination stack pointer to trget
-    trget->left = NULL; // Since trget is at the top of the destination stack, its left pointer should be NULL
+    trget->right = *dest;
+    if (*dest)
+        (*dest)->left = trget;
+    *dest = trget; 
+    trget->left = NULL;
+}
+
+void	back_push(t_node **src, t_node **dest)
+{
+	t_node	*trget;
+
+	if (!*src)
+		return ;
+	
+	trget = *src;
+
+	*src  = (*src)->right;
+	if (*src)
+		(*src)->left = NULL;
+
+	trget->right = NULL;
+	trget->left = NULL;
+
+	add_node_back(trget, dest);
 }
