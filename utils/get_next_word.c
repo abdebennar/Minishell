@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_3.c                                          :+:      :+:    :+:   */
+/*   get_next_word.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 16:41:13 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/17 14:33:46 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/21 19:22:37 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	is_sep(char c, char *sep)
+static bool	is_sep(char c, char *sep)
 {
 	if (ft_strchr(sep, c) != NULL)
 		return (true);

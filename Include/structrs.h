@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   structrs.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:42:30 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/21 17:42:49 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/21 19:44:01 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 typedef struct s_data
 {
@@ -54,13 +52,12 @@ typedef	struct s_node
 	char			*full_cmd;
 	int				pre;
 	t_token			tok;
-
-
 	/* your's */
 	int				fd[2];
 	char			*cmd;
 	char			**args;
 	t_redir			*redir;
+	t_env			*env;  // TODO 
 	struct s_node	*left;
 	struct s_node	*right;
 }	t_node;

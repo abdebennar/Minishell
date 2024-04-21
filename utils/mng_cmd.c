@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_4.c                                          :+:      :+:    :+:   */
+/*   mng_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 19:50:39 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/17 15:08:38 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/21 19:27:58 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_token	get_token(const char c1, const char c2)
 	return (NOT);
 }
 
-int	skip_quaout(char *s, char c)
+int	skip_quotes(char *s, char c)
 {
 	int	i;
 

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_5.c                                          :+:      :+:    :+:   */
+/*   mng_args.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:08:54 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/19 23:25:03 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/21 19:26:24 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-uint	cmd_len(char *str)
+static uint	cmd_len(char *str)
 {
 	uint	len;
 	uint	i;
@@ -28,7 +28,7 @@ uint	cmd_len(char *str)
 	return (len);
 }
 
-uint	del_sp(char *cmd, char q)
+static uint	del_sp(char *cmd, char q)
 {
 	uint i;
 
@@ -42,7 +42,7 @@ uint	del_sp(char *cmd, char q)
 	return (i + 1);
 }
 
-void	arg_space(char *cmd)
+static void	arg_space(char *cmd)
 {
 	int i;
 	int j;
@@ -59,7 +59,7 @@ void	arg_space(char *cmd)
 	
 }
 
-void	reset_sp(char **args)
+static void	reset_sp(char **args)
 {
 	uint i;
 	uint j;
