@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 17:37:42 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/20 18:16:19 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/21 16:22:26 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_node	*tree(t_node	*node)
 		{
 			node->right->left = node->left;
 			node->left->right = node->right;
+			if (node->right->right)
+				node->left->right = node->right->right;
 		}
 		node->right = NULL;
 		node->left = NULL;

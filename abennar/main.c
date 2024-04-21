@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/15 12:59:46 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/20 22:17:00 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 
 	while (666)
 	{
-		line = readline("$ ");
+		line = readline	("$ ");
 		Parsing(line);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:42:10 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/20 21:15:34 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/21 16:22:32 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,43 +18,28 @@ void print_tree(t_node *root, int level) {
         for (int i = 0; i < level; i++) {
             printf("   ");
         }
-        printf("%s\n", root->cmd);
+		if (root->tok == NOT)
+        	printf("%s\n", root->cmd);
+		else
+			print_tok(root->tok);
         print_tree(root->left, level + 1);
     }
 }
 
 
-void	Parsing(char *cmd)
+
+void	Parsing(char *line)
 {
 	t_node *node;
+	char *cmd;
 
 	node = NULL;
 
-	cmd = ft_strtrim(cmd, SEP);
+	cmd = ft_strtrim(line, SEP);
 	node = lexer(cmd);
 	lst_iter(node, get_args);
-	t_node *tmp = node;
-	// while (tmp)
-	// {
-	// 	printf("%s -->", tmp->cmd);
-	// 	tmp = tmp->right;
-	// }
-	
-printf("POSTFIX\n");
 	node = infix_to_postfix(&node);
-	// node = postfix_to_prefex(node);
-	// node = tree(node);
-	
-
-	// print_tree(node, 0);
-	
-	while (node)
-	{
-		printf("%s\t`", node->cmd);
-		print_tok(node->tok);
-		printf("\n");
-		
-		node = node->right;
-	}
+	node = postfix_to_prefex(node);
+	node = tree(node);
+	print_tree(node, 0);
 }
-// (ls && (ls | wc ))

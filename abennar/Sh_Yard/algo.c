@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 17:17:54 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/20 21:35:52 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/21 15:47:15 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ t_node	*infix_to_postfix(t_node **lst)
 	while (head)
 	{
 		if (head->tok == NOT)
-		{
 			back_push(&head, &postfix);		
-		}
 		else if (head->tok != LPR && head->tok != RPR)
 		{
 			while (token_stack && token_stack->pre >= head->pre)
@@ -36,7 +34,6 @@ t_node	*infix_to_postfix(t_node **lst)
 			top_push(&head, &token_stack);
 		else if (head->tok == RPR)
 		{
-
 			top_push(&head, &trash);
 			while (token_stack->tok != LPR)
 				back_push(&token_stack, &postfix);
@@ -46,6 +43,5 @@ t_node	*infix_to_postfix(t_node **lst)
 	}
 	while (token_stack)
 		back_push(&token_stack, &postfix);
-	
 	return (postfix);
 }
