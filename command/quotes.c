@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:33:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/21 17:14:46 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/21 19:54:54 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	is_alphanum(char c)
-{
-	return ((c >= 'a' && c <= 'z')
-			|| (c >= 'A' && c <= 'Z')
-			|| (c >= '0' && c <= '9'));
-}
 
 int	only_identifier(char *str)
 {
@@ -69,8 +62,6 @@ char	*add_c(char *str, char c)
 	char	*new;
 	char	*save;
 	
-	// if (!str || !c)
-	// 	return (NULL);
 	new = malloc(ft_strlen(str) + 2);
 	save = new;
 	while (str && *str)

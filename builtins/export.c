@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 03:29:22 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/21 17:14:46 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/21 20:19:21 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int is_it_in(t_env *raw_env, char *new_var)
-{
-	while (raw_env)
-	{
-		if (!ft_strcmp(raw_env->var, new_var))
-			return (1);
-		raw_env = raw_env->next;
-	}
-	return (0);
-}
 
 void	ft_lstaddback(t_env **alst, t_env *new)
 {

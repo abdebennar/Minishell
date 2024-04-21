@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../Include/minishell.h"
 
 static int  check_flags(char *cmd)
 {
-    if (!*cmd)
+    if (!cmd || !*cmd)
         return (0);
     if (*cmd == '-')
     {
@@ -33,8 +33,12 @@ void    _echo_(char **cmd)
     int flag;
 
     flag = 0;
-    while (check_flags(*(++cmd)))
+    while (check_flags(*(cmd)))
+	{
+		cmd++;
+		printf("inside checker");
         flag = 1;
+	}
     while(*cmd)
     {
         printf("%s", *(cmd++));
@@ -44,3 +48,20 @@ void    _echo_(char **cmd)
     if (!flag)
         printf("\n");
 }
+
+// #include <string.h>
+
+// int main()
+// {
+// 	char **cmd;
+
+// 	cmd = malloc(sizeof(char *) * 4);
+// 	// const char *ss = "heel";
+
+// 	cmd[0] = strdup("nnnnnnnnnnnnn");
+// 	cmd[1] = strdup("nnnnn");
+// 	cmd[2] = strdup("fuck you");
+// 	cmd[3] = NULL;
+
+// 	_echo_(cmd);
+// }

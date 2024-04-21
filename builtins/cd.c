@@ -62,7 +62,7 @@ void    _cd_(char **cmd, t_env **env)
     char    pwd[PATH_MAX];
     int 	exit_err;
 
-    if (cmd[2])
+    if (cmd[2]) //check this
     {
         printf("bash: cd: too many arguments\n");
         exit(1);
