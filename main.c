@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   and_or.c                                           :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/05 03:49:25 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/21 17:49:48 by abennar          ###   ########.fr       */
+/*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
+/*   Updated: 2024/04/21 17:19:01 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	_or_(t_node *node, int exit_stat)
+int	main(int argc, char **argv, char **env)
 {
-	if (!node)
-		exit(-1);
-	if (exit_stat)
-		executor(node->left);
-}
+	char	*line;
+	
 
-void	_and_(t_node *node, int exit_stat)
-{
-	if (!node)
-		exit(-1);
-	if (!exit_stat)
-		executor(node->left);
+	while (666)
+	{
+		line = readline	("$ ");
+		Parsing(line);
+	}
 }

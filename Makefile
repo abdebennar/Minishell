@@ -6,7 +6,7 @@
 #    By: abennar <abennar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/14 13:36:20 by abennar           #+#    #+#              #
-#    Updated: 2024/04/21 14:16:36 by abennar          ###   ########.fr        #
+#    Updated: 2024/04/21 17:47:58 by abennar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,8 @@ NAME = minishell
 
 all : 
 	rm -rf minishell
-	$(MAKE) -C ./libft
 	$(MAKE) $(NAME)
 
 
 $(NAME) :
-	cc -g -lreadline $(SRC) -I/Users/abennar/Desktop/minishell/include ./libft/libft.a -o $@ #-fsanitize=address #-Wall -Wextra -Werror
+	cc -g -lreadline $(SRC) -I/Users/abennar/Desktop/bel-oirg/Include  -o $@ #-fsanitize=address #-Wall -Wextra -Werror

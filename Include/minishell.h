@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   and_or.c                                           :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/05 03:49:25 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/21 17:49:48 by abennar          ###   ########.fr       */
+/*   Created: 2024/04/01 03:21:20 by bel-oirg          #+#    #+#             */
+/*   Updated: 2024/04/21 17:43:11 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
 
-void	_or_(t_node *node, int exit_stat)
-{
-	if (!node)
-		exit(-1);
-	if (exit_stat)
-		executor(node->left);
-}
+#include "structrs.h"
+#include "prottypes.h"
 
-void	_and_(t_node *node, int exit_stat)
-{
-	if (!node)
-		exit(-1);
-	if (!exit_stat)
-		executor(node->left);
-}
+# define ALLOC	1 
+# define CLEAN	0
+
+
+
+# define SEP	" \t\n\v\r\f"
+
+
+
+
+

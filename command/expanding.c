@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expanding.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 00:29:18 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/18 01:25:36 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/21 17:51:34 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 void	_b_expanding_(t_node **node)
 {
@@ -80,6 +80,6 @@ int main()
 // 					(*node)->cmd[index] = ft_strdup("");
 // 			}
 // 		}
-// 		*node = (*node)->rchild;
+// 		*node = (*node)->right;
 // 	}
 // }

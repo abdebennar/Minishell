@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   and_or.c                                           :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/05 03:49:25 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/21 17:49:48 by abennar          ###   ########.fr       */
+/*   Created: 2023/11/04 20:30:47 by abennar           #+#    #+#             */
+/*   Updated: 2024/04/21 17:30:08 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	_or_(t_node *node, int exit_stat)
+char	*ft_strrchr(const char *s, int c)
 {
-	if (!node)
-		exit(-1);
-	if (exit_stat)
-		executor(node->left);
-}
+	int	i;
 
-void	_and_(t_node *node, int exit_stat)
-{
-	if (!node)
-		exit(-1);
-	if (!exit_stat)
-		executor(node->left);
+	i = (ft_strlen(s) + 1);
+	while (s != NULL && i--)
+	{
+		if (s[i] == (char )c)
+			return ((char *)(s + i));
+	}
+	return (NULL);
 }

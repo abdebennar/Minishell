@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/20 22:17:00 by abennar          ###   ########.fr       */
+/*   Created: 2023/11/05 14:32:26 by abennar           #+#    #+#             */
+/*   Updated: 2024/04/21 17:30:08 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv)
+char	*ft_substr( char const *str, unsigned int start, size_t len)
 {
-	char	*line;
-	
+	int		i;
+	char	*s_str;
 
-	while (666)
+	i = 0 ;
+	if (!str)
+		return (NULL);
+	if (start > ft_strlen(str))
+		return (ft_strdup(""));
+	if (len > ft_strlen(str + start))
+		len = ft_strlen(str + start);
+	s_str = my_malloc(sizeof(char) * len + 1, 1);
+	if (!s_str)
+		return (NULL);
+	while (len--)
 	{
-		line = readline	("$ ");
-		Parsing(line);
+		s_str[i] = (start + str)[i];
+		i++;
 	}
+	s_str[i] = '\0';
+	return (s_str);
 }

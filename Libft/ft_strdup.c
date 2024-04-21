@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   and_or.c                                           :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/05 03:49:25 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/21 17:49:48 by abennar          ###   ########.fr       */
+/*   Created: 2023/11/03 15:36:13 by abennar           #+#    #+#             */
+/*   Updated: 2024/04/21 17:30:08 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	_or_(t_node *node, int exit_stat)
+char	*ft_strdup(const char *s)
 {
-	if (!node)
-		exit(-1);
-	if (exit_stat)
-		executor(node->left);
-}
+	int		i;
+	char	*str;
 
-void	_and_(t_node *node, int exit_stat)
-{
-	if (!node)
-		exit(-1);
-	if (!exit_stat)
-		executor(node->left);
+	i = 0;
+	str = my_malloc(sizeof(char) * ft_strlen(s) + 1, 1);
+	if (!str)
+		return (0);
+	while (s[i] != '\0')
+	{
+		str[i] = s[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }

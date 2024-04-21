@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:42:10 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/21 16:22:32 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/21 17:22:22 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ void	Parsing(char *line)
 {
 	t_node *node;
 	char *cmd;
-
 	node = NULL;
-
 	cmd = ft_strtrim(line, SEP);
 	node = lexer(cmd);
 	lst_iter(node, get_args);

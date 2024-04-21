@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 03:57:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/15 15:56:36 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/21 17:51:34 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 void	err(int *fd_in, int *fd_out)
 {
@@ -76,14 +76,14 @@ void	_pipe_(t_node *cmd)
 
 	if (pipe(piped) < 0)
 		perror("pipe");
-	pid[0] = lbuddha(cmd->lchild, piped);
+	pid[0] = lbuddha(cmd->left, piped);
 	if (pid[0] < 0)
 	{
 		close(pid[0]);
 		close(pid[1]);
 		return ;
 	}
-	pid[1] = rbuddha(cmd->rchild, piped);
+	pid[1] = rbuddha(cmd->right, piped);
 	if (pid[1] < 0)
 	{
 		close(pid[0]);

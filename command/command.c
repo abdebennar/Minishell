@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/15 17:56:05 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/21 18:02:04 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 static char	*add_path(char *cmd)
 {
@@ -24,7 +24,7 @@ static char	*add_path(char *cmd)
 	index = -1;
 	path = getenv("PATH");
 	(!path) && (perror("PATH not found"), 0);
-	path_v = ft_split(path, ":");
+	path_v = ft_split(path, ':');
 	index = -1;
 	while (path_v[++index])
 	{
