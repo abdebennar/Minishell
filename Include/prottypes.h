@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/21 19:42:18 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/21 19:50:04 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <dirent.h> //opendir
 #include <readline/readline.h> // readline
 #include <readline/history.h> // readline history
+#include "minishell.h"
 
 //quotes
 char	*d_q(char *raw, int *index);

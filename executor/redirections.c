@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 04:00:45 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/21 17:51:33 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/21 19:47:02 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	_right_(t_node *node)
 	t_redir *alter;
 	int		fd;
 
-	alter = node->redirections;
+	alter = node->redir;
 	while (alter)
 	{
 		if (alter->tok == OUT)
@@ -33,7 +33,7 @@ int	_right_(t_node *node)
 			fd = open(alter->file, O_WRONLY | O_APPEND | O_CREAT, 0644);
 		}
 		(fd < 0) && (perror("open"), 0);
-		alter = alter->right;
+		alter = alter->next;
 	}
 	node->fd[1] = fd;
 	return (fd);
@@ -44,7 +44,7 @@ int	_left_(t_node *node)
 	t_redir *alter;
 	int		fd;
 
-	alter = node->redirections;
+	alter = node->redir;
 	while (alter)
 	{
 		if (alter->tok == IN)
@@ -60,7 +60,7 @@ int	_left_(t_node *node)
 			fd = alter->fd;
 		}
 		(fd < 0) && (perror("open"), 0);
-		alter = alter->right;
+		alter = alter->next;
 	}
 	node->fd[0] = fd;
 	return (fd);
@@ -70,12 +70,12 @@ void	_redirections_(t_node *node)
 {
 	t_redir *alter;
 
-	alter = node->redirections;
+	alter = node->redir;
 	while (alter)
 	{
 		if (alter->tok == HEREDOC)
 			alter->fd = _heredoc_(alter);
-		alter = alter->right;
+		alter = alter->next;
 	}
 	node->fd[0] = alter->fd;
 	_left_(node);
