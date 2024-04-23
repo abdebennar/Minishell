@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/21 20:04:25 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/23 05:34:50 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 #include <readline/readline.h> // readline
 #include <readline/history.h> // readline history
 #include "prottypes.h"
-// #include "minishell.h"
 
 //quotes
 char	*d_q(char *raw, int *index);
@@ -48,9 +47,9 @@ int is_it_in(t_env *raw_env, char *new_var);
 int	is_alphanum(char c);
 
 //utils -> ft_str
-char	*ft_strdup(const char *s);
+char	*ft_strdup(char *s);
 int		ft_strlen(char *s);
-char	*ft_substr( char const *str, unsigned int start, size_t len);
+char	*ft_substr( char *str, unsigned int start, size_t len);
 int		ft_strcmp(char *s1, char *s2);
 
 //utils -> link_lst

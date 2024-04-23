@@ -6,11 +6,11 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 19:50:39 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/21 19:27:58 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/23 05:31:54 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../Include/minishell.h"
 
 t_token	get_token(const char c1, const char c2)
 {

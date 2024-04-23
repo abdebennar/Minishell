@@ -6,11 +6,11 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 19:54:18 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/21 19:56:04 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/23 05:31:30 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../Include/minishell.h"
 
 int	is_alphanum(char c)
 {

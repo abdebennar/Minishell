@@ -6,10 +6,9 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:42:30 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/21 20:04:08 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/23 05:59:42 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 # define ALLOC	1 
 # define CLEAN	0
@@ -60,10 +59,10 @@ typedef	struct s_node
 	t_token			tok;
 	/* your's */
 	int				fd[2];
-	char			*cmd;
-	char			**args;
+	char			*cmd; //TODO change this to **cmd
+	char			**args; //TODO remove this and replace **args with **cmd
 	t_redir			*redir;
-	t_env			*env;  // TODO 
+	t_env			*env;  // TODO
 	struct s_node	*left;
 	struct s_node	*right;
 }	t_node;

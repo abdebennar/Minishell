@@ -6,11 +6,11 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:33:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/21 19:54:54 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/23 02:52:41 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../Include/minishell.h"
 
 int	only_identifier(char *str)
 {
@@ -121,14 +121,12 @@ char	*s_q(char *raw, int *index)
 	(*index)++;
 	while (raw[*index])
 	{
-		// printf("%s\n", &raw[*index]);
 		if (raw[(*index)] == '\'')
 		{
 			(*index)++;
 			clean[++ind] = 0;
 			return (clean);
 		}
-		// if (raw[(*index)] != '\'')
 		clean[++ind] = raw[(*index)];
 		(*index)++;
 	}

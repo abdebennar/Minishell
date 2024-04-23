@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 04:00:45 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/21 19:47:02 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/23 06:09:15 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,27 @@ int	_right_(t_node *node)
 	int		fd;
 
 	alter = node->redir;
+	fd = 1;
 	while (alter)
 	{
 		if (alter->tok == OUT)
 		{
-			if (fd > 0)
+			if (fd > 1)
 				close(fd);
 			fd = open(alter->file, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 		}
 		else if (alter->tok == APPEND)
 		{
-			if (fd > 0)
+			if (fd > 1)
 				close(fd);
 			fd = open(alter->file, O_WRONLY | O_APPEND | O_CREAT, 0644);
 		}
-		(fd < 0) && (perror("open"), 0);
+		if (fd < 0)
+			return (perror("open"), -1);
 		alter = alter->next;
 	}
 	node->fd[1] = fd;
-	return (fd);
+	return (0);
 }
 
 int	_left_(t_node *node)
@@ -44,6 +46,7 @@ int	_left_(t_node *node)
 	t_redir *alter;
 	int		fd;
 
+	fd = 0;
 	alter = node->redir;
 	while (alter)
 	{
@@ -59,12 +62,15 @@ int	_left_(t_node *node)
 				close(fd);
 			fd = alter->fd;
 		}
-		(fd < 0) && (perror("open"), 0);
+		if (fd < 0)
+			return (perror("open"), -1);
 		alter = alter->next;
 	}
 	node->fd[0] = fd;
-	return (fd);
+	return (0);
 }
+
+//TODO expand inside heredoc 
 
 void	_redirections_(t_node *node)
 {
@@ -77,7 +83,10 @@ void	_redirections_(t_node *node)
 			alter->fd = _heredoc_(alter);
 		alter = alter->next;
 	}
-	node->fd[0] = alter->fd;
-	_left_(node);
-	_right_(node);
+	if (_left_(node) || _right_(node))
+		perror("left || right");
+	if (node->fd[0] != 0)
+		dup2(node->fd[0], STDIN_FILENO);
+	if (node->fd[1] != 1)
+		dup2(node->fd[1], STDOUT_FILENO);
 }

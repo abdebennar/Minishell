@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/21 18:02:04 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/23 05:48:25 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../Include/minishell.h"
 
 static char	*add_path(char *cmd)
 {
@@ -19,12 +19,12 @@ static char	*add_path(char *cmd)
 	char	*out;
 	char	**path_v;
 
-	if (is_it_in(cmd, '/'))
+	if (find_c(cmd, '/'))
 		return (cmd);
 	index = -1;
 	path = getenv("PATH");
 	(!path) && (perror("PATH not found"), 0);
-	path_v = ft_split(path, ':');
+	path_v = ft_split(path, ":");
 	index = -1;
 	while (path_v[++index])
 	{
@@ -36,16 +36,19 @@ static char	*add_path(char *cmd)
 	return (NULL);
 }
 
-void    _exec_(t_node *node)
+void    _exec_(t_node **node)
 {
     int forked;
 
+	_expanding_(node);
+	_wildcard_(node);
+	_redirection_(node);
     forked = fork();
     if (forked < 0)
         perror("fork");
     if (!forked)
     {
-        execve(add_path(node->cmd[0]), node->cmd, NULL);
+        execve(add_path((*node)->cmd[0]), (*node)->cmd, NULL);
         perror("Command not found");
     }
 }

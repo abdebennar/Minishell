@@ -6,7 +6,7 @@
 #    By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/14 13:36:20 by abennar           #+#    #+#              #
-#    Updated: 2024/04/21 19:36:44 by bel-oirg         ###   ########.fr        #
+#    Updated: 2024/04/23 02:38:21 by bel-oirg         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,4 +19,4 @@ all :
 	$(MAKE) $(NAME)
 
 $(NAME) :
-	cc -g -lreadline $(SRC) -I/Users/$(USER)/Desktop/bel-oirg/Include  -o $@ #-fsanitize=address #-Wall -Wextra -Werror
+	cc -g -lreadline $(SRC) -I/Users/$(USER)/Desktop/minishell/Include  -o $@ #-fsanitize=address #-Wall -Wextra -Werror

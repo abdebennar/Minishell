@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 05:50:24 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/21 17:14:46 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/23 00:03:35 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,19 @@ static char	*random_f(void)
 
 	file_len = 16;
 	file_name = my_malloc(file_len + 1, 1);
+
+
+	
 	fd_rd = open("/dev/urandom", O_RDONLY, 0777);
 	(fd_rd < 0) && (w_err("cannot open /dev/urandom"), 0);
 	read(fd_rd, file_name, file_len);
 	close(fd_rd);
 	file_name[file_len] = 0;
+
+
+	
+	
+
 	fd_tmp = open(file_name, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	if (fd_tmp < 0)
 		return (random_f());
@@ -43,7 +51,7 @@ static int	fill_file(t_redir *alter, char *file_name)
 	content = NULL;
 	while (1)
 	{
-		write(1, "pipe heredoc> ", 14);
+		write(1, "heredoc> ", 10);
 		line = readline(STDIN_FILENO);
 		if (!my_strcmp(line, alter->file))
 		{
@@ -67,5 +75,6 @@ int	_heredoc_(t_redir *alter)
 	file_name = random_f();
 	fd_in = fill_file(alter, file_name);
 	(fd_in < 0) && (perror("open"), my_malloc(0, 0));
+	unlink(file_name);
 	return (fd_in);
 }

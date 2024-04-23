@@ -6,11 +6,11 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 01:37:28 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/21 19:42:08 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/23 05:30:45 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../Include/minishell.h"
 
 void	lst_free(t_data **hold)
 {
@@ -31,6 +31,32 @@ void	lst_free(t_data **hold)
 }
 
 void	*my_malloc(size_t size, int mode)
+{
+	static t_data	*head;
+	t_data			*node;
+	void			*data;
+
+	if (mode == 1)
+	{
+		data = malloc(size);
+		if (!data)
+			return (lst_free(&head), exit(1), NULL);
+		node = malloc(sizeof(t_data));
+		if (!node)
+			return (lst_free(&head), exit(1), NULL);
+		node->data = data;
+		node->next = NULL;
+		(head) && (node->next = head);
+		head = node;
+		return (data);
+	}
+	if (!mode)
+		return (lst_free(&head), exit(1), NULL);
+	return (lst_free(&head), exit(0), NULL);
+}
+
+
+void	*my_malloc2(size_t size, int mode)
 {
 	static t_data	*head;
 	t_data			*node;
