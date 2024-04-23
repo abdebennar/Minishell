@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mng_args.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:08:54 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/23 05:31:50 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/23 20:17:39 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	get_args(t_node *node)
 	uint	i;
 
 	len = cmd_len(node->full_cmd);
-	cmd = my_malloc(sizeof(char) * len + 1, ALLOC);
+	cmd = my_malloc(sizeof(char) * len + 1, ALLOC, 0);
 	len = 0;
 	i = 0;
 	while (node->full_cmd[len])
@@ -100,7 +100,7 @@ void	get_args(t_node *node)
 	}
 	cmd[i] = '\0';
 	arg_space(cmd);
-	args = ft_split(cmd, ' ');
+	args = ft_split(cmd, " ", 0);
 	reset_sp(args);
 	node->cmd = args[0];
 	node->args = ++args;

@@ -21,13 +21,13 @@ static void    update_pwd(char *new_pwd, t_env **env)
     if (*env)
     {
         (*env)->value = new_pwd;
-		new_node->env = ft_strjoin("PWD=", new_pwd);
+		new_node->env = ft_strjoin("PWD=", new_pwd); 
     }
     else
     {
-        new_node = my_malloc(sizeof(t_env), 1);
-        new_node->var = ft_strdup("PWD");
-		new_node->value = ft_strdup(new_pwd);
+        new_node = my_malloc(sizeof(t_env), 1); // FIX add the group
+        new_node->var = ft_strdup("PWD"); // FIX
+		new_node->value = ft_strdup(new_pwd); // FIX
 		new_node->env = ft_strjoin("PWD=", new_pwd);
 		new_node->next = NULL;
 		ft_lstaddback(env, new_node);
@@ -47,8 +47,8 @@ static void    update_oldpwd(char *new_pwd, t_env **env)
     }
     else
     {
-        new_node = my_malloc(sizeof(t_env), 1);
-        new_node->var = ft_strdup("OLDPWD");
+        new_node = my_malloc(sizeof(t_env), 1); // FIX add group
+        new_node->var = ft_strdup("OLDPWD"); 
 		new_node->value = ft_strdup(new_pwd);
 		new_node->env = ft_strjoin("OLDPWD=", new_pwd);
 		new_node->next = NULL;

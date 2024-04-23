@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_word.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 16:41:13 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/23 05:31:44 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:42:12 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char *get_next_word(char *str, int *i, t_token tok)
 			break;
 		(*i)++;
 	}
-	substr = ft_substr(str, start, *i - start);
+	substr = ft_substr(str, start, *i - start, 0);
 	while (start < *i)
 		str[start++] = 127;
 	return (substr);

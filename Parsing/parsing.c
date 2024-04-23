@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:42:10 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/21 19:43:14 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/23 20:21:54 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,18 @@ void print_tree(t_node *root, int level)
     }
 }
 
-void	Parsing(char *line)
+void	Parsing(char *line, t_env *env)
 {
 	t_node *node;
 	char *cmd;
 	node = NULL;
-	cmd = ft_strtrim(line, SEP);
+	cmd = ft_strtrim(line, SEP, 0);
+	free(line);
 	node = lexer(cmd);
 	lst_iter(node, get_args);
 	node = infix_to_postfix(&node);
-	node = postfix_to_prefex(node);
+	add_env(node, env);
+	node = postfix_to_prefix(node);
 	node = tree(node);
 	print_tree(node, 0); // TMP
 }

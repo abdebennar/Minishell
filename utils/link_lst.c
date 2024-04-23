@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   link_lst.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 13:45:49 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/23 05:31:47 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/23 20:17:14 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_node	*new_node(char *cmd, t_redir *redir, t_token tok, int pre)
 {
 	t_node	*new;
 
-	new = my_malloc(sizeof(t_node), ALLOC);
+	new = my_malloc(sizeof(t_node), ALLOC, 0);
 	new->full_cmd = cmd;
 	new->redir = redir;
 	new->tok = tok;
@@ -42,7 +42,7 @@ t_redir	*new_redir(char *file, t_token tok)
 {
 	t_redir	*new;
 	
-	new = my_malloc(sizeof(t_redir), ALLOC);
+	new = my_malloc(sizeof(t_redir), ALLOC, 0);
 	new->file = file;
 	new->tok = tok;
 	new->next = NULL;

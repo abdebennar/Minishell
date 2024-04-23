@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 01:37:28 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/23 05:30:45 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:08:28 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,16 @@ void	lst_free(t_data **hold)
 		ptr = tmp;
 		tmp = tmp->next;
 		free(ptr->data);
+		ptr->data = NULL;
 		free(ptr);
+		ptr = NULL;
 	}
 	*hold = NULL;
 }
 
-void	*my_malloc(size_t size, int mode)
+void	*my_malloc(size_t size, int mode, int group)
 {
-	static t_data	*head;
+	static t_data	*head[GB_GROUPS] = {NULL};
 	t_data			*node;
 	void			*data;
 
@@ -40,43 +42,17 @@ void	*my_malloc(size_t size, int mode)
 	{
 		data = malloc(size);
 		if (!data)
-			return (lst_free(&head), exit(1), NULL);
+			return (lst_free(&head[group]), exit(1), NULL);
 		node = malloc(sizeof(t_data));
 		if (!node)
-			return (lst_free(&head), exit(1), NULL);
+			return (lst_free(&head[group]), exit(1), NULL);
 		node->data = data;
 		node->next = NULL;
-		(head) && (node->next = head);
-		head = node;
+		(head[group]) && (node->next = head[group]);
+		head[group] = node;
 		return (data);
 	}
 	if (!mode)
-		return (lst_free(&head), exit(1), NULL);
-	return (lst_free(&head), exit(0), NULL);
-}
-
-
-void	*my_malloc2(size_t size, int mode)
-{
-	static t_data	*head;
-	t_data			*node;
-	void			*data;
-
-	if (mode == 1)
-	{
-		data = malloc(size);
-		if (!data)
-			return (lst_free(&head), exit(1), NULL);
-		node = malloc(sizeof(t_data));
-		if (!node)
-			return (lst_free(&head), exit(1), NULL);
-		node->data = data;
-		node->next = NULL;
-		(head) && (node->next = head);
-		head = node;
-		return (data);
-	}
-	if (!mode)
-		return (lst_free(&head), exit(1), NULL);
-	return (lst_free(&head), exit(0), NULL);
+		return (lst_free(&head[group]), NULL);
+	return (lst_free(&head[group]), exit(0), NULL);
 }

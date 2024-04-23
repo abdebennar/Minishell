@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 11:01:06 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/23 06:00:47 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:41:37 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_node	*check_tokens(char *cmd, t_token tok, int *i)
 		tok = get_token(cmd[j], cmd[j + 1]);
 	}
 	f = get_cmd_area(cmd, *i);
-	full_cmd = ft_substr(cmd, *i, f);
+	full_cmd = ft_substr(cmd, *i, f, 0);
 	*i += f;
 	return (new_node(full_cmd, redir, NOT, 0));
 }
@@ -53,7 +53,7 @@ int	get_pre(t_token tok)
 	return (1);
 }
 
-void	print_tok(t_token tok)
+void	print_tok(t_token tok) // TMP
 {
 	if (tok == PIPE)
 		printf("pipe\n");

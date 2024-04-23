@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 23:50:48 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/23 05:31:41 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:17:28 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	check_the_set(char c, const char *set)
 	return (0);
 }
 
-char	*ft_strtrim(const char *s1, const char *set)
+char	*ft_strtrim(const char *s1, const char *set, int group)
 {
 	int		start;
 	int		end;
@@ -43,7 +43,7 @@ char	*ft_strtrim(const char *s1, const char *set)
 	end = ft_strlen(s1);
 	while (end > start && check_the_set(s1[end - 1], set))
 		end--;
-	str = (char *)my_malloc(sizeof(char) * (end - start + 3), 1);
+	str = (char *)my_malloc(sizeof(char) * (end - start + 3), 1, group);
 	while (start < end && s1[start])
 	{
 		str[trk++] = s1[start++];

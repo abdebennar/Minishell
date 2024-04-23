@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:33:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/23 02:52:41 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:15:09 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ char	*s_q(char *raw, int *index)
 	int		ind;
 
 	ind = -1;
-	clean = my_malloc(ft_strlen(raw - 1), 1);
+	clean = my_malloc(ft_strlen(raw - 1), 1); // FIX add the group
 	if (count_c(raw, '\'') % 2)
 	{
 		printf("unclosed quote\n");

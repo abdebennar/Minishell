@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 23:58:29 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/23 05:31:35 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:12:38 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	word_counter(char const *s, char *delim)
 	return (counter);
 }
 
-static char	*char_counter(char const *s, char *delim)
+static char	*char_counter(char const *s, char *delim, int group)
 {
 	char		*str;
 	int			counter;
@@ -50,7 +50,7 @@ static char	*char_counter(char const *s, char *delim)
 	index = 0;
 	while (!is_in(s[counter], delim) && s[counter])
 		counter++;
-	str = (char *)my_malloc(sizeof(char) * (counter + 1), 1);
+	str = (char *)my_malloc(sizeof(char) * (counter + 1), ALLOC, group);
 	while (counter--)
 	{
 		str[index] = s[index];
@@ -60,7 +60,7 @@ static char	*char_counter(char const *s, char *delim)
 	return (str);
 }
 
-char	**ft_split(char *s, char *delim)
+char	**ft_split(char *s, char *delim, int group)
 {
 	char	**split;
 	int		k;
@@ -69,7 +69,7 @@ char	**ft_split(char *s, char *delim)
 	if (!s)
 		return (NULL);
 	w_count = word_counter(s, delim);
-	split = (char **)my_malloc(sizeof(char *) * (w_count + 1), 1);
+	split = (char **)my_malloc(sizeof(char *) * (w_count + 1), ALLOC, group);
 	if (!split)
 		return (NULL);
 	k = -1;
@@ -77,9 +77,9 @@ char	**ft_split(char *s, char *delim)
 	{
 		while (is_in(*s, delim) && *delim)
 			s++;
-		split[k] = char_counter(s, delim);
+		split[k] = char_counter(s, delim, group);
 		if (!split[k])
-			return (perror(""), my_malloc(0, 0), NULL);
+			return (perror(""), my_malloc(0, CLEAN, group), NULL);
 		s += ft_strlen(split[k]);
 	}
 	split[k] = NULL;

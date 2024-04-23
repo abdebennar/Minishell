@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   prottypes.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:42:30 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/23 05:59:42 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/23 19:53:18 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # define ALLOC	1 
 # define CLEAN	0
+# define GB_GROUPS 2
 # define SEP	" \t\n\v\r\f"
 
 typedef struct s_data
