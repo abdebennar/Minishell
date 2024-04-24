@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 11:01:06 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/24 05:01:12 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/24 16:50:40 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ t_node	*lexer(char *cmd)
 	list = NULL;
 	while (cmd[i])
 	{
-		tok = get_token(cmd[i], cmd[i + 1]);
+		check_syntax(tok = get_token(cmd[i], cmd[i + 1]), cmd, i);
 		if (!low_pre(tok))
 		{
 			node = new_node(NULL, NULL, tok, get_pre(tok));

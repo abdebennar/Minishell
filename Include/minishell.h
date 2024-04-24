@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/23 20:22:43 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/24 17:08:19 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,3 +86,6 @@ t_node	*tree(t_node	*node);
 
 //lexer
 t_node	*lexer(char *cmd);
+
+// err mng 
+void	error_exit(char *error, int exit_NO);

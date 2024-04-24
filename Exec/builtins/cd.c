@@ -49,7 +49,7 @@ static void    update_oldpwd(char *new_pwd, t_env **env)
     }
     else
     {
-        new_node = my_malloc(sizeof(t_env), 1, 0); // FIX add group
+        new_node = my_malloc(sizeof(t_env), 1, 0);
         new_node->var = ft_strdup("OLDPWD", 0); 
 		new_node->value = ft_strdup(new_pwd, 0);
 		new_node->env = ft_strjoin("OLDPWD=", new_pwd, 0);

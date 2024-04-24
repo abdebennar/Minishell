@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 03:29:22 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/24 05:23:38 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:55:15 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ void	export_args(t_env **raw_env, char *new_var)
 	}
 	else
 	{
-		new_node = my_malloc(sizeof(t_env), 1, 0); // FIX add the group
+		new_node = my_malloc(sizeof(t_env), 1, 0);
 		new_node->var = var;
 		(append && !value) && (value = ft_strdup("", 0)); // 
 		new_node->value = value;
