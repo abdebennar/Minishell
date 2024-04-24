@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:43:59 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/23 20:19:08 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/24 05:01:08 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../Include/minishell.h"
 
 void	add_env(t_node *node, t_env *env)
 {
@@ -20,7 +20,6 @@ void	add_env(t_node *node, t_env *env)
 		node = node->right;
 	}	
 }
-
 
 int		var_len(char *str)
 {

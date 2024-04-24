@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:32:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/23 05:37:04 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/24 05:23:01 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,13 @@ int	find_c(char *str, char c)
 			return (1);
 	return (0);
 }
-void	_env_(char **cmd, t_env *raw_env)
+void	_env_(t_node *node)
 {
+	t_env	*raw_env;
+	char	**cmd;
+
+	cmd = node->cmd;
+	raw_env = node->env;
 	while(raw_env)
 	{
 		if (find_c((raw_env)->env, '='))

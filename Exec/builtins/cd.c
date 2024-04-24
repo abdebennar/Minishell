@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../Include/minishell.h"
+
+//I think I should use 1 grp cause this data will remain --!
 
 static void    update_pwd(char *new_pwd, t_env **env)
 {
@@ -20,15 +22,15 @@ static void    update_pwd(char *new_pwd, t_env **env)
         *env = (*env)->next;
     if (*env)
     {
-        (*env)->value = new_pwd;
-		new_node->env = ft_strjoin("PWD=", new_pwd); 
+        (*env)->value = ft_strdup(new_pwd, 0);
+		new_node->env = ft_strjoin("PWD=", new_pwd, 0); 
     }
     else
     {
-        new_node = my_malloc(sizeof(t_env), 1); // FIX add the group
-        new_node->var = ft_strdup("PWD"); // FIX
-		new_node->value = ft_strdup(new_pwd); // FIX
-		new_node->env = ft_strjoin("PWD=", new_pwd);
+        new_node = my_malloc(sizeof(t_env), 1, 0);
+        new_node->var = ft_strdup("PWD", 0);
+		new_node->value = ft_strdup(new_pwd, 0);
+		new_node->env = ft_strjoin("PWD=", new_pwd, 0);
 		new_node->next = NULL;
 		ft_lstaddback(env, new_node);
     }
@@ -43,30 +45,29 @@ static void    update_oldpwd(char *new_pwd, t_env **env)
     if (*env)
     {
         (*env)->value = new_pwd;
-		new_node->env = ft_strjoin("OLDPWD=", new_pwd);
+		new_node->env = ft_strjoin("OLDPWD=", new_pwd, 0);
     }
     else
     {
-        new_node = my_malloc(sizeof(t_env), 1); // FIX add group
-        new_node->var = ft_strdup("OLDPWD"); 
-		new_node->value = ft_strdup(new_pwd);
-		new_node->env = ft_strjoin("OLDPWD=", new_pwd);
+        new_node = my_malloc(sizeof(t_env), 1, 0); // FIX add group
+        new_node->var = ft_strdup("OLDPWD", 0); 
+		new_node->value = ft_strdup(new_pwd, 0);
+		new_node->env = ft_strjoin("OLDPWD=", new_pwd, 0);
 		new_node->next = NULL;
 		ft_lstaddback(env, new_node);
     }
 }
 
-void    _cd_(char **cmd, t_env **env)
+void    _cd_(t_node *node)
 {
     char    old_pwd[PATH_MAX];
     char    pwd[PATH_MAX];
     int 	exit_err;
+	t_env	*env;
+	char	**cmd;
 
-    if (cmd[2]) //check this
-    {
-        printf("bash: cd: too many arguments\n");
-        exit(1);
-    }
+	cmd = node->cmd;
+	env = node->env;
     if (!cmd[1])
         cmd[1] = getenv("HOME");
     else if (ft_strcmp(cmd[1], "-"))
@@ -84,3 +85,16 @@ void    _cd_(char **cmd, t_env **env)
     update_oldpwd(old_pwd, env);
     update_pwd(pwd, env);
 }
+
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	char	**cmd;
+// 	t_env	*env;
+
+// 	env = env_init(envp);
+
+// 	cmd = malloc(sizeof(char *) * 2);
+// 	cmd[0] = ft_strdup("cd", 0);
+// 	cmd[1] = ft_strdup("~", 0);
+// 	_cd_(cmd, env);
+// }

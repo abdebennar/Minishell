@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:51:05 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/21 17:14:46 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/24 05:24:06 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../Include/minishell.h"
 
-void	_pwd_(char **cmd)
+void	_pwd_(t_node *node)
 {
 	char cwd[PATH_MAX];
-	
+	char	**cmd;
+
+	cmd = node->cmd;
 	if (cmd[1])
 	{
 		printf("pwd: too many arguments");

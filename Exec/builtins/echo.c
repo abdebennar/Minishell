@@ -28,11 +28,13 @@ static int  check_flags(char *cmd)
     return (0);
 }
 
-void    _echo_(char **cmd)
+void    _echo_(t_node *node)
 {
-    int flag;
+    int		flag;
+	char	**cmd;
 
     flag = 0;
+	cmd = node->cmd;
     while (check_flags(*(cmd)))
 	{
 		cmd++;

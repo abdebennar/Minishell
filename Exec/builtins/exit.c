@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 10:09:25 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/21 17:14:46 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/24 05:19:42 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../Include/minishell.h"
 
 static long long	ft_atoll(char *str, int *err)
 {
@@ -41,11 +41,13 @@ static long long	ft_atoll(char *str, int *err)
 	return ((long long)num * sign);
 }
 
-void	_exit_(char **cmd)
+void	_exit_(t_node *node)
 {
 	long long	num;
 	int			err;
+	char		**cmd;
 
+	cmd = node->cmd;
 	if (!cmd[1])
 		exit(0);
 	if (cmd[2])

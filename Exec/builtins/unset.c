@@ -6,11 +6,11 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 08:47:25 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/22 23:25:31 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/24 05:24:52 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../Include/minishell.h"
 
 static int check_var(char *str)
 {
@@ -52,8 +52,13 @@ static void	unset_args(char *arg, t_env **raw_env)
 	}
 }
 
-void	_unset_(char **cmd, t_env **raw_env)
+void	_unset_(t_node *node)
 {
+	t_env	*raw_env;
+	char	**cmd;
+
+	raw_env = node->env;
+	cmd = node->cmd;
 	if (!cmd[1])
 	{
 		printf("unset: not enough arguments");

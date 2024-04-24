@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 03:29:22 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/23 18:38:08 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/24 05:23:38 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../Include/minishell.h"
 
 void	ft_lstaddback(t_env **alst, t_env *new)
 {
@@ -140,13 +140,13 @@ void	export_args(t_env **raw_env, char *new_var)
 	if (is_it_in(*raw_env, new_var))
 	{
 		(!append) && ((*raw_env)->value = value);
-		(append) && ((*raw_env)->value = ft_strjoin((*raw_env)->value, value));
+		(append) && ((*raw_env)->value = ft_strjoin((*raw_env)->value, value, 0));
 	}
 	else
 	{
-		new_node = my_malloc(sizeof(t_env), 1); // FIX add the group
+		new_node = my_malloc(sizeof(t_env), 1, 0); // FIX add the group
 		new_node->var = var;
-		(append && !value) && (value = ft_strdup("")); // 
+		(append && !value) && (value = ft_strdup("", 0)); // 
 		new_node->value = value;
 		new_node->env = new_var;
 		new_node->next = NULL;
@@ -161,7 +161,7 @@ void	show_export(t_env **raw_env)
 	sort_env(raw_env);
 	while (*raw_env)
 	{
-		if ((*raw_env)->value)
+		if ((*raw_env)->value) //maybe the value *
 			printf("declare -x %s=\"%s\"\n", (*raw_env)->var, (*raw_env)->value);
 		else
 			printf("declare -x %s\n", (*raw_env)->var);
@@ -169,8 +169,13 @@ void	show_export(t_env **raw_env)
 	}
 }
 
-void	_export_(char **cmd, t_env **raw_env)
+void	_export_(t_node *node)
 {
+	t_env	*raw_env;
+	char	**cmd;
+
+	cmd = node->cmd;
+	raw_env = node->env;
 	if (!cmd[1])
 		show_export(raw_env);
 	else

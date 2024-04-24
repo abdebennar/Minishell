@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   prottypes.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:42:30 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/23 19:53:18 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/24 05:13:55 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# define ALLOC	1 
-# define CLEAN	0
-# define GB_GROUPS 2
-# define SEP	" \t\n\v\r\f"
+# define GB_GROUPS	2
+# define ALLOC		1 
+# define CLEAN		0
+# define SEP		" \t\n\v\r\f"
 
 typedef struct s_data
 {
@@ -60,10 +60,9 @@ typedef	struct s_node
 	t_token			tok;
 	/* your's */
 	int				fd[2];
-	char			*cmd; //TODO change this to **cmd
-	char			**args; //TODO remove this and replace **args with **cmd
+	char			**cmd;
 	t_redir			*redir;
-	t_env			*env;  // TODO
+	t_env			*env;
 	struct s_node	*left;
 	struct s_node	*right;
 }	t_node;

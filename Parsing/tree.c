@@ -6,11 +6,11 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 17:37:42 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/21 19:34:02 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/24 05:01:18 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../Include/minishell.h"
 
 t_node	*tree(t_node	*node)
 {

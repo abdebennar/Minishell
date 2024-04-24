@@ -6,11 +6,11 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 17:17:54 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/21 19:34:59 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/24 05:01:05 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../Include/minishell.h"
 
 t_node	*infix_to_postfix(t_node **lst)
 {
