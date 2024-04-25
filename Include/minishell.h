@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/24 17:08:19 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/25 06:04:59 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*add_c(char *str, char c);
 //builtins -> env
 int		find_c(char *str, char c);
 
-//utils ---------
+//utils --------------------------------------------
 char	**ft_split(char *s, char *delim, int group);
 char	*ft_strtrim(const char *s1, const char *set, int group);
 char	*ft_strjoin(char *s1, char *s2, int group);
@@ -61,11 +61,39 @@ void	add_redir_back(t_redir *node, t_redir **list);
 void	add_node_back(t_node *node, t_node **list);
 void	add_redir_back(t_redir *node, t_redir **list);
 
+//utils -> link_lst2
+void	ft_lstaddback(t_node **alst, t_node *new);
+
 void	print_tok(t_token tok); //just tmp
-//--------------
+//----------------------------------------------//
+
+//Exec -----------------------------------------
+//Exec -> command ------------------------------
+void    _exec_(t_node **node);
+void	_expanding_(t_node **node);
+char	*s_q(char *raw, int *index);
+char	*d_q(char *raw, int *index);
+void	_wildcard_(t_node **node);
+
+//Exec -> builtins
+void    _cd_(t_node *node);
+void    _echo_(t_node *node);
+void	_env_(t_node *node);
+void	_exit_(t_node *node);
+void	_export_(t_node *node);
+void	_pwd_(t_node *node);
+void	_unset_(t_node *node);
+
+//Exec -> executor
+void	_and_(t_node *node, int exit_stat);
+void	_or_(t_node *node, int exit_stat);
+int		_redirections_(t_node *node);
+int		_heredoc_(t_redir *alter);
+void	_pipe_(t_node *cmd);
+//--------------------------------------------//
 
 //parsing
-void	Parsing(char *line, t_env *env);
+t_node	*Parsing(char *line, t_env *env);
 bool	low_pre(t_token tok);
 void	lst_iter(t_node	*lst, void (*f)(t_node *));
 
@@ -89,3 +117,6 @@ t_node	*lexer(char *cmd);
 
 // err mng 
 void	error_exit(char *error, int exit_NO);
+
+//syntax -> parse
+void	check_syntax(t_token tok, char *cmd, int i);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 04:00:45 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/24 14:56:11 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/25 03:45:39 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	_left_(t_node *node)
  
 //TODO expand inside heredoc 
 
-void	_redirections_(t_node *node)
+int	_redirections_(t_node *node)
 {
 	t_redir *alter;
 
@@ -84,9 +84,9 @@ void	_redirections_(t_node *node)
 		alter = alter->next;
 	}
 	if (_left_(node) || _right_(node))
-		perror("left || right");
+		return (perror("left || right"), -1);
 	if (node->fd[0] != 0)
-		dup2(node->fd[0], STDIN_FILENO);
+		dup2(node->fd[0], STDIN_FILENO); //add protection
 	if (node->fd[1] != 1)
 		dup2(node->fd[1], STDOUT_FILENO);
 }

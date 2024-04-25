@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 03:57:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/23 18:15:47 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/25 05:28:50 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	err(int *fd_in, int *fd_out)
 {
 	(fd_in) && (close(*fd_in), 0);
 	(fd_out) && (close(*fd_out), 0);
-	my_malloc(0, 0); // FIX add the group
+	my_malloc(0, 0, 0); // FIX add the group
 }
 
 void	w_err(char *str)
@@ -24,7 +24,7 @@ void	w_err(char *str)
 	write(2, "[-] ", 5);
 	write(2, str, ft_strlen(str));
 	write(2, "\n", 2);
-	my_malloc(0, 0); // FIX add the group
+	my_malloc(0, 0, 0); // FIX add the group
 }
 
 int	rbuddha(t_node *node, int *piped)

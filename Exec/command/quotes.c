@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:33:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/23 18:15:09 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/25 05:47:24 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Include/minishell.h"
+#include "minishell.h"
 
 int	only_identifier(char *str)
 {
@@ -94,7 +94,7 @@ char	*d_q(char *raw, int *index)
 				possible = malloc(ident + 1);
 				ft_strncpy(possible, &raw[*index + 1], ident);
 				if (getenv(possible)) //you can remove this
-					new = ft_strjoin(new, getenv(possible));
+					new = ft_strjoin(new, getenv(possible), 0);
 				*index += ident + 1;
 			}
 		}
@@ -112,7 +112,7 @@ char	*s_q(char *raw, int *index)
 	int		ind;
 
 	ind = -1;
-	clean = my_malloc(ft_strlen(raw - 1), 1); // FIX add the group
+	clean = my_malloc(ft_strlen(raw - 1), 1, 0); // FIX add the group
 	if (count_c(raw, '\'') % 2)
 	{
 		printf("unclosed quote\n");

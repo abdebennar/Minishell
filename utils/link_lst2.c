@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   link_lst2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/25 05:58:14 by bel-oirg         ###   ########.fr       */
+/*   Created: 2024/04/25 06:04:15 by bel-oirg          #+#    #+#             */
+/*   Updated: 2024/04/25 06:06:07 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+void	ft_lstaddback(t_ **alst, t_node *new)
 {
-	char	*line;
-	t_env	*env;
-	t_node	*node;
-	
+	t_node *ptr;
 
-	env = env_init(envp);
-	while (666)
+	if (alst && *alst)
 	{
-		line = readline("$ ");
-		node = Parsing(line, env);
-		_exec_(&node);
+		ptr = *alst;
+		while (ptr->)
+			ptr = ptr->next;
+		ptr->next = new;
 	}
+	else if (alst)
+		*alst = new;
 }

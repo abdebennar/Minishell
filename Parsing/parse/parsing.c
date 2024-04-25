@@ -3,34 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:42:10 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/24 16:44:31 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/25 05:59:27 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/minishell.h"
 
-void print_tree(t_node *root, int level)
-{
-    if (root != NULL) {
-        print_tree(root->right, level + 1);
-        for (int i = 0; i < level; i++) {
-            printf("   ");
-        }
-		if (root->tok == NOT)
-        	printf("%s\n", root->cmd);
-		else
-			print_tok(root->tok);
-        print_tree(root->left, level + 1);
-    }
-}
+// void print_tree(t_node *root, int level)
+// {
+//     if (root != NULL) {
+//         print_tree(root->right, level + 1);
+//         for (int i = 0; i < level; i++) {
+//             printf("   ");
+//         }
+// 		if (root->tok == NOT)
+//         	printf("%s\n", root->(*cmd);
+// 		else
+// 			print_tok(root->tok);
+//         print_tree(root->left, level + 1);
+//     }
+// }
 
-void	Parsing(char *line, t_env *env)
+t_node	*Parsing(char *line, t_env *env)
 {
 	t_node *node;
 	char *cmd;
+	
 	node = NULL;
 	cmd = ft_strtrim(line, SEP, 0);
 	free(line);
@@ -40,5 +41,6 @@ void	Parsing(char *line, t_env *env)
 	add_env(node, env);
 	node = postfix_to_prefix(node);
 	node = tree(node);
-	print_tree(node, 0); // TMP
+	return (node);
+	// print_tree(node, 0); // TMP
 }

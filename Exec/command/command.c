@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/24 14:55:22 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/25 05:48:41 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Include/minishell.h"
+#include "minishell.h"
 
 static char	*add_path(char *cmd)
 {
@@ -36,43 +36,42 @@ static char	*add_path(char *cmd)
 	return (NULL);
 }
 
-bool	is_builtin(char *str)
+static bool	is_builtin(t_node *node)
 {
+	char *str;
+
+	str = node->cmd[0];
 	if (!ft_strcmp(str, "cd"))
-		return (1);
+		return (_cd_(node), true);
 	else if (!ft_strcmp(str, "echo"))
-		return (1);
+		return (_echo_(node), true);
 	else if (!ft_strcmp(str, "env"))
-		return (1);
+		return (_env_(node), true);
 	else if (!ft_strcmp(str, "exit"))
-		return (1);
+		return (_exit_(node), true);
 	else if (!ft_strcmp(str, "export"))
-		return (1);
+		return (_export_(node), true);
 	else if (!ft_strcmp(str, "pwd"))
-		return (1);
-	else if (!ft_strcmp(str, "unset"));
-		return (1);
-	return (0);
+		return (_pwd_(node), true);
+	else if (!ft_strcmp(str, "unset"))
+		return (_unset_(node), true);
+	return (false);
 }
 
 void    _exec_(t_node **node)
 {
     int forked;
-
+	
 	_expanding_(node);
-	_wildcard_(node);
-	_redirection_(node);
+	// _redirection_(node);
+	if (is_builtin(*node))
+		return ;
     forked = fork();
     if (forked < 0)
         perror("fork");
     if (!forked)
     {
-		if (is_builtin((*node)->cmd[0]))
-			exec_builtin((*node));
-		else
-		{
 			execve(add_path((*node)->cmd[0]), (*node)->cmd, NULL);
 			perror("Command not found");
-		}
     }
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 01:44:16 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/23 18:40:25 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/25 05:43:16 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Include/minishell.h"
+#include "minishell.h"
 
 bool check_pattern(char *str, char *pattern)
 {
@@ -76,8 +76,8 @@ char	*b_wildcard_(char *pattern)
         if (check_pattern(entry->d_name, pattern))
         {
             if (extracted)
-                extracted = ft_strjoin(extracted, " "); // FIX 
-            extracted = ft_strjoin(extracted, entry->d_name);
+                extracted = ft_strjoin(extracted, " ", 0); // FIX 
+            extracted = ft_strjoin(extracted, entry->d_name, 0);
         }
     }
 	if (extracted)

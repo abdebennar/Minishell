@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 05:50:24 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/23 18:40:36 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/25 02:05:26 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ static char	*random_f(void)
 	int		fd_tmp;
 
 	file_len = 16;
-	file_name = my_malloc(file_len + 1, 1); // FIX add the group
-
+	file_name = my_malloc(file_len + 1, 1, 0); // FIX add the group
 
 	
 	fd_rd = open("/dev/urandom", O_RDONLY, 0777);
@@ -30,9 +29,6 @@ static char	*random_f(void)
 	close(fd_rd);
 	file_name[file_len] = 0;
 
-
-	
-	
 
 	fd_tmp = open(file_name, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	if (fd_tmp < 0)
@@ -74,7 +70,7 @@ int	_heredoc_(t_redir *alter)
 	
 	file_name = random_f();
 	fd_in = fill_file(alter, file_name);
-	(fd_in < 0) && (perror("open"), my_malloc(0, 0)); // FIX add the group
+	(fd_in < 0) && (perror("open"), my_malloc(0, 0, 0)); // FIX add the group
 	unlink(file_name);
 	return (fd_in);
 }
