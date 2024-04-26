@@ -35,11 +35,12 @@ void    _echo_(t_node *node)
 
     flag = 0;
 	cmd = node->cmd;
+	cmd++;
     while (check_flags(*(cmd)))
 	{
-		cmd++;
 		printf("inside checker");
         flag = 1;
+		cmd++;
 	}
     while(*cmd)
     {

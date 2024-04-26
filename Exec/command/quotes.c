@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:33:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/25 05:47:24 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/26 05:44:27 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,13 @@ char	*d_q(char *raw, int *index)
 		printf("unclosed quote\n");
 		exit(1);
 	}
-	(*index)++;
+	if (raw[*index] == '"')
+		(*index)++;
 	while (raw[*index])
 	{
 		if (raw[*index] == '$')
 		{
+			// printf("checked $\n");
 			ident = only_identifier(&raw[*index + 1]);
 			if (ident)
 			{
@@ -98,8 +100,8 @@ char	*d_q(char *raw, int *index)
 				*index += ident + 1;
 			}
 		}
-		else if (raw[*index] == '"')
-			return (new);
+		else if (raw[*index] == '"' || !raw[*index])
+			break ;
 		else 
 			new = add_c(new, raw[(*index)++]);
 	}

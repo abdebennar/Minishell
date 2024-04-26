@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/26 02:51:29 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/26 06:23:37 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	_and_(t_node *node, int exit_stat);
 void	_or_(t_node *node, int exit_stat);
 int		_redirections_(t_node *node);
 int		_heredoc_(t_redir *alter);
-void	_pipe_(t_node *cmd);
+void	_pipe_(t_node *node);
 //--------------------------------------------//
 
 //parsing

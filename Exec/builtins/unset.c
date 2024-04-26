@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 08:47:25 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/26 02:14:54 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/26 05:25:04 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	unset_args(char *arg, t_env **raw_env)
 	
 	if (check_var(arg))
 	{
-		printf("unset: %s: invalid parameter name", arg);
+		printf("unset: %s: invalid parameter name\n", arg);
 		exit(1);
 	}
 	while(ft_strcmp((*raw_env)->value, arg))
