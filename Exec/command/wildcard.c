@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 01:44:16 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/25 05:43:16 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/25 23:59:41 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ bool check_pattern(char *str, char *pattern)
 {
     if (!*pattern)
         return (!*str);
+		
 	if (*pattern == '*')
 		return ((check_pattern(str, pattern + 1) ||
 		(*str && check_pattern(str + 1, pattern))));
+		
    else if (*str == *pattern)
         return check_pattern(str + 1, pattern + 1);
     return (false);
@@ -55,6 +57,9 @@ bool check_pattern(char *str, char *pattern)
 // 	return (1);
 // }
 
+
+//reme to check .*.c
+
 char	*b_wildcard_(char *pattern)
 {
     struct dirent   *entry;
@@ -73,8 +78,14 @@ char	*b_wildcard_(char *pattern)
         entry = readdir(dir);
         if (!entry)
             break;
+			
         if (check_pattern(entry->d_name, pattern))
         {
+			// printf("%c --\n", (entry->d_name)[0]);
+			// printf("%c --p\n", *pattern);
+			if ((entry->d_name)[0] == '.')
+				if (pattern[0] != '.')
+					continue ;
             if (extracted)
                 extracted = ft_strjoin(extracted, " ", 0); // FIX 
             extracted = ft_strjoin(extracted, entry->d_name, 0);
@@ -82,7 +93,7 @@ char	*b_wildcard_(char *pattern)
     }
 	if (extracted)
 		return (extracted);
-	return (pattern);
+	return (extracted);
 }
 
 void	_wildcard_(t_node **node)
@@ -94,9 +105,9 @@ void	_wildcard_(t_node **node)
 		(*node)->cmd[index] = b_wildcard_((*node)->cmd[index]);
 }
 
-// int main()
-// {
-// 	char pattern[] = "*\"\".c";
+int main()
+{
+	char pattern[] = "../command/.*";
 	
-//     printf("%s\n", _wildcard_(pattern));
-// }
+    printf("%s\n", b_wildcard_(pattern));
+}

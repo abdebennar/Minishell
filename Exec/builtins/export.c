@@ -3,36 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 03:29:22 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/24 14:55:15 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/26 00:24:42 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/minishell.h"
-
-void	ft_lstaddback(t_env **alst, t_env *new)
-{
-	t_env *ptr;
-
-	if (alst && *alst)
-	{
-		ptr = *alst;
-		while (ptr->next)
-			ptr = ptr->next;
-		ptr->next = new;
-	}
-	else if (alst)
-		*alst = new;
-}
-
-int	is_alphanum(char c)
-{
-	return ((c >= 'a' && c <= 'z')
-			|| (c >= 'A' && c <= 'Z')
-			|| (c >= '0' && c <= '9'));
-}
 
 static int check_var(char *str)
 {

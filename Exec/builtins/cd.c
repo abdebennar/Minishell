@@ -22,19 +22,21 @@ static void    update_pwd(char *new_pwd, t_env **env)
         *env = (*env)->next;
     if (*env)
     {
-        (*env)->value = ft_strdup(new_pwd, 0);
-		new_node->env = ft_strjoin("PWD=", new_pwd, 0); 
+        (*env)->value = ft_strdup(new_pwd, 1);
+		// new_node->env = ft_strjoin("PWD=", new_pwd, 0); 
     }
     else
     {
-        new_node = my_malloc(sizeof(t_env), 1, 0);
-        new_node->var = ft_strdup("PWD", 0);
-		new_node->value = ft_strdup(new_pwd, 0);
-		new_node->env = ft_strjoin("PWD=", new_pwd, 0);
+        new_node = my_malloc(sizeof(t_env), 1, 1);
+        new_node->var = ft_strdup("PWD", 1);
+		new_node->value = ft_strdup(new_pwd, 1);
+		new_node->env = ft_strjoin("PWD=", new_pwd, 1);
 		new_node->next = NULL;
 		ft_lstaddback(env, new_node);
     }
 }
+
+//remember to change the grp
 
 static void    update_oldpwd(char *new_pwd, t_env **env)
 {
@@ -44,15 +46,15 @@ static void    update_oldpwd(char *new_pwd, t_env **env)
         *env = (*env)->next;
     if (*env)
     {
-        (*env)->value = new_pwd;
-		new_node->env = ft_strjoin("OLDPWD=", new_pwd, 0);
+        (*env)->value = ft_strdup(new_pwd, 1);
+		// new_node->env = ft_strjoin("OLDPWD=", new_pwd, 0);
     }
     else
     {
-        new_node = my_malloc(sizeof(t_env), 1, 0);
-        new_node->var = ft_strdup("OLDPWD", 0); 
-		new_node->value = ft_strdup(new_pwd, 0);
-		new_node->env = ft_strjoin("OLDPWD=", new_pwd, 0);
+        new_node = my_malloc(sizeof(t_env), 1, 1);
+        new_node->var = ft_strdup("OLDPWD", 1); 
+		new_node->value = ft_strdup(new_pwd, 1);
+		new_node->env = ft_strjoin("OLDPWD=", new_pwd, 1);
 		new_node->next = NULL;
 		ft_lstaddback(env, new_node);
     }
