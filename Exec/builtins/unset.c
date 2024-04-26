@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 08:47:25 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/24 05:24:52 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/26 02:14:54 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,5 @@ void	_unset_(t_node *node)
 		exit(1);
 	}
 	while(*(++cmd))
-		unset_args(*cmd, raw_env);
+		unset_args(*cmd, &raw_env);
 }

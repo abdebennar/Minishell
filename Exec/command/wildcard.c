@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 01:44:16 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/25 23:59:41 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/26 02:15:52 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,9 @@ void	_wildcard_(t_node **node)
 		(*node)->cmd[index] = b_wildcard_((*node)->cmd[index]);
 }
 
-int main()
-{
-	char pattern[] = "../command/.*";
+// int main()
+// {
+// 	char pattern[] = "../command/.*";
 	
-    printf("%s\n", b_wildcard_(pattern));
-}
+//     printf("%s\n", b_wildcard_(pattern));
+// }

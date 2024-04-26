@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/26 00:30:36 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/26 02:18:53 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ static bool	is_builtin(t_node *node)
 	return (false);
 }
 
-//env -> **str to give it to execve
+//TODO env -> **str to give it to execve 
+//TODO add an architecture based on token
 
 void    _exec_(t_node **node)
 {
@@ -73,7 +74,7 @@ void    _exec_(t_node **node)
         perror("fork");
     if (!forked)
     {
-			execve(add_path((*node)->cmd[0]), (*node)->cmd, );
-			perror("Command not found");
+			execve(add_path((*node)->cmd[0]), (*node)->cmd, NULL);
+			perror("Command not found bitch");
     }
 }

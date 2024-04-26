@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 03:29:22 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/26 00:24:42 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/26 02:14:37 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*get_var(char *s, int c)
 	counter = 1;
 	while(s[i] && s[i] != c)
 	    counter++, i++;
-    var = malloc(counter);
+    var = my_malloc(1, counter, 0);
     i = 0;
 	while (s[i] && s[i] != c)
 	{
@@ -155,10 +155,10 @@ void	_export_(t_node *node)
 	cmd = node->cmd;
 	raw_env = node->env;
 	if (!cmd[1])
-		show_export(raw_env);
+		show_export(&raw_env);
 	else
 	{
 		while(*(++cmd))
-			export_args(raw_env, *cmd);
+			export_args(&raw_env, *cmd);
 	}
 }

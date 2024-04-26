@@ -84,8 +84,8 @@ void    _cd_(t_node *node)
     }
     if (getcwd(pwd, PATH_MAX))
         return ;
-    update_oldpwd(old_pwd, env);
-    update_pwd(pwd, env);
+    update_oldpwd(old_pwd, &env);
+    update_pwd(pwd, &env);
 }
 
 // int	main(int argc, char **argv, char **envp)

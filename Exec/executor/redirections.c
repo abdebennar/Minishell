@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 04:00:45 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/25 03:45:39 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/26 02:06:54 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,13 @@ int	_redirections_(t_node *node)
 	if (_left_(node) || _right_(node))
 		return (perror("left || right"), -1);
 	if (node->fd[0] != 0)
+	{
 		dup2(node->fd[0], STDIN_FILENO); //add protection
+		close(node->fd[0]);
+	}
 	if (node->fd[1] != 1)
+	{
 		dup2(node->fd[1], STDOUT_FILENO);
+		close(node->fd[0]);
+	}
 }
