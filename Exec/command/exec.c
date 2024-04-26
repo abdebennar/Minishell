@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/26 02:47:45 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/26 03:00:54 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,11 @@ void    _exec_(t_node **node)
 {
     int forked;
 	
+	if (!(*node)->cmd[0])
+		return ;
 	_expanding_(node);
+	_redirections_(*node);
+	printf("node->cmd %s\n", (*node)->cmd[0]);
 	// _redirection_(node);
 	if (is_builtin(*node))
 		return ;
