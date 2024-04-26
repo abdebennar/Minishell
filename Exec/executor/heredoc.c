@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 05:50:24 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/25 02:05:26 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/26 02:51:18 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char	*random_f(void)
 
 	
 	fd_rd = open("/dev/urandom", O_RDONLY, 0777);
-	(fd_rd < 0) && (w_err("cannot open /dev/urandom"), 0);
+	(fd_rd < 0) && (perror("cannot open /dev/urandom"), 0);
 	read(fd_rd, file_name, file_len);
 	close(fd_rd);
 	file_name[file_len] = 0;
@@ -49,16 +49,16 @@ static int	fill_file(t_redir *alter, char *file_name)
 	{
 		write(1, "heredoc> ", 10);
 		line = readline(STDIN_FILENO);
-		if (!my_strcmp(line, alter->file))
+		if (!doc_strcmp(line, alter->file))
 		{
 			(1) && (free(line), line = NULL);
 			break ;
 		}
-		content = ft_strjoin(content, line); // FIX
+		content = ft_strjoin(content, line, 0); // FIX
 		(line) && (free(line), 0);
 	}
 	fd_file = open(file_name, O_RDWR | O_CREAT | O_TRUNC, 0777);
-	(fd_file < 0) && (perror("open"), my_malloc(0, 0), 0); // FIX add the group
+	(fd_file < 0) && (perror("open"), my_malloc(0, 0, 0), 0); // FIX add the group
 	write(fd_file, content, ft_strlen(content)); 
 	return (fd_file);
 }

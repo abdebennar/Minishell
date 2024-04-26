@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command.c                                          :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/26 02:18:53 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/26 02:47:45 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,28 @@ void    _exec_(t_node **node)
         perror("fork");
     if (!forked)
     {
-			execve(add_path((*node)->cmd[0]), (*node)->cmd, NULL);
-			perror("Command not found bitch");
+		//TODO till using NULL not env
+		execve(add_path((*node)->cmd[0]), (*node)->cmd, NULL);
+		perror("Command not found bitch");
     }
 }
+
+void	_exec_arch_(t_node **node)
+{
+	t_token	tok;
+	int		exit_stat;
+	
+	tok = (*node)->tok;
+	exit_stat = 1;
+	if (tok == OR)
+		_or_(*node, exit_stat);
+	else if (tok == AND)
+		_and_(*node, exit_stat);
+	else if (tok == PIPE)
+		_pipe_(*node);
+	else if (tok == NOT)
+		_exec_(node);
+	else
+		perror("No token provided");
+}
+

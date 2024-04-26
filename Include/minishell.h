@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/26 00:24:21 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/26 02:51:29 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,20 @@ void	add_redir_back(t_redir *node, t_redir **list);
 // utils -> link_lst2
 void	ft_lstaddback(t_env **alst, t_env *new);
 
+//utils ->ft_str2
+int	doc_strcmp(char *s1, char *s2);
+
 void	print_tok(t_token tok); //just tmp
 //----------------------------------------------//
 
 //Exec -----------------------------------------
 //Exec -> command ------------------------------
-void    _exec_(t_node **node);
 void	_expanding_(t_node **node);
 char	*s_q(char *raw, int *index);
 char	*d_q(char *raw, int *index);
 void	_wildcard_(t_node **node);
+void	_exec_arch_(t_node **node);
+void    _exec_(t_node **node);
 
 //Exec -> builtins
 void    _cd_(t_node *node);

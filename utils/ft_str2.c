@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_str2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/26 02:27:14 by bel-oirg         ###   ########.fr       */
+/*   Created: 2024/04/26 02:44:18 by bel-oirg          #+#    #+#             */
+/*   Updated: 2024/04/26 02:51:37 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+int	doc_strcmp(char *s1, char *s2)
 {
-	char	*line;
-	t_env	*env;
-	t_node	*node;
-	
-
-	env = env_init(envp);
-	while (666)
+	if (!*s2 && !s1)
+		return (0);
+	if (!s2 || !s1)
+		return (1);
+	while (*s1 == *s2 && *s1)
 	{
-		line = readline("$ ");
-		node = Parsing(line, env);
-		_exec_arch_(&node);
+		s1++;
+		s2++;
 	}
+	if (*s1 == '\n' && !*s2)
+		return (0);
+	return (*s1 - *s2);
 }
