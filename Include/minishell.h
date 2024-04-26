@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/26 06:23:37 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/26 21:28:12 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,10 @@ t_node	*tree(t_node	*node);
 
 //lexer
 t_node	*lexer(char *cmd);
+void	skip_space(char *cmd, int *i);
 
 // err mng 
 void	error_exit(char *error, int exit_NO);
 
 //syntax -> parse
-void	check_syntax(t_token tok, char *cmd, int i);
+bool	check_syntax(t_token tok, char *cmd, int i);

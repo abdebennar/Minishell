@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 11:01:06 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/24 16:50:40 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/26 21:19:33 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,9 @@ t_node	*lexer(char *cmd)
 	list = NULL;
 	while (cmd[i])
 	{
-		check_syntax(tok = get_token(cmd[i], cmd[i + 1]), cmd, i);
+		tok = get_token(cmd[i], cmd[i + 1]);
+		if (!check_syntax(tok, cmd, i))
+			return (NULL);
 		if (!low_pre(tok))
 		{
 			node = new_node(NULL, NULL, tok, get_pre(tok));
@@ -109,7 +111,6 @@ t_node	*lexer(char *cmd)
 		}
 		else
 			node = check_tokens(cmd, tok, &i);
-
 		add_node_back(node, &list);
 	}
 	return (list);

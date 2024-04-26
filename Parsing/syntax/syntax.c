@@ -3,24 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:50:12 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/26 00:04:04 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/26 22:32:33 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	check_syntax(t_token tok, char *cmd, int i)
+bool	unexpected_token(char *cmd, int i)
 {
+	t_token	tok;
+
+	tok = get_token(cmd[i], cmd[i + 1]);
+	if (tok == PIPE || tok == OR || tok == AND)
+	{
+		printf("syntax error near unexpected token\n");
+		return (false);
+	}
+	return (true);
+}
+
+
+bool	check_syntax(t_token tok, char *cmd, int i)
+{
+	bool	ret;
+
+	ret = false;
 	i++;
 	if (tok == AND || tok == OR || tok == APPEND || tok == HEREDOC)
 		i++;
-	while (ft_strchr(SEP, cmd[i]))
-		i++;
-	if (get_token(cmd[i], cmd[i + 1]) != NOT)
+	if (tok == LPR)
 	{
-		printf("shell: syntax error\n");
+		while (cmd[i])
+		{
+			if (get_token(cmd[i], cmd[i + 1]) == RPR)
+			{
+				ret = true;
+				break;
+			}
+			i++;		
+		}
+		if (!ret)
+		printf("syntax error near unexpected token\n");
 	}
+	else 
+	{
+		skip_space(cmd, &i);
+		ret = unexpected_token(cmd, i);
+	}
+	return (ret);
 }

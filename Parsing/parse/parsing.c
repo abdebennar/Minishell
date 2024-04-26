@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:42:10 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/26 03:04:32 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/26 21:54:25 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ t_node	*Parsing(char *line, t_env *env)
 	if (!cmd[0])
 		return (NULL);
 	node = lexer(cmd);
+	if (!node)
+		return (NULL);
 	lst_iter(node, get_args);
 	node = infix_to_postfix(&node);
 	add_env(node, env);
