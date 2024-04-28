@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:08:54 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/23 23:17:24 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/27 06:37:11 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void	get_args(t_node *node)
 	arg_space(cmd);
 	args = ft_split(cmd, " ", 0);
 	reset_sp(args);
-	
+	node->fd[0] = 0;
+	node->fd[1] = 1;
 	node->cmd = args;
 }

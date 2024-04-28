@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/26 06:08:28 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/27 13:36:30 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int	main(int argc, char **argv, char **envp)
 	{
 		line = readline("$ ");
 		node = Parsing(line, env);
-		_exec_arch_(&node);
+		_exec_arch_(node);
 	}
 }

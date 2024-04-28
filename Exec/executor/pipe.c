@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 03:57:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/26 06:37:37 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/28 05:52:40 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@ int	rbuddha(t_node *node, int *piped)
 	}
 	if (!forked)
 	{
-		close(piped[0]);
-		dup2(piped[1], STDOUT_FILENO);
 		close(piped[1]);
-		_exec_(&node);
-		perror("Command not found");
+		dup2(piped[0], node->fd[0]);
+		close(piped[0]);
+		_exec_arch_(node);
+		// execve(add_path((node)->cmd[0]), (node)->cmd, env_p((node)->env));
+		perror("Command not found on right");
+		exit(1);
 	}
 	return (forked);
 }
@@ -45,12 +47,14 @@ int	lbuddha(t_node *node, int *piped)
 	}
 	if (!forked)
 	{
-		close(piped[1]);
-		dup2(piped[0], STDIN_FILENO);
 		close(piped[0]);
-		_exec_(&node);
-		perror("Command not found");
+		dup2(piped[1], node->fd[1]);
+		close(piped[1]);
+		_exec_arch_((node));
+		// execve(add_path((node)->cmd[0]), (node)->cmd, env_p((node)->env));
+		exit(1);
 	}
+	// wait(NULL);
 	return (forked);
 }
 
@@ -61,23 +65,22 @@ void	_pipe_(t_node *node)
 
 	if (pipe(piped) < 0)
 		perror("pipe");
-	node->fd[1] = 1;
-	pid[0] = lbuddha(node, piped);
+
+	pid[0] = lbuddha(node->left, piped);
 	if (pid[0] < 0)
 	{
-		close(pid[0]);
-		close(pid[1]);
+		close(piped[0]), close(piped[1]);
 		return ;
 	}
-	pid[1] = rbuddha(node, piped);
+	node = node->right;
+	pid[1] = rbuddha(node->right, piped);
 	if (pid[1] < 0)
 	{
-		close(pid[0]);
-		close(pid[1]);
+		close(piped[0]), close(piped[1]);
 		return ;
 	}
+	close(piped[0]);
+	close(piped[1]);
 	waitpid(pid[0], NULL, 0);
 	waitpid(pid[1], NULL, 0);
-	close(piped[1]);
-	close(piped[0]);
 }

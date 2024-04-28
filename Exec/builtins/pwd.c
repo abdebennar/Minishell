@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:51:05 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/24 05:24:06 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/27 00:26:55 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ void	_pwd_(t_node *node)
 	}
 	getcwd(cwd, PATH_MAX);
 	printf("%s\n", cwd);
-	exit(0);
+	// exit(0);
 }

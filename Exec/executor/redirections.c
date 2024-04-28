@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 04:00:45 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/26 02:59:19 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/27 13:43:05 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,28 +72,28 @@ int	_left_(t_node *node)
  
 //TODO expand inside heredoc 
 
-int	_redirections_(t_node *node)
+int	_redirections_(t_node **node)
 {
 	t_redir *alter;
 
-	alter = node->redir;
+	alter = (*node)->redir;
 	while (alter)
 	{
 		if (alter->tok == HEREDOC)
 			alter->fd = _heredoc_(alter);
 		alter = alter->next;
 	}
-	if (_left_(node) || _right_(node))
+	if (_left_((*node)) || _right_((*node)))
 		return (perror("left || right"), -1);
-	if (node->fd[0] != 0)
+	if ((*node)->fd[0] != 0)
 	{
-		dup2(node->fd[0], STDIN_FILENO); //add protection
-		close(node->fd[0]);
+		dup2((*node)->fd[0], STDIN_FILENO); //add protection
+		close((*node)->fd[0]);
 	}
-	if (node->fd[1] != 1)
+	if ((*node)->fd[1] != 1)
 	{
-		dup2(node->fd[1], STDOUT_FILENO);
-		close(node->fd[1]);
+		dup2((*node)->fd[1], STDOUT_FILENO);
+		close((*node)->fd[1]);
 	}
 	return (0);
 }

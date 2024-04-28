@@ -3,12 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/26 21:28:12 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/27 13:45:08 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
 #include <stdio.h> // printf
 #include <unistd.h> //write - close - fork - dup2 - chdir
@@ -76,8 +79,10 @@ void	_expanding_(t_node **node);
 char	*s_q(char *raw, int *index);
 char	*d_q(char *raw, int *index);
 void	_wildcard_(t_node **node);
-void	_exec_arch_(t_node **node);
-void    _exec_(t_node **node);
+void	_exec_arch_(t_node *node);
+void    _exec_(t_node *node);
+char	**env_p(t_env *env_raw);
+char	*add_path(char *cmd);
 
 //Exec -> builtins
 void    _cd_(t_node *node);
@@ -91,7 +96,7 @@ void	_unset_(t_node *node);
 //Exec -> executor
 void	_and_(t_node *node, int exit_stat);
 void	_or_(t_node *node, int exit_stat);
-int		_redirections_(t_node *node);
+int		_redirections_(t_node **node);
 int		_heredoc_(t_redir *alter);
 void	_pipe_(t_node *node);
 //--------------------------------------------//
@@ -125,3 +130,5 @@ void	error_exit(char *error, int exit_NO);
 
 //syntax -> parse
 bool	check_syntax(t_token tok, char *cmd, int i);
+
+#endif

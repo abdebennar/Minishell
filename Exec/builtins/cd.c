@@ -69,6 +69,7 @@ void    _cd_(t_node *node)
 	char	**cmd;
 
 	cmd = node->cmd;
+	printf("%s\n", cmd[1]);
 	env = node->env;
     if (!cmd[1])
         cmd[1] = getenv("HOME");

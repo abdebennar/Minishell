@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:42:10 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/26 21:54:25 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/27 06:11:44 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_node	*Parsing(char *line, t_env *env)
 	node = NULL;
 	cmd = ft_strtrim(line, SEP, 0);
 	free(line);
-	if (!cmd[0])
+	if (!cmd || !cmd[0])
 		return (NULL);
 	node = lexer(cmd);
 	if (!node)
