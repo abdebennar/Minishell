@@ -6,18 +6,18 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 04:00:45 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/28 09:01:06 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/28 15:53:58 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	_right_(t_node *node)
+int	_right_(t_node **node)
 {
 	t_redir *alter;
 	int		fd;
 
-	alter = node->redir;
+	alter = (*node)->redir;
 	fd = 1;
 	while (alter)
 	{
@@ -37,17 +37,17 @@ int	_right_(t_node *node)
 			return (perror("open"), -1);
 		alter = alter->next;
 	}
-	node->fd[1] = fd;
+	(*node)->fd[1] = fd;
 	return (0);
 }
 
-int	_left_(t_node *node)
+int	_left_(t_node **node)
 {
 	t_redir *alter;
 	int		fd;
 
 	fd = 0;
-	alter = node->redir;
+	alter = (*node)->redir;
 	while (alter)
 	{
 		if (alter->tok == IN)
@@ -66,7 +66,7 @@ int	_left_(t_node *node)
 			return (perror("open"), -1);
 		alter = alter->next;
 	}
-	node->fd[0] = fd;
+	(*node)->fd[0] = fd;
 	return (0);
 }
  
@@ -83,16 +83,18 @@ int	_redirections_(t_node **node)
 			alter->fd = _heredoc_(alter);
 		alter = alter->next;
 	}
-	if (_left_((*node)) || _right_((*node)))
+	if (_left_((node)) || _right_((node)))
 		return (perror("left || right"), -1);
 	if ((*node)->fd[0] != 0)
 	{
-		dup2((*node)->fd[0], STDIN_FILENO); //add protection
+		if (dup2((*node)->fd[0], STDIN_FILENO) < 0)
+			perror("dup2 on redirections");
 		close((*node)->fd[0]);
 	}
 	if ((*node)->fd[1] != 1)
 	{
-		dup2((*node)->fd[1], STDOUT_FILENO);
+		if (dup2((*node)->fd[1], STDOUT_FILENO) < 0)
+			perror("dup2 on redirections");
 		close((*node)->fd[1]);
 	}
 	return (0);

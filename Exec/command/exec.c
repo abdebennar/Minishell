@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/27 13:42:37 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/28 15:58:25 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,13 @@ char	**env_p(t_env *env_raw)
 void    _exec_(t_node *node)
 {
     int forked;
-
+	int	fd_out;
+	int	fd_in;
+  
+	fd_out = dup(STDOUT_FILENO);
+	fd_in = dup(STDIN_FILENO);
 	_expanding_(&node);
 	_redirections_(&node);
-
 	if (is_builtin(node))
 		return ;
     forked = fork();
@@ -104,6 +107,10 @@ void    _exec_(t_node *node)
 		exit(1);
     }
 	waitpid(forked, NULL, 0);
+	dup2(fd_out, STDOUT_FILENO);
+	close(fd_out);
+	dup2(fd_in, STDIN_FILENO);
+	close(fd_in);
 }
 
 void	_exec_arch_(t_node *node)
