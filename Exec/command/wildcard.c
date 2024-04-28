@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 01:44:16 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/26 02:15:52 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/28 10:26:02 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,40 +25,8 @@ bool check_pattern(char *str, char *pattern)
         return check_pattern(str + 1, pattern + 1);
     return (false);
 }
-
-//checking the path .
-//check the quotes
-// int	check_wildcard(char *str)
-// {
-// 	int		inside_q;
-// 	char	*pattern;
-// 	char	*back_str;
-// 	int		index;
-// 	char	q;
-
-// 	inside_q = 0;
-// 	index = -1;
-// 	back_str = str;
-// 	pattern = my_malloc(ft_strlen(str), 1);
-// 	while (*str)
-// 	{
-// 		if (*str == '\'' && *(str + 1) == '\'')
-// 			str += 2;
-// 		else if (*str == '"' && *(str + 1) == '"')
-// 			str += 2;
-// 		else
-// 			pattern[++index] = *str++;
-// 	}
-// 	*str = 0;
-// 	str = back_str;
-// 	// printf("this is str %s\n", pattern);
-// 	if (find_c(pattern, '"') || find_c(pattern, '\''))
-// 		return (0);
-// 	return (1);
-// }
-
-
 //reme to check .*.c
+//test  l****l  and the pattern l*l
 
 char	*b_wildcard_(char *pattern)
 {
@@ -68,31 +36,22 @@ char	*b_wildcard_(char *pattern)
 
     dir = opendir(".");
     if (!dir)
-    {
-        perror("opendir");
-        return (NULL);
-    }
+        return (perror("opendir"), NULL);
     extracted = NULL;
     while (1)
     {
         entry = readdir(dir);
         if (!entry)
             break;
-			
         if (check_pattern(entry->d_name, pattern))
         {
-			// printf("%c --\n", (entry->d_name)[0]);
-			// printf("%c --p\n", *pattern);
-			if ((entry->d_name)[0] == '.')
-				if (pattern[0] != '.')
-					continue ;
+			if (*(entry->d_name) == '.' && *pattern != '.') //I changed this check it
+				continue ;
             if (extracted)
                 extracted = ft_strjoin(extracted, " ", 0); // FIX 
             extracted = ft_strjoin(extracted, entry->d_name, 0);
         }
     }
-	if (extracted)
-		return (extracted);
 	return (extracted);
 }
 

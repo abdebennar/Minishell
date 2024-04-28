@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:42:10 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/27 06:11:44 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/28 08:15:45 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 //             printf("   ");
 //         }
 // 		if (root->tok == NOT)
-//         	printf("%s\n", root->(*cmd);
+//         	printf("%s\n", root->cmd[0]);
 // 		else
 // 			print_tok(root->tok);
 //         print_tree(root->left, level + 1);
@@ -45,5 +45,7 @@ t_node	*Parsing(char *line, t_env *env)
 	add_env(node, env);
 	node = postfix_to_prefix(node);
 	node = tree(node);
+	// print_tree(node, 0);
+	// exit(0);
 	return (node);
 }
