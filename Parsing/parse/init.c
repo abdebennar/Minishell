@@ -6,45 +6,42 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:43:59 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/29 14:37:00 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:27:29 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/minishell.h"
 
-void	add_env(t_node *node, t_env *env)
+char **copy(char **str, int extra_size)
 {
-	while (node)
-	{
-		node->env = env;
-		node = node->right;
-	}	
-}
-
-int		var_len(char *str)
-{
+	int	l_cnt;
+	char **new;
 	int i;
+	int j;
+	
+	l_cnt = 0;
+	while (str[l_cnt])
+		l_cnt++;
 
-	i  = 0;
-	while (str[i] && str[i] != '=')
+	new = my_malloc((l_cnt + 1 + extra_size) * sizeof (char *), ALLOC, 1);
+
+	i = 0;
+	j = 0;
+	while (extra_size)
+		j++;
+	while (str[i])
+	{
+		l_cnt = ft_strlen(str[i]);
+		new[i] = my_malloc(l_cnt + 1, ALLOC, 1);
+		ft_strcpy(new[j], str[i]);
 		i++;
-	return (i);
-}
-
-t_env	*new_env(char *env, char *var, char *value)
-{
-	t_env	*new;
-
-	new = my_malloc(sizeof(t_env), ALLOC, 1);
-	new->env = env;
-	new->value = value;
-	new->var = var;
-	new->next = NULL;
-
+		j++;
+	}
+	new[i] = NULL;
 	return (new);
 }
 
-void	addback_env(t_env *node, t_env **list)
+void	add_env()
 {
 	t_env	*tmp;
 
@@ -77,7 +74,7 @@ t_env	*env_init(char **envp)
 	while (envp[i])
 	{
 		full_env = ft_strdup(envp[i], 1);
-		var = ft_substr(envp[i], 0, var_len(envp[i]), 1);
+		var = ft_substr(envp[i],0, var_len(envp[i]), 1);
 		value = ft_substr(envp[i], var_len(envp[i]) + 1, ft_strlen(envp[i]), 1);
 		new = new_env(full_env, var, value);
 		addback_env(new, &env);

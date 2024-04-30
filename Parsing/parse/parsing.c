@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:42:10 by abennar           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/04/29 14:38:35 by bel-oirg         ###   ########.fr       */
+=======
+/*   Updated: 2024/04/30 01:05:26 by abennar          ###   ########.fr       */
+>>>>>>> 09166f3fa8119fe46a145c0eb5ffa359dfd0927d
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +31,7 @@
 //     }
 // }
 
-t_node	*Parsing(char *line, t_env *env)
+t_node	*parsing(char *line, t_env *env)
 {
 	t_node	*node;
 	char	*cmd;
@@ -42,7 +46,7 @@ t_node	*Parsing(char *line, t_env *env)
 		return (NULL);
 	lst_iter(node, get_args);
 	node = infix_to_postfix(&node);
-	add_env(node, env);
+	// add_env(node, env); // FIX NO need of this any more
 	node = postfix_to_prefix(node);
 	node = tree(node);
 	// print_tree(node, 0);

@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/29 05:30:52 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:27:16 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@
 #include <dirent.h> //opendir
 #include <readline/readline.h> // readline
 #include <readline/history.h> // readline history
+#include <string.h>
 #include "prottypes.h"
 
 //builtins -> env
-int		find_c(char *str, char c);
+// int		find_c(char *str, char c);
 
 //utils --------------------------------------------
 char	**ft_split(char *s, char *delim, int group);
@@ -34,7 +35,9 @@ char	*ft_strjoin(char *s1, char *s2, int group);
 char 	*get_next_word(char *str, int *i, t_token tok);
 void	get_args(t_node *node);
 void	*my_malloc(size_t size, int mode, int group);
-void	add_env(t_node *node, t_env *env);
+void	_setenv(char *name, char *new_value); // TODO  the setenv function 
+char	**copy(char **str, int extra_size);
+void	add_env();
 
 //utils ->mng_cmd
 t_token	get_token(const char c1, const char c2);
@@ -52,6 +55,7 @@ char	*ft_substr( char *str, unsigned int start, size_t len, int group);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strchr(const char *s, int c);
 
+
 //utils -> link_lst
 t_redir	*new_redir(char *file, t_token tok);
 t_node	*new_node(char *cmd, t_redir *redir, t_token tok, int pre);
@@ -64,6 +68,8 @@ void	ft_lstaddback(t_env **alst, t_env *new);
 
 //utils ->ft_str2
 int	doc_strcmp(char *s1, char *s2);
+char    *ft_strcpy(char *s1, char *s2);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 void	print_tok(t_token tok); //just tmp
 //----------------------------------------------//
@@ -103,7 +109,7 @@ void	_pipe_(t_node *node);
 //--------------------------------------------//
 
 //parsing
-t_node	*Parsing(char *line, t_env *env);
+t_node	*parsing(char *line, t_env *env);
 bool	low_pre(t_token tok);
 void	lst_iter(t_node	*lst, void (*f)(t_node *));
 
@@ -131,5 +137,8 @@ void	error_exit(char *error, int exit_NO);
 
 //syntax -> parse
 bool	check_syntax(t_token tok, char *cmd, int i);
+
+
+
 
 #endif

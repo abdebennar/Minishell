@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/29 15:22:07 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:26:31 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*add_path(char *cmd)
 	char	*out;
 	char	**path_v;
 
-	if (find_c(cmd, '/'))
+	if (ft_strchr(cmd, '/'))
 		return (cmd);
 	index = -1;
 	path = getenv("PATH");
