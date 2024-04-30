@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/28 15:58:25 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/29 15:22:07 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,11 @@ void    _exec_(t_node *node)
     int forked;
 	int	fd_out;
 	int	fd_in;
-  
+
 	fd_out = dup(STDOUT_FILENO);
 	fd_in = dup(STDIN_FILENO);
 	_expanding_(&node);
-	_redirections_(&node);
-	if (is_builtin(node))
+	if (_redirections_(&node) || is_builtin(node))
 		return ;
     forked = fork();
     if (forked < 0)
@@ -103,7 +102,7 @@ void    _exec_(t_node *node)
     if (!forked)
     {
 		execve(add_path((node)->cmd[0]), (node)->cmd, env_p((node)->env));
-		perror("Command not found bitch");
+		printf("bash: %s: Command not found bitch\n", (node)->cmd[0]);
 		exit(1);
     }
 	waitpid(forked, NULL, 0);

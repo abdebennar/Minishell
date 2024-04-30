@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/27 13:45:08 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/29 05:30:52 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,6 @@
 #include <readline/readline.h> // readline
 #include <readline/history.h> // readline history
 #include "prottypes.h"
-
-//quotes
-char	*d_q(char *raw, int *index);
-char	*s_q(char *raw, int *index);
-char	*add_c(char *str, char c);
 
 //builtins -> env
 int		find_c(char *str, char c);
@@ -84,12 +79,18 @@ void    _exec_(t_node *node);
 char	**env_p(t_env *env_raw);
 char	*add_path(char *cmd);
 
+//quotes
+char	*add_c(char *str, char c);
+
 //Exec -> builtins
 void    _cd_(t_node *node);
 void    _echo_(t_node *node);
 void	_env_(t_node *node);
 void	_exit_(t_node *node);
+
 void	_export_(t_node *node);
+char	*get_val(char *s, int c);
+
 void	_pwd_(t_node *node);
 void	_unset_(t_node *node);
 

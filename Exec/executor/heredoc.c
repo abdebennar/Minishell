@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 05:50:24 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/26 02:51:18 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/29 15:13:56 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ static int	fill_file(t_redir *alter, char *file_name)
 			(1) && (free(line), line = NULL);
 			break ;
 		}
-		content = ft_strjoin(content, line, 0); // FIX
-		(line) && (free(line), 0);
+		content = ft_strjoin(content, line, 0); //TODO maybe add newline
 	}
 	fd_file = open(file_name, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	(fd_file < 0) && (perror("open"), my_malloc(0, 0, 0), 0); // FIX add the group
@@ -70,7 +69,7 @@ int	_heredoc_(t_redir *alter)
 	
 	file_name = random_f();
 	fd_in = fill_file(alter, file_name);
-	(fd_in < 0) && (perror("open"), my_malloc(0, 0, 0)); // FIX add the group
+	(fd_in < 0) && (perror("open"), my_malloc(0, 0, 0)); //TODO correct its return ....
 	unlink(file_name);
 	return (fd_in);
 }

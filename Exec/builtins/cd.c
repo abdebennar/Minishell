@@ -36,8 +36,6 @@ static void    update_pwd(char *new_pwd, t_env **env)
     }
 }
 
-//remember to change the grp
-
 static void    update_oldpwd(char *new_pwd, t_env **env)
 {
     t_env   *new_node;
@@ -45,10 +43,7 @@ static void    update_oldpwd(char *new_pwd, t_env **env)
     while (ft_strcmp((*env)->var, "OLDPWD"))
         *env = (*env)->next;
     if (*env)
-    {
         (*env)->value = ft_strdup(new_pwd, 1);
-		// new_node->env = ft_strjoin("OLDPWD=", new_pwd, 0);
-    }
     else
     {
         new_node = my_malloc(sizeof(t_env), 1, 1);
