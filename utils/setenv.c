@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 00:01:17 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/30 01:29:18 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/30 05:03:58 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	_exist(char *name , char *new_value)
 	
 	find_env(&offset, name);
 
-	environ[offset] = ft_strjoin(ft_substr(environ[offset], 0, get_c(environ[offset]) + 1, 0), new_value, 1);
+	environ[offset] = ft_strjoin(ft_substr(environ[offset], 0,
+	get_c(environ[offset]) + 1, 0), new_value, 1);
 }
 
 void	non_exist(char *name, char *new_value)

@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/30 01:30:04 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/30 05:12:27 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*s_q(char *raw, int *index);
 char	*add_c(char *str, char c);
 
 //builtins -> env
-int		find_c(char *str, char c);
+// int		find_c(char *str, char c);
 
 //utils --------------------------------------------
 char	**ft_split(char *s, char *delim, int group);

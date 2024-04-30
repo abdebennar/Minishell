@@ -6,7 +6,7 @@
 #    By: abennar <abennar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/14 13:36:20 by abennar           #+#    #+#              #
-#    Updated: 2024/04/30 01:31:01 by abennar          ###   ########.fr        #
+#    Updated: 2024/04/30 02:09:45 by abennar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,4 +20,4 @@ all :
 
 
 $(NAME) :
-	cc -lreadline $(SRC) -I$(PWD)/Include  -o $@ -g3  #-fsanitize=address #-Wall -Wextra -Werror
+	cc -lreadline $(SRC) -I$(PWD)/Include  -o $@ #-g3  #-fsanitize=address #-Wall -Wextra -Werror

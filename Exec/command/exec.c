@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/28 15:58:25 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/30 05:12:20 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*add_path(char *cmd)
 	char	*out;
 	char	**path_v;
 
-	if (find_c(cmd, '/'))
+	if (ft_strchr(cmd, '/'))
 		return (cmd);
 	index = -1;
 	path = getenv("PATH");
