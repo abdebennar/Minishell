@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/30 01:00:52 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/30 01:30:04 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char 	*get_next_word(char *str, int *i, t_token tok);
 void	get_args(t_node *node);
 void	*my_malloc(size_t size, int mode, int group);
 void	_setenv(char *name, char *new_value); // TODO  the setenv function 
+char	**copy(char **str, int extra_size);
 void	add_env();
 
 //utils ->mng_cmd
@@ -59,6 +60,7 @@ char	*ft_substr( char *str, unsigned int start, size_t len, int group);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strchr(const char *s, int c);
 
+
 //utils -> link_lst
 t_redir	*new_redir(char *file, t_token tok);
 t_node	*new_node(char *cmd, t_redir *redir, t_token tok, int pre);
@@ -71,6 +73,8 @@ void	ft_lstaddback(t_env **alst, t_env *new);
 
 //utils ->ft_str2
 int	doc_strcmp(char *s1, char *s2);
+char    *ft_strcpy(char *s1, char *s2);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 void	print_tok(t_token tok); //just tmp
 //----------------------------------------------//

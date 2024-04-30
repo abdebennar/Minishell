@@ -6,13 +6,12 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 00:01:17 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/30 00:57:31 by abennar          ###   ########.fr       */
+/*   Updated: 2024/04/30 01:29:18 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char **copy(char **str, int extra_size);
 
 int	get_c(char *s)
 {
@@ -35,7 +34,7 @@ void	find_env(int *offset, char *name)
 	
 	while (environ[*offset])
 	{
-		if (strncmp(name, (environ[*offset]) , get_c(environ[*offset])) == 0)
+		if (ft_strncmp(name, (environ[*offset]) , get_c(environ[*offset])) == 0)
 			break;
 	}
 }
@@ -57,10 +56,7 @@ void	non_exist(char *name, char *new_value)
 	extern char **environ;
 	new = copy(environ, 1);
 	int	i = 0;
-	while (new[i])
-		i++;
 	new[i] = ft_strjoin(ft_strjoin(name, "=", 0), new_value, 1);
-	new[++i] = NULL;
 	environ = new;
 }
 
