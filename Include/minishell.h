@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/27 13:45:08 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/30 01:00:52 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include <dirent.h> //opendir
 #include <readline/readline.h> // readline
 #include <readline/history.h> // readline history
+#include <string.h>
 #include "prottypes.h"
 
 //quotes
@@ -39,7 +40,8 @@ char	*ft_strjoin(char *s1, char *s2, int group);
 char 	*get_next_word(char *str, int *i, t_token tok);
 void	get_args(t_node *node);
 void	*my_malloc(size_t size, int mode, int group);
-void	add_env(t_node *node, t_env *env);
+void	_setenv(char *name, char *new_value); // TODO  the setenv function 
+void	add_env();
 
 //utils ->mng_cmd
 t_token	get_token(const char c1, const char c2);
@@ -102,7 +104,7 @@ void	_pipe_(t_node *node);
 //--------------------------------------------//
 
 //parsing
-t_node	*Parsing(char *line, t_env *env);
+t_node	*parsing(char *line, t_env *env);
 bool	low_pre(t_token tok);
 void	lst_iter(t_node	*lst, void (*f)(t_node *));
 
@@ -130,5 +132,8 @@ void	error_exit(char *error, int exit_NO);
 
 //syntax -> parse
 bool	check_syntax(t_token tok, char *cmd, int i);
+
+
+
 
 #endif

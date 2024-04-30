@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/27 13:36:30 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/30 00:58:13 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int	main(int argc, char **argv, char **envp)
 	t_env	*env;
 	t_node	*node;
 	
-	env = env_init(envp);
+	add_env();
 	while (666)
 	{
 		line = readline("$ ");
-		node = Parsing(line, env);
+		node = parsing(line, env);
 		_exec_arch_(node);
 	}
 }
