@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 04:00:45 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/29 15:24:53 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/04/30 21:02:28 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int	_redirections_(t_node **node)
 	}
 	if (_left_((node)) || _right_((node)))
 		return (-1);
-	printf("this is fd[0] %d\n", (*node)->fd[0]);
 	if ((*node)->fd[0] != 0)
 	{
 		if (dup2((*node)->fd[0], STDIN_FILENO) < 0)

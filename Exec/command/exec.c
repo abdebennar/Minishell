@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/29 15:22:07 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/01 09:37:39 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,15 +101,24 @@ void    _exec_(t_node *node)
 	}
     if (!forked)
     {
+		
 		execve(add_path((node)->cmd[0]), (node)->cmd, env_p((node)->env));
 		printf("bash: %s: Command not found bitch\n", (node)->cmd[0]);
 		exit(1);
     }
 	waitpid(forked, NULL, 0);
-	dup2(fd_out, STDOUT_FILENO);
-	close(fd_out);
-	dup2(fd_in, STDIN_FILENO);
-	close(fd_in);
+	if ((node)->fd[0] != 0)
+	{
+		close((node)->fd[0]);
+		dup2(fd_in, STDIN_FILENO);
+		close(fd_in);	
+	}
+	if ((node)->fd[1] != 1)
+	{
+		close((node)->fd[1]);
+		dup2(fd_out, STDOUT_FILENO);
+		close(fd_out);
+	}
 }
 
 void	_exec_arch_(t_node *node)
