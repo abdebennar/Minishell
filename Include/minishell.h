@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/01 10:11:00 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/01 11:29:28 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 //quotes
 char	*d_q(char *raw, int *index);
 char	*s_q(char *raw, int *index);
-char	*add_c(char *str, char c);
+char	*add_c(char *str, char c, int group);
 
 //builtins -> env
 // int		find_c(char *str, char c);
@@ -109,7 +109,7 @@ void	_pipe_(t_node *node);
 //--------------------------------------------//
 
 //parsing
-t_node	*parsing(char *line, t_env *env);
+t_node	*parsing(char *line);
 bool	low_pre(t_token tok);
 void	lst_iter(t_node	*lst, void (*f)(t_node *));
 

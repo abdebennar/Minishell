@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 00:29:18 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/27 13:37:35 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/01 10:54:18 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	_expanding_(t_node **node)
 			else if (m_cmd[index] == '"' || m_cmd[index] == '$')
 				clean = ft_strjoin(clean, d_q(m_cmd, &index), 0);
 			else
-				clean = add_c(clean, m_cmd[index++]);
+				clean = add_c(clean, m_cmd[index++], 0);
 		}
 		cmd[v_index] = clean;
 	}

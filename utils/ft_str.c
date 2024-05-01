@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 06:21:55 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/23 19:58:21 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/01 11:18:05 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ char	*ft_substr(char *str, unsigned int start, size_t len, int group)
 	i = 0 ;
 	if (!str)
 		return (NULL);
-	if (start > ft_strlen(str))
+	if ((int)start > ft_strlen(str))
 		return (ft_strdup("", group));
-	if (len > ft_strlen(str + start))
+	if ((int)len > ft_strlen(str + start))
 		len = ft_strlen(str + start);
 	s_str = my_malloc(sizeof(char) * len + 1, 1, group);
 	if (!s_str)

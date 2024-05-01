@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 05:50:24 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/30 20:51:21 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/01 10:46:52 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,11 @@ static char	*random_f(void)
 	file_len = 16;
 	file_name = my_malloc(file_len + 1, 1, 0); // FIX add the group
 
-	
 	fd_rd = open("/dev/urandom", O_RDONLY, 0777);
 	(fd_rd < 0) && (perror("cannot open /dev/urandom"), 0);
 	read(fd_rd, file_name, file_len);
 	close(fd_rd);
 	file_name[file_len] = 0;
-
 
 	fd_tmp = open(file_name, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	if (fd_tmp < 0)

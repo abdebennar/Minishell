@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setenv.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 00:01:17 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/01 03:43:45 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/01 11:13:04 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	find_env(int *offset, char *name)
 
 void	_exist(char *name , char *new_value)
 {
-	char		**tmp;
 	extern char **environ;
 	int			offset;
 	

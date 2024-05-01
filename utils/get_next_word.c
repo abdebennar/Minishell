@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_word.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 16:41:13 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/23 18:42:12 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/01 11:13:19 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static bool	is_sep(char c, char *sep)
 
 char *get_next_word(char *str, int *i, t_token tok)
 {
-	bool	sep;
 	int		start;
 	char *substr;
 

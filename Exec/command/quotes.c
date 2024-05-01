@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:33:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/26 05:44:27 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/01 10:55:26 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ int	count_c(char *str, char c)
 	return (counter);
 }
 
-char	*add_c(char *str, char c)
+char	*add_c(char *str, char c, int group)
 {
 	char	*new;
 	char	*save;
 	
-	new = malloc(ft_strlen(str) + 2);
+	new = my_malloc(ft_strlen(str) + 2, 1, group);
 	save = new;
 	while (str && *str)
 		*new++ = *str++;
@@ -103,7 +103,7 @@ char	*d_q(char *raw, int *index)
 		else if (raw[*index] == '"' || !raw[*index])
 			break ;
 		else 
-			new = add_c(new, raw[(*index)++]);
+			new = add_c(new, raw[(*index)++], 0);
 	}
 	return (new);
 }

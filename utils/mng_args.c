@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:08:54 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/27 06:37:11 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/01 11:12:45 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static uint	del_sp(char *cmd, char q)
 static void	arg_space(char *cmd)
 {
 	int i;
-	int j;
 
 	i = 0;
 	while (cmd[i])
