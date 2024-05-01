@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 03:29:22 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/26 02:14:37 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/01 10:09:10 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*get_var(char *s, int c)
 	return (var);
 }
 
-void	swap_env(char **str1, char **str2)
+static void	swap_env(char **str1, char **str2)
 {
 	char *tmp;
 	
@@ -74,91 +74,59 @@ void	swap_env(char **str1, char **str2)
 	*str2 = tmp;
 }
 
-void	sort_env(t_env **raw_env)
+static char **sort_env(void)
 {
-	t_env	*tmp_env;
-	t_env	*tmp_head;
-	
-	tmp_head = *raw_env;
-	while(tmp_head)
+	extern char **environ;
+	char		**ptr;
+	char		**tmp;
+	char		**tmp2;
+
+	ptr  = copy(environ, false, 0);
+	tmp = ptr;
+	while(*tmp)
 	{
-		tmp_env = tmp_head->next;
-		while(tmp_env)
+		tmp2 = (tmp + 1);
+		while(*tmp2)
 		{
-			if (ft_strcmp(tmp_head->env, tmp_env->env) > 0)
-			{
-				swap_env(&(tmp_head->env), &(tmp_env->env));
-				swap_env(&(tmp_head->var), &(tmp_env->var));
-				swap_env(&(tmp_head->value), &(tmp_env->value));
-				//maybe you can swap the entire node
-				//swap_env(tmp_head, tmp_env);
-			}
-			tmp_env = tmp_env->next;
+			if (ft_strcmp(*tmp, *tmp2) > 0)
+				swap_env(&(*tmp), &(*tmp2));
+			tmp2++;
 		}
-		tmp_head = tmp_head->next;
+		tmp++;
 	}
+	return (ptr);
 }
 
-void	export_args(t_env **raw_env, char *new_var)
+void	export_args(char *new_var)
 {
-	t_env	*new_node;
-	char	*value;
-	char	*var;
-	int		append;
+	extern char **environ;
 
-	var = get_var(new_var, '=');
-	value = get_val(new_var, '=');
-	append = check_var(var);
-	if (append < 0)
-	{
-		printf("export : not valid in this context : %s", var);
-		exit(1);
-	}
-	(append) && (var[ft_strlen(var) - 1] = 0);
-	if (is_it_in(*raw_env, new_var))
-	{
-		(!append) && ((*raw_env)->value = value);
-		(append) && ((*raw_env)->value = ft_strjoin((*raw_env)->value, value, 0));
-	}
-	else
-	{
-		new_node = my_malloc(sizeof(t_env), 1, 0);
-		new_node->var = var;
-		(append && !value) && (value = ft_strdup("", 0)); // 
-		new_node->value = value;
-		new_node->env = new_var;
-		new_node->next = NULL;
-		ft_lstaddback(raw_env, new_node);
-	}
+	_setenv(ft_substr(new_var, 0, get_c(new_var), 0), ft_strdup((new_var + get_c(new_var) + 1), 0));
 }
 
-void	show_export(t_env **raw_env)
+static void	show_export(void)
 {
-	if (!raw_env)
-		return ;
-	sort_env(raw_env);
-	while (*raw_env)
+	char **tmp;
+
+	tmp = sort_env();
+	while (*tmp)
 	{
-		if ((*raw_env)->value) //maybe the value *
-			printf("declare -x %s=\"%s\"\n", (*raw_env)->var, (*raw_env)->value);
-		else
-			printf("declare -x %s\n", (*raw_env)->var);
-		*raw_env = (*raw_env)->next;
+		if (ft_strchr(*tmp, '=') && ft_strncmp(*tmp, "_", get_c(*tmp)))
+			printf("declare -x %s=\"%s\"\n", ft_substr(*tmp, 0, get_c(*tmp), 0), ft_strdup((*tmp + get_c(*tmp) + 1), 0));
+		else if (!ft_strchr(*tmp, '='))
+			printf("declare -x %s\n", *tmp);
+		tmp++;
 	}
 }
 
 void	_export_(t_node *node)
 {
-	t_env	*raw_env;
 	char	**cmd;
 
 	cmd = node->cmd;
-	raw_env = node->env;
 	if (!cmd[1])
-		show_export(&raw_env);
+		show_export();
 	else
-	{
 		while(*(++cmd))
-			export_args(&raw_env, *cmd);
-	}
+			export_args(*cmd);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/01 09:45:48 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/01 10:19:22 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void    _exec_(t_node *node)
     int forked;
 	int	fd_out;
 	int	fd_in;
+	extern char **environ;
 
 	fd_out = dup(STDOUT_FILENO);
 	fd_in = dup(STDIN_FILENO);
@@ -102,7 +103,7 @@ void    _exec_(t_node *node)
     if (!forked)
     {
 		
-		execve(add_path((node)->cmd[0]), (node)->cmd, env_p((node)->env));
+		execve(add_path((node)->cmd[0]), (node)->cmd, environ);
 		printf("bash: %s: Command not found bitch\n", (node)->cmd[0]);
 		exit(1);
     }
