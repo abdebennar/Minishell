@@ -3,61 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 08:47:25 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/26 05:25:04 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/02 14:36:06 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/minishell.h"
 
-static int check_var(char *str)
-{
-	if (!((*str >= 'a' && *str <= 'z')
-		|| (*str >= 'A' && *str <= 'Z') || (*str == '_')))	
-		return (-1);
-	while(++*str)
-	{
-		if (!((*str >= 'a' && *str <= 'z')
-			|| (*str >= 'A' && *str <= 'Z')
-			|| (*str >= '0' && *str <= '9')
-			|| (*str == '_')))
-			return (-1);
-	}
-	return (0);
-}
+// static int check_var(char *str)
+// {
+// 	if (!((*str >= 'a' && *str <= 'z')
+// 		|| (*str >= 'A' && *str <= 'Z') || (*str == '_')))	
+// 		return (-1);
+// 	while(++*str)
+// 	{
+// 		if (!((*str >= 'a' && *str <= 'z')
+// 			|| (*str >= 'A' && *str <= 'Z')
+// 			|| (*str >= '0' && *str <= '9')
+// 			|| (*str == '_')))
+// 			return (-1);
+// 	}
+// 	return (0);
+// }
 
-static void	unset_args(char *arg, t_env **raw_env)
-{
-	t_env	*tmp;
-	
-	if (check_var(arg))
-	{
-		printf("unset: %s: invalid parameter name\n", arg);
-		exit(1);
-	}
-	while(ft_strcmp((*raw_env)->value, arg))
-	{
-		tmp = *raw_env;
-		(*raw_env) = (*raw_env)->next;
-	}
-	tmp->next = (*raw_env)->next;
-	if (*raw_env)
-	{
-		free((*raw_env)->env);
-		free((*raw_env)->var);
-		free((*raw_env)->value);
-		free(*raw_env);
-	}
+static void	unset_args(char *env)
+{	
+	extern char **environ;
+	char		**tmp;
+
+	tmp = environ;
+	// if (check_var(env))
+	// {
+	// 	printf("unset: %s : not a valid identifier\n", env);
+	// 	exit(1);
+	// }
+	if (getenv(env))
+		while (*tmp)
+		{
+			if (!ft_strncmp(env, *tmp, get_c(*tmp)))
+			{
+				while (*(++tmp))
+				{
+					*(tmp - 1) = *tmp;
+				}
+				*(--tmp) = NULL;
+				break;
+			}
+			tmp++;
+		}
 }
 
 void	_unset_(t_node *node)
 {
-	t_env	*raw_env;
 	char	**cmd;
 
-	raw_env = node->env;
 	cmd = node->cmd;
 	if (!cmd[1])
 	{
@@ -65,5 +66,5 @@ void	_unset_(t_node *node)
 		exit(1);
 	}
 	while(*(++cmd))
-		unset_args(*cmd, &raw_env);
+		unset_args(*cmd);
 }

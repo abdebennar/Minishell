@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 19:50:39 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/23 19:57:47 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/02 09:28:11 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ int	get_cmd_area(char *s, int start)
 		if (s[start] == '"' || s[start] == '\'')
 		{
 			j = skip_quotes((s + start + 1), s[start]);
-			len += j + 1;
-			start += j + 1;
+			len += j;
+			start += j;
 		}
 		len++;
 		start++;

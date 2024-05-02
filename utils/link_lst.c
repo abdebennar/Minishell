@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 13:45:49 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/23 20:17:14 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/02 09:58:48 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ t_node	*new_node(char *cmd, t_redir *redir, t_token tok, int pre)
 	new->redir = redir;
 	new->tok = tok;
 	new->pre = pre;
-
+	new->fd[0] = 0;
+	new->fd[1] = 1;
 	new->right = NULL;
 	new->left = NULL;
 	return (new);
