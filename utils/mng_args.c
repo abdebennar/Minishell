@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mng_args.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:08:54 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/01 11:12:45 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/02 09:57:43 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static uint	del_sp(char *cmd, char q)
 			cmd[i] = '\177';
 		i++;
 	}
-	return (i + 1);
+	return (i);
 }
 
 static void	arg_space(char *cmd)
@@ -49,7 +49,7 @@ static void	arg_space(char *cmd)
 	i = 0;
 	while (cmd[i])
 	{
-		if (cmd[i] == '"' || cmd[i] == '\'')
+		if ((cmd[i] == '"' || cmd[i] == '\'') && cmd[i + 1])
 		{
 			i += del_sp((cmd + i + 1), cmd[i]);
 		}
@@ -64,9 +64,9 @@ static void	reset_sp(char **args)
 	uint j;
 
 	i = 0;
-	j = 0;
 	while (args[i])
 	{
+		j = 0;
 		while (args[i][j])
 		{
 			if (args[i][j] == '\177')
@@ -82,17 +82,19 @@ void	get_args(t_node *node)
 	uint	len;
 	char	*cmd;
 	char	**args;
+	char	*full_cmd;
 	uint	i;
 
-	len = cmd_len(node->full_cmd);
+	full_cmd = node->full_cmd;
+	len = cmd_len(full_cmd);
 	cmd = my_malloc(sizeof(char) * len + 1, ALLOC, 0);
 	len = 0;
 	i = 0;
-	while (node->full_cmd[len])
+	while (full_cmd[len])
 	{
-		if (node->full_cmd[len] != '\177')
+		if (full_cmd[len] != '\177')
 		{
-			cmd[i] = node->full_cmd[len];
+			cmd[i] = full_cmd[len];
 			i++;
 		}
 		len++;
@@ -101,7 +103,5 @@ void	get_args(t_node *node)
 	arg_space(cmd);
 	args = ft_split(cmd, " ", 0);
 	reset_sp(args);
-	node->fd[0] = 0;
-	node->fd[1] = 1;
 	node->cmd = args;
 }
