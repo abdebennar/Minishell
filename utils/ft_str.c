@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 06:21:55 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/01 11:18:05 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/02 15:54:49 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*ft_strchr(const char *s, int c)
 	int	i;
 
 	i = 0;
-	while (s[i] != '\0')
+	while (&s[i] && s[i] != '\0')
 	{
 		if (s[i] == (char)c)
 			return ((char *)(s + i));

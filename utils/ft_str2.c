@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 02:44:18 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/01 10:10:22 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/02 17:14:22 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,3 +54,5 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	}
 	return (0);
 }
+
+

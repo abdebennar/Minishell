@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/01 12:19:55 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/02 17:19:30 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*add_path(char *cmd)
 	char	*out;
 	char	**path_v;
 
+	if (!cmd)
+		return (NULL);
 	if (ft_strchr(cmd, '/'))
 		return (cmd);
 	index = -1;
@@ -58,29 +60,29 @@ static bool	is_builtin(t_node *node)
 	return (false);
 }
 
-char	**env_p(t_env *env_raw)
-{
-	int		counter;
-	int		index;
-	char	**env_pv;
-	t_env	*tmp_env;
+// char	**env_p(t_env *env_raw)
+// {
+// 	int		counter;
+// 	int		index;
+// 	char	**env_pv;
+// 	t_env	*tmp_env;
 
-	counter = 0;
-	tmp_env = env_raw;
-	while (env_raw)
-	{
-		counter++;
-		env_raw = env_raw->next;
-	}
-	index = -1;
-	env_pv = my_malloc(sizeof(char *) * (counter + 1),1 , 1);
-	while (tmp_env)
-	{
-		env_pv[++index] = tmp_env->env;
-		tmp_env = tmp_env->next;
-	}
-	return (env_pv);
-}
+// 	counter = 0;
+// 	tmp_env = env_raw;
+// 	while (env_raw)
+// 	{
+// 		counter++;
+// 		env_raw = env_raw->next;
+// 	}
+// 	index = -1;
+// 	env_pv = my_malloc(sizeof(char *) * (counter + 1),1 , 1);
+// 	while (tmp_env)
+// 	{
+// 		env_pv[++index] = tmp_env->env;
+// 		tmp_env = tmp_env->next;
+// 	}
+// 	return (env_pv);
+// }
 
 void    _exec_(t_node *node)
 {
@@ -92,7 +94,7 @@ void    _exec_(t_node *node)
 	fd_out = dup(STDOUT_FILENO);
 	fd_in = dup(STDIN_FILENO);
 	_expanding_(&node);
-	if (_redirections_(&node) || is_builtin(node))
+	if (!(node)->cmd[0] || _redirections_(&node) || is_builtin(node))
 		return ;
     forked = fork();
     if (forked < 0)
@@ -102,6 +104,7 @@ void    _exec_(t_node *node)
 	}
     if (!forked)
     {
+		
 		execve(add_path((node)->cmd[0]), (node)->cmd, environ);
 		printf("bash: %s: Command not found bitch\n", (node)->cmd[0]);
 		exit(1);
