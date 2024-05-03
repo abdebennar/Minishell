@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/01 11:29:28 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/03 15:54:36 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,6 @@
 #include <string.h>
 #include "prottypes.h"
 
-//quotes
-char	*d_q(char *raw, int *index);
-char	*s_q(char *raw, int *index);
-char	*add_c(char *str, char c, int group);
-
-//builtins -> env
-// int		find_c(char *str, char c);
 
 //utils --------------------------------------------
 char	**ft_split(char *s, char *delim, int group);
@@ -78,6 +71,10 @@ char    *ft_strcpy(char *s1, char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 void	print_tok(t_token tok); //just tmp
+
+//utils ->error
+int	exit_stat(int exit_value, int mode);
+
 //----------------------------------------------//
 
 //Exec -----------------------------------------
@@ -90,6 +87,7 @@ void	_exec_arch_(t_node *node);
 void    _exec_(t_node *node);
 char	**env_p(t_env *env_raw);
 char	*add_path(char *cmd);
+char	*add_c(char *str, char c, int group);
 
 //Exec -> builtins
 void    _cd_(t_node *node);
@@ -131,9 +129,6 @@ t_node	*tree(t_node	*node);
 //lexer
 t_node	*lexer(char *cmd);
 void	skip_space(char *cmd, int *i);
-
-// err mng 
-void	error_exit(char *error, int exit_NO);
 
 //syntax -> parse
 bool	check_syntax(t_token tok, char *cmd, int i);
