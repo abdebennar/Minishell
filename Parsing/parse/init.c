@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:43:59 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/01 10:12:33 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/04 22:31:28 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char **copy(char **str, bool extra_size, int group)
 		i++;
 		j++;
 	}
-	new[i] = NULL;
+	new[j] = NULL;
 	return (new);
 }
 

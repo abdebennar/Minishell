@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:32:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/04 17:19:25 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/04 23:39:11 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	_env_()
 	tmp = environ;
 	while (*tmp)
 	{
-		if (ft_strchr(*tmp, '='))
+		if (ft_strchr(*tmp, '=') && **tmp != '?')
 			printf("%s\n", *tmp);
 		tmp++;
 	}

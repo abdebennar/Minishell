@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 03:29:22 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/04 17:19:54 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/04 23:43:47 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int check_var(char *str)
 {
 	if (!((*str >= 'a' && *str <= 'z')
-		|| (*str >= 'A' && *str <= 'Z') || (*str == '_')))	
+		|| (*str >= 'A' && *str <= 'Z') || (*str == '_')))
 		return (-1);
 	while(*(++str))
 	{
@@ -102,7 +102,16 @@ void	export_args(char *new_var)
 	extern char **environ;
 
 	if (ft_strchr(new_var, '='))
-		_setenv(ft_substr(new_var, 0, get_c(new_var), 0), ft_strdup((new_var + get_c(new_var) + 1), 0));
+	{
+		if (*(new_var + get_c(new_var) -  1) == '+')
+		{
+			_setenv(ft_substr(new_var, 0, get_c(new_var) - 1, 0),
+			ft_strjoin(getenv(ft_substr(new_var, 0, get_c(new_var) - 1, 0)), 
+			ft_strdup((new_var + get_c(new_var) + 1), 0), 0));
+		}
+		else
+			_setenv(ft_substr(new_var, 0, get_c(new_var), 0), ft_strdup((new_var + get_c(new_var) + 1), 0));
+	}
 	else 
 		_setenv(new_var, NULL);
 }
@@ -114,10 +123,13 @@ static void	show_export(void)
 	tmp = sort_env();
 	while (*tmp)
 	{
-		if (ft_strchr(*tmp, '=') && ft_strncmp(*tmp, "_", get_c(*tmp)))
-			printf("declare -x %s=\"%s\"\n", ft_substr(*tmp, 0, get_c(*tmp), 0), ft_strdup((*tmp + get_c(*tmp) + 1), 0));
-		else if (!ft_strchr(*tmp, '='))
-			printf("declare -x %s\n", *tmp);
+		if (ft_strncmp(*tmp, "?", get_c(*tmp)))
+		{
+			if (ft_strchr(*tmp, '=') && ft_strncmp(*tmp, "_", get_c(*tmp)))
+				printf("declare -x %s=\"%s\"\n", ft_substr(*tmp, 0, get_c(*tmp), 0), ft_strdup((*tmp + get_c(*tmp) + 1), 0));
+			else if (!ft_strchr(*tmp, '='))
+				printf("declare -x %s\n", *tmp);
+		}
 		tmp++;
 	}
 }
@@ -130,12 +142,13 @@ void	_export_(t_node *node)
 	if (!cmd[1])
 		show_export();
 	else
-		while(*cmd)
+		while(*(++cmd))
 		{
 			if (check_var(*cmd))
 			{
-				break;
+				printf("export: `%s': not a valid identifier\n", *cmd);
 				_setenv("?", ft_itoa(1));
+				break;
 			}
 			export_args(*cmd);
 		}
