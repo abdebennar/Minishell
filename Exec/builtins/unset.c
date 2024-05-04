@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 08:47:25 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/02 16:51:47 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/04 17:15:40 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	unset_args(char *env)
 	if (check_var(env))
 	{
 		printf("unset: %s : not a valid identifier\n", env);
+		_setenv("?", ft_itoa(1));
 		return ;
 	}
 	if (getenv(env))
@@ -61,11 +62,7 @@ void	_unset_(t_node *node)
 	char	**cmd;
 
 	cmd = node->cmd;
-	if (!cmd[1])
-	{
-		printf("unset: not enough arguments");
-		exit(1);
-	}
 	while(*(++cmd))
 		unset_args(*cmd);
+	_setenv("?", ft_itoa(0));
 }

@@ -32,10 +32,11 @@ void    _cd_(t_node *node)
     if (exit_err)
     {
         perror(NULL);
-		_setenv("\a", itoa(new_val)); //TODO alkelb
+		_setenv("?", ft_itoa(1));
 		return ;
     }
     getcwd(pwd, PATH_MAX);
 	_setenv("OLDPWD", old_pwd);
 	_setenv("PWD", pwd);
+	_setenv("?", ft_itoa(0));
 }

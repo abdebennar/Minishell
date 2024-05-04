@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/02 17:19:30 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/04 17:23:31 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static bool	is_builtin(t_node *node)
 	else if (!ft_strcmp(str, "export"))
 		return (_export_(node), true);
 	else if (!ft_strcmp(str, "pwd"))
-		return (_pwd_(node), true);
+		return (_pwd_(), true);
 	else if (!ft_strcmp(str, "unset"))
 		return (_unset_(node), true);
 	return (false);

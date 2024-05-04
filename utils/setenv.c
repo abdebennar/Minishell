@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setenv.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 00:01:17 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/01 11:13:04 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/04 14:16:51 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ void	non_exist(char *name, char *new_value)
 	extern char **environ;
 	new = copy(environ, true, 1);
 	int	i = 0;
-	new[i] = ft_strjoin(ft_strjoin(name, "=", 0), new_value, 1);
+	if (new_value)
+		new[i] = ft_strjoin(ft_strjoin(name, "=", 0), new_value, 1);
+	else
+		new[i] = ft_strjoin(ft_strdup(name, 0), new_value, 1);
 	environ = new;
 }
 

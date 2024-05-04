@@ -50,6 +50,7 @@ void    _echo_(t_node *node)
     }
     if (!flag)
         printf("\n");
+	_setenv("?", ft_itoa(0));
 }
 
 // #include <string.h>

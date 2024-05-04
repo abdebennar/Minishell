@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/03 15:54:36 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/04 17:22:48 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	_setenv(char *name, char *new_value); // TODO  the setenv function
 char	**copy(char **str, bool  extra_size, int group);
 void	add_env();
 int		get_c(char *s);
+char	*ft_itoa(int n);
 
 //utils ->mng_cmd
 t_token	get_token(const char c1, const char c2);
@@ -95,7 +96,7 @@ void    _echo_(t_node *node);
 void	_env_(t_node *node);
 void	_exit_(t_node *node);
 void	_export_(t_node *node);
-void	_pwd_(t_node *node);
+void	_pwd_(void);
 void	_unset_(t_node *node);
 
 //Exec -> executor

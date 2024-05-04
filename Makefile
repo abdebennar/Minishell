@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+         #
+#    By: abennar <abennar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/14 13:36:20 by abennar           #+#    #+#              #
-#    Updated: 2024/05/02 16:07:39 by bel-oirg         ###   ########.fr        #
+#    Updated: 2024/05/04 14:04:36 by abennar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,4 +21,4 @@ all :
 	$(MAKE) $(NAME)
 
 $(NAME) :
-	cc -fsanitize=address -lreadline $(FLAGS) $(SRC) -I$(PWD)/Include  -o $@ #-g3  
+	cc  -lreadline $(FLAGS) $(SRC) -I$(PWD)/Include  -o $@ #-fsanitize=address  #-g3   

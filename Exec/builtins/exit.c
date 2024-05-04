@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 10:09:25 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/24 05:19:42 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/04 16:59:56 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	_exit_(t_node *node)
 	if (cmd[2])
 	{
 		printf("exit\nbash: exit: too many arguments\n");
-		exit(1);
+		_setenv("?", ft_itoa(1));
 	}
 	err = 0;
 	num = ft_atoll(cmd[1], &err);
