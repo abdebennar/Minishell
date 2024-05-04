@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/04 17:22:48 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/04 19:07:02 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 #include <readline/history.h> // readline history
 #include <string.h>
 #include "prottypes.h"
-
 
 //utils --------------------------------------------
 char	**ft_split(char *s, char *delim, int group);
@@ -71,10 +70,7 @@ int	doc_strcmp(char *s1, char *s2);
 char    *ft_strcpy(char *s1, char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
-void	print_tok(t_token tok); //just tmp
-
-//utils ->error
-int	exit_stat(int exit_value, int mode);
+// void	print_tok(t_token tok); //just tmp
 
 //----------------------------------------------//
 
@@ -86,35 +82,33 @@ char	*d_q(char *raw, int *index);
 void	_wildcard_(t_node **node);
 void	_exec_arch_(t_node *node);
 void    _exec_(t_node *node);
-char	**env_p(t_env *env_raw);
 char	*add_path(char *cmd);
 char	*add_c(char *str, char c, int group);
 
 //Exec -> builtins
 void    _cd_(t_node *node);
 void    _echo_(t_node *node);
-void	_env_(t_node *node);
+void	_env_();
+
 void	_exit_(t_node *node);
+long long	ft_atoll(char *str, int *err);
+
 void	_export_(t_node *node);
 void	_pwd_(void);
 void	_unset_(t_node *node);
 
 //Exec -> executor
-void	_and_(t_node *node, int exit_stat);
-void	_or_(t_node *node, int exit_stat);
+void	_and_(t_node *node);
+void	_or_(t_node *node);
 int		_redirections_(t_node **node);
 int		_heredoc_(t_redir *alter);
 void	_pipe_(t_node *node);
 //--------------------------------------------//
 
-//parsing
+//Parsing ------------------------------------
 t_node	*parsing(char *line);
 bool	low_pre(t_token tok);
 void	lst_iter(t_node	*lst, void (*f)(t_node *));
-
-// env init
-t_env	*env_init(char **envp);
-
 
 //algo
 t_node	*infix_to_postfix(t_node **lst);
@@ -133,8 +127,6 @@ void	skip_space(char *cmd, int *i);
 
 //syntax -> parse
 bool	check_syntax(t_token tok, char *cmd, int i);
-
-
-
+//--------------------------------------------//
 
 #endif

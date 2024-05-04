@@ -6,24 +6,24 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 03:49:25 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/28 10:30:41 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/04 18:27:01 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/minishell.h"
 
-void	_or_(t_node *node, int exit_stat)
+void	_or_(t_node *node)
 {
 	if (!node)
 		exit(-1);
-	if (exit_stat)
-		_exec_arch_((node->left));
+	if (ft_atoll(getenv("?"), NULL))
+		_exec_arch_((node->right));
 }
 
-void	_and_(t_node *node, int exit_stat)
+void	_and_(t_node *node)
 {
 	if (!node)
 		exit(-1);
-	if (!exit_stat)
-		_exec_arch_((node->left));
+	if (!ft_atoll(getenv("?"), NULL))
+		_exec_arch_((node->right));
 }

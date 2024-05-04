@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 09:51:05 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/04 17:22:10 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/04 19:09:04 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Include/minishell.h"
+#include "minishell.h"
 
 void	_pwd_(void)
 {
@@ -20,3 +20,4 @@ void	_pwd_(void)
 	printf("%s\n", cwd);
 	_setenv("?", ft_itoa(0));
 }
+ 

@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:33:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/02 18:19:13 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/04 18:17:03 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,11 @@ char	*d_q(char *raw, int *index) //TODO printf $"PWD" -- still
 	{
 		if (raw[*index] == '$')
 		{
+			if (raw[*index + 1] == '?')
+			{
+				new = ft_strjoin(new, getenv("?"), 1), (*index) += 2;
+				continue;
+			}
 			ident = only_identifier(&raw[*index + 1]);
 			if (ident)
 			{
@@ -120,10 +125,7 @@ char	*d_q(char *raw, int *index) //TODO printf $"PWD" -- still
 		else if (raw[*index] == '\'' && !dq)
 			break ;
 		else
-		{
-			printf("inside else\n");
 			new = add_c(new, raw[(*index)++], 0);
-		}
 	}
 	return (new);
 }

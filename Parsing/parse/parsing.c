@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:42:10 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/02 09:10:46 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/04 18:33:08 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Include/minishell.h"
+#include "minishell.h"
 
 // void print_tree(t_node *root, int level)
 // {
@@ -44,7 +44,5 @@ t_node	*parsing(char *line)
 	node = infix_to_postfix(&node);
 	node = postfix_to_prefix(node);
 	node = tree(node);
-	// print_tree(node, 0);
-	// exit(0);
 	return (node);
 }

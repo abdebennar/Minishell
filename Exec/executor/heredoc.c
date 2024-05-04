@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 05:50:24 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/01 10:46:52 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/04 19:05:04 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,30 +45,34 @@ static int	fill_file(t_redir *alter, char *file_name)
 	content = NULL;
 	while (1)
 	{
-		write(1, "heredoc> ", 10);
-		line = readline(STDIN_FILENO);
+		line = readline("heredoc>");
 		if (!doc_strcmp(line, alter->file))
 		{
 			(1) && (free(line), line = NULL);
 			break ;
 		}
-		content = ft_strjoin(content, line, 0); //TODO maybe add newline
+		content = ft_strjoin(content, ft_strjoin(line, "\n", 0), 0);
 	}
 	fd_file = open(file_name, O_RDWR | O_CREAT | O_TRUNC, 0777);
-	(fd_file < 0) && (perror("open"), my_malloc(0, 0, 0), 0); // FIX add the group
-	write(fd_file, content, ft_strlen(content)); 
+	(fd_file < 0) && (perror("open"), my_malloc(0, 0, 0), 0); //TODO handle err
+	
+	write(fd_file, content, ft_strlen(content));
+	close(fd_file);
 	return (fd_file);
 }
+
 
 int	_heredoc_(t_redir *alter)
 {
 	char	*file_name;
 	int		fd_in;
 	
+	fd_in = 0;
 	file_name = random_f();
-	fd_in = fill_file(alter, file_name);
+	fill_file(alter, file_name);
 	(fd_in < 0) && (perror("open"), my_malloc(0, 0, 0)); //TODO correct its return ....
+	fd_in = open(file_name, O_RDWR | O_CREAT, 0777);
 	unlink(file_name);
-	printf("this is fd[0] in heredoc %d\n", fd_in);
+	// printf("this is fd[0] in heredoc %d\n", fd_in);
 	return (fd_in);
 }

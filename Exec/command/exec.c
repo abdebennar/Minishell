@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/04 17:23:31 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/04 18:32:35 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,30 +60,6 @@ static bool	is_builtin(t_node *node)
 	return (false);
 }
 
-// char	**env_p(t_env *env_raw)
-// {
-// 	int		counter;
-// 	int		index;
-// 	char	**env_pv;
-// 	t_env	*tmp_env;
-
-// 	counter = 0;
-// 	tmp_env = env_raw;
-// 	while (env_raw)
-// 	{
-// 		counter++;
-// 		env_raw = env_raw->next;
-// 	}
-// 	index = -1;
-// 	env_pv = my_malloc(sizeof(char *) * (counter + 1),1 , 1);
-// 	while (tmp_env)
-// 	{
-// 		env_pv[++index] = tmp_env->env;
-// 		tmp_env = tmp_env->next;
-// 	}
-// 	return (env_pv);
-// }
-
 void    _exec_(t_node *node)
 {
 	extern char	**environ;
@@ -104,7 +80,6 @@ void    _exec_(t_node *node)
 	}
     if (!forked)
     {
-		
 		execve(add_path((node)->cmd[0]), (node)->cmd, environ);
 		printf("bash: %s: Command not found bitch\n", (node)->cmd[0]);
 		exit(1);
@@ -134,9 +109,9 @@ void	_exec_arch_(t_node *node)
 	exit_stat = 1;
 	tok = (node)->tok;
 	if (tok == OR)
-		_or_(node, exit_stat);
+		_or_(node);
 	else if (tok == AND)
-		_and_(node, exit_stat);
+		_and_(node);
 	else if (tok == PIPE)
 		_pipe_(node);
 	else if (tok == NOT)
