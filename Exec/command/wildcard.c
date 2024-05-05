@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 01:44:16 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/05 14:57:19 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/05 16:20:04 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,12 @@ bool check_pattern(char* s, char* p)
     
     return *p == '\0';
 }
-//reme to check .*.c
-//test  l****l  and the pattern l*l
 
-char	*b_wildcard_(char *pattern)
+char	*_wildcard_(char *pattern)
 {
-    struct dirent   *entry;
-    char            *extracted;
-    DIR             *dir;
+	struct dirent	*entry;
+    char			*extracted;
+    DIR				*dir;
 
     dir = opendir(".");
     if (!dir)
@@ -60,31 +58,18 @@ char	*b_wildcard_(char *pattern)
     {
         entry = readdir(dir);
         if (!entry)
-            break;
+            break ;
         if (check_pattern(entry->d_name, pattern))
         {
-			if (*(entry->d_name) == '.' && *pattern != '.') //I changed this check it
+			if (*(entry->d_name) == '.' && *pattern != '.')
 				continue ;
             if (extracted)
-                extracted = ft_strjoin(extracted, " ", 0); // FIX 
+                extracted = ft_strjoin(extracted, " ", 0);
             extracted = ft_strjoin(extracted, entry->d_name, 0);
         }
     }
-	return (extracted);
+	if (extracted)
+		return (extracted);
+	return (pattern);
 }
-
-void	_wildcard_(t_node **node)
-{
-	int	index;
-
-	index = -1;
-	while ((*node)->cmd[++index])
-		(*node)->cmd[index] = b_wildcard_((*node)->cmd[index]);
-}
-
-// int main()
-// {
-// 	char pattern[] = "*/*.c";
-	
-//     printf("%s\n", b_wildcard_(pattern));
-// }
+// cd ../current/*.c

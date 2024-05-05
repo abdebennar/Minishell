@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 05:50:24 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/04 19:05:04 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/05 16:20:26 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static int	fill_file(t_redir *alter, char *file_name)
 			(1) && (free(line), line = NULL);
 			break ;
 		}
+		// if (find_c(line, '$'))
+			
 		content = ft_strjoin(content, ft_strjoin(line, "\n", 0), 0);
 	}
 	fd_file = open(file_name, O_RDWR | O_CREAT | O_TRUNC, 0777);
@@ -61,7 +63,6 @@ static int	fill_file(t_redir *alter, char *file_name)
 	return (fd_file);
 }
 
-
 int	_heredoc_(t_redir *alter)
 {
 	char	*file_name;
@@ -70,9 +71,8 @@ int	_heredoc_(t_redir *alter)
 	fd_in = 0;
 	file_name = random_f();
 	fill_file(alter, file_name);
-	(fd_in < 0) && (perror("open"), my_malloc(0, 0, 0)); //TODO correct its return ....
+	(fd_in < 0) && (perror("open"), my_malloc(0, 0, 0)); //TODO correct its return
 	fd_in = open(file_name, O_RDWR | O_CREAT, 0777);
 	unlink(file_name);
-	// printf("this is fd[0] in heredoc %d\n", fd_in);
 	return (fd_in);
 }

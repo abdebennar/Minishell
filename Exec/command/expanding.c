@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expanding.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 00:29:18 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/05 16:12:00 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/05 16:18:55 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,32 +24,18 @@ void	_expanding_(t_node **node)
 	cmd = (*node)->cmd;
 	while (cmd[++v_index])
 	{
-		index = 0;
-		clean = NULL;
-		m_cmd = cmd[v_index];
+		(1) && (index = 0, clean = NULL, m_cmd = cmd[v_index]);
 		while (m_cmd[index])
 		{
 			if (m_cmd[index] == '\'')
-				clean = ft_strjoin(clean, s_q(m_cmd, &index), 0);
-			else if (m_cmd[index] == '"' || m_cmd[index] == '$')
-				clean = ft_strjoin(clean, d_q(m_cmd, &index), 0);
+				clean = ft_strjoin(clean, s_q(&m_cmd[index], &index), 0);
+			else if (m_cmd[index] == '"')
+				clean = ft_strjoin(clean, d_q(&m_cmd[index], &index), 0);
+			else if (m_cmd[index] == '$')
+				clean = ft_strjoin(clean, dollar(&m_cmd[index], &index), 0);
 			else
 				clean = add_c(clean, m_cmd[index++], 0);
 		}
-		cmd[v_index] = clean;
+		cmd[v_index] = _wildcard_(clean);
 	}
 }
-
-// int main()
-// {
-// 	t_node *node;
-
-// 	node = malloc(sizeof(t_node));
-// 	node->cmd = malloc(sizeof(char *) * 3);
-// 	node->cmd[0] = ft_strdup("ls");
-// 	node->cmd[1] = ft_strdup("123'fds'456\"$SHfELL\"7890");
-// 	node->cmd[2] = NULL;
-// 	// printf("SEG %s\n", (node)->cmd[2]);
-
-// 	_expanding_(&node);
-// }

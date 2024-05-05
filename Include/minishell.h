@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/04 19:07:02 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/05 16:21:04 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,11 @@ void	add_redir_back(t_redir *node, t_redir **list);
 void	ft_lstaddback(t_env **alst, t_env *new);
 
 //utils ->ft_str2
-int	doc_strcmp(char *s1, char *s2);
 char    *ft_strcpy(char *s1, char *s2);
+char	*ft_strdup_len(char *s1, int len, int group);
+int		doc_strcmp(char *s1, char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-
+int		find_c(char *str, char c);
 // void	print_tok(t_token tok); //just tmp
 
 //----------------------------------------------//
@@ -77,22 +78,29 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 //Exec -----------------------------------------
 //Exec -> command ------------------------------
 void	_expanding_(t_node **node);
-char	*s_q(char *raw, int *index);
-char	*d_q(char *raw, int *index);
-void	_wildcard_(t_node **node);
+//Exec -> command -> exec -------------------
 void	_exec_arch_(t_node *node);
 void    _exec_(t_node *node);
 char	*add_path(char *cmd);
+//Exec -> command -> quotes_helpers --------
 char	*add_c(char *str, char c, int group);
+char	*check_envar(char *raw, int *index);
+int		only_identifier(char *str);
+int		count_c(char *str, char c);
+//Exec -> command -> quotes ----------------
+char	*dollar(char *raw, int *index);
+char	*s_q(char *raw, int *index);
+char	*d_q(char *raw, int *index);
+//Exec -> command -> wildcards -------------
+char	*_wildcard_(char *pattern);
+
 
 //Exec -> builtins
 void    _cd_(t_node *node);
 void    _echo_(t_node *node);
 void	_env_();
-
 void	_exit_(t_node *node);
 long long	ft_atoll(char *str, int *err);
-
 void	_export_(t_node *node);
 void	_pwd_(void);
 void	_unset_(t_node *node);
