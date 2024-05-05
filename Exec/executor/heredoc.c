@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 05:50:24 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/05 18:42:38 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/05 18:44:41 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,10 @@ char	*expand_heredoc(char *line)
 	clean = NULL;
 	while (line[index])
 	{
-		if (line[index] == '$')
+		if (line[index] == '$' && only_identifier(&line[index + 1]))
 		{
-			if (only_identifier(&line[index + 1]))
-			{
-				dollar_out = dollar(&line[index], &index);
-				clean = ft_strjoin(clean, dollar_out, 0);
-			}
-			else
-				clean = add_c(clean, line[index++], 0);
+			dollar_out = dollar(&line[index], &index);
+			clean = ft_strjoin(clean, dollar_out, 0);
 		}
 		else
 			clean = add_c(clean, line[index++], 0);

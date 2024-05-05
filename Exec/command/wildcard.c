@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 01:44:16 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/05 16:20:04 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/05 19:39:23 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,8 @@ bool check_pattern(char* s, char* p)
         else 
             return false;
     }
-    
     while (*p == '*')
         p++;
-    
     return *p == '\0';
 }
 

@@ -52,20 +52,3 @@ void    _echo_(t_node *node)
         printf("\n");
 	_setenv("?", ft_itoa(0));
 }
-
-// #include <string.h>
-
-// int main()
-// {
-// 	char **cmd;
-
-// 	cmd = malloc(sizeof(char *) * 4);
-// 	// const char *ss = "heel";
-
-// 	cmd[0] = strdup("nnnnnnnnnnnnn");
-// 	cmd[1] = strdup("nnnnn");
-// 	cmd[2] = strdup("fuck you");
-// 	cmd[3] = NULL;
-
-// 	_echo_(cmd);
-// }

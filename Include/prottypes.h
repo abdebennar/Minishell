@@ -6,14 +6,16 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:42:30 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/29 14:33:19 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/05 19:27:51 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# define GB_GROUPS	2
-# define ALLOC		1 
-# define CLEAN		0
-# define SEP		" \t\n\v\r\f"
+# define GB_GROUPS		2
+# define ALLOC			1 
+# define CLEAN			0
+# define SEP			" \t\n\v\r\f"
+# define CMD_N_FOUND	127
+# define NOT_EXEC		126
 
 typedef struct s_data
 {
