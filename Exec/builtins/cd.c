@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Include/minishell.h"
+#include "minishell.h"
 
 void    _cd_(t_node *node)
 {
-    char    old_pwd[PATH_MAX];
-    char    pwd[PATH_MAX];
-    int 	exit_err;
+    char	old_pwd[PATH_MAX];
+    char	pwd[PATH_MAX];
+    int		exit_err;
 	char	**cmd;
 
 	cmd = node->cmd;
@@ -25,7 +25,14 @@ void    _cd_(t_node *node)
     else if (!ft_strcmp(cmd[1], "-"))
 	{
         cmd[1] = getenv("OLDPWD");
-		printf("%s\n", cmd[1]);
+		if (cmd[1])
+			printf("%s\n", cmd[1]);
+		else 
+		{
+			printf("bash: cd: OLDPWD not set\n");
+			_setenv("?", ft_itoa(1));
+			return ;
+		}
 	}
     getcwd(old_pwd, PATH_MAX);
     exit_err = chdir(cmd[1]);

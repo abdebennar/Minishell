@@ -6,31 +6,31 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/05 19:26:35 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/05 21:38:30 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include <stdio.h> // printf
-#include <unistd.h> //write - close - fork - dup2 - chdir
-#include <stdlib.h> //malloc 
-#include <stdbool.h> //true && false
-#include <limits.h> //INT_MAX
-#include <fcntl.h> //open
-# include <errno.h>
-#include <dirent.h> //opendir
-#include <readline/readline.h> // readline
-#include <readline/history.h> // readline history
-#include <string.h>
-#include "prottypes.h"
+# include <stdio.h> // printf
+# include <unistd.h> //write - close - fork - dup2 - chdir
+# include <stdlib.h> //malloc 
+# include <stdbool.h> //true && false
+# include <limits.h> //INT_MAX
+# include <fcntl.h> //open
+# include <errno.h> //errno var
+# include <dirent.h> //opendir
+# include <readline/readline.h> // readline
+# include <readline/history.h> // readline history
+# include <string.h>
+# include "prottypes.h"
 
 //utils --------------------------------------------
 char	**ft_split(char *s, char *delim, int group);
 char	*ft_strtrim(const char *s1, const char *set, int group);
 char	*ft_strjoin(char *s1, char *s2, int group);
-char 	*get_next_word(char *str, int *i, t_token tok);
+char	*get_next_word(char *str, int *i, t_token tok);
 void	get_args(t_node *node);
 void	*my_malloc(size_t size, int mode, int group);
 void	_setenv(char *name, char *new_value); // TODO  the setenv function 
@@ -54,7 +54,6 @@ int		ft_strlen(const char *s);
 char	*ft_substr( char *str, unsigned int start, size_t len, int group);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strchr(const char *s, int c);
-
 
 //utils -> link_lst
 t_redir	*new_redir(char *file, t_token tok);
@@ -83,6 +82,10 @@ void	_expanding_(t_node **node);
 void	_exec_arch_(t_node *node);
 void    _exec_(t_node *node);
 char	*add_path(char *cmd);
+//Exec -> command -> exec_helper --------------
+bool	is_builtin(t_node *node);
+char	*add_path(char *cmd);
+void	reset_fds(t_node **node, int *bk_fd);
 //Exec -> command -> quotes_helpers --------
 char	*add_c(char *str, char c, int group);
 char	*check_envar(char *raw, int *index);
@@ -94,7 +97,6 @@ char	*s_q(char *raw, int *index);
 char	*d_q(char *raw, int *index);
 //Exec -> command -> wildcards -------------
 char	*_wildcard_(char *pattern);
-
 
 //Exec -> builtins
 void    _cd_(t_node *node);

@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:50:12 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/04 19:10:35 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/05 21:37:19 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ bool	unexpected_token(char *cmd, int i)
 	return (true);
 }
 
-bool	check_syntax(t_token tok, char *cmd, int i)
+bool	check_syntax(t_token tok, char *cmd, int i) //TODO handle unclosed quotes
 {
 	bool	ret;
 
