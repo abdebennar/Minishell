@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 03:29:22 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/05 11:03:06 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/05 23:20:30 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,9 @@ void	export_args(char *new_var)
 	if (ft_strchr(new_var, '='))
 	{
 		if (*(new_var + get_c(new_var) -  1) == '+')
-		{
 			_setenv(ft_substr(new_var, 0, get_c(new_var) - 1, 0),
 			ft_strjoin(getenv(ft_substr(new_var, 0, get_c(new_var) - 1, 0)), 
 			ft_strdup((new_var + get_c(new_var) + 1), 0), 0));
-		}
 		else
 			_setenv(ft_substr(new_var, 0, get_c(new_var), 0), 
 			ft_strdup((new_var + get_c(new_var) + 1), 0));

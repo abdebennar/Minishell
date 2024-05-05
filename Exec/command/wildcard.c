@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 01:44:16 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/05 19:39:23 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/05 23:26:07 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ char	*_wildcard_(char *pattern)
     DIR				*dir;
 
     dir = opendir(".");
+	if (!pattern || !*pattern)
+		return (NULL);
     if (!dir)
         return (perror("opendir"), NULL);
     extracted = NULL;
@@ -70,4 +72,5 @@ char	*_wildcard_(char *pattern)
 		return (extracted);
 	return (pattern);
 }
-// cd ../current/*.c
+
+// cd ../current/*.c 
