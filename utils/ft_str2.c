@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 02:44:18 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/05 16:21:52 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/05 18:36:05 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,4 @@ char	*ft_strdup_len(char *s1, int len, int group)
 		str[index] = s1[index];
 	str[index] = 0;
 	return (str);
-}
-
-int	find_c(char *str, char c)
-{
-	while (str && *str)
-		if (*(str++) == c)
-			return (1);
-	return (0);
 }
