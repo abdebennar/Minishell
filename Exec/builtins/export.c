@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 03:29:22 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/04 23:43:47 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/05 11:03:06 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,8 @@ void	export_args(char *new_var)
 			ft_strdup((new_var + get_c(new_var) + 1), 0), 0));
 		}
 		else
-			_setenv(ft_substr(new_var, 0, get_c(new_var), 0), ft_strdup((new_var + get_c(new_var) + 1), 0));
+			_setenv(ft_substr(new_var, 0, get_c(new_var), 0), 
+			ft_strdup((new_var + get_c(new_var) + 1), 0));
 	}
 	else 
 		_setenv(new_var, NULL);
@@ -126,7 +127,8 @@ static void	show_export(void)
 		if (ft_strncmp(*tmp, "?", get_c(*tmp)))
 		{
 			if (ft_strchr(*tmp, '=') && ft_strncmp(*tmp, "_", get_c(*tmp)))
-				printf("declare -x %s=\"%s\"\n", ft_substr(*tmp, 0, get_c(*tmp), 0), ft_strdup((*tmp + get_c(*tmp) + 1), 0));
+				printf("declare -x %s=\"%s\"\n", ft_substr(*tmp, 0, 
+					get_c(*tmp), 0), ft_strdup((*tmp + get_c(*tmp) + 1), 0));
 			else if (!ft_strchr(*tmp, '='))
 				printf("declare -x %s\n", *tmp);
 		}

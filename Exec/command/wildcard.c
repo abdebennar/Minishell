@@ -3,27 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 01:44:16 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/28 10:26:02 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/05 14:57:19 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool check_pattern(char *str, char *pattern)
+bool check_pattern(char* s, char* p) 
 {
-    if (!*pattern)
-        return (!*str);
-		
-	if (*pattern == '*')
-		return ((check_pattern(str, pattern + 1) ||
-		(*str && check_pattern(str + 1, pattern))));
-		
-   else if (*str == *pattern)
-        return check_pattern(str + 1, pattern + 1);
-    return (false);
+    char *s_star = NULL, *p_star = NULL;
+    
+    while (*s != '\0')
+	{
+        if (*p == *s)
+		{
+            s++;
+            p++;
+        }
+        else if (*p == '*')
+		{
+            p_star = p;
+            s_star = s;
+            p++;
+        }
+        else if (p_star != NULL)
+		{
+            p = p_star + 1;
+            s = ++s_star;
+        }
+        else 
+            return false;
+    }
+    
+    while (*p == '*')
+        p++;
+    
+    return *p == '\0';
 }
 //reme to check .*.c
 //test  l****l  and the pattern l*l
@@ -66,7 +84,7 @@ void	_wildcard_(t_node **node)
 
 // int main()
 // {
-// 	char pattern[] = "../command/.*";
+// 	char pattern[] = "*/*.c";
 	
 //     printf("%s\n", b_wildcard_(pattern));
 // }

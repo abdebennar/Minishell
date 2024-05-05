@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:08:54 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/02 09:57:43 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/05 16:11:25 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static uint	del_sp(char *cmd, char q)
 			cmd[i] = '\177';
 		i++;
 	}
-	return (i);
+	return (i + 1);
 }
 
 static void	arg_space(char *cmd)
