@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/05 21:38:30 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:03:54 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ int		find_c(char *str, char c);
 //Exec -----------------------------------------
 //Exec -> command ------------------------------
 void	_expanding_(t_node **node);
+char	*alter_expanding_(char *file_name);
+char	*alter_expanding_heredoc(char *file_name);
 //Exec -> command -> exec -------------------
 void	_exec_arch_(t_node *node);
 void    _exec_(t_node *node);
@@ -95,6 +97,7 @@ int		count_c(char *str, char c);
 char	*dollar(char *raw, int *index);
 char	*s_q(char *raw, int *index);
 char	*d_q(char *raw, int *index);
+char	*d_q_heredoc(char *raw, int *index);
 //Exec -> command -> wildcards -------------
 char	*_wildcard_(char *pattern);
 

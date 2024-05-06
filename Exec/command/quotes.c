@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:33:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/05 21:29:03 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:02:59 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,29 @@ char	*s_q(char *raw, int *index)
 	while (raw[mic_index])
 	{
 		if (raw[mic_index] == '\'')
+		{
+			mic_index++;
+			break ;
+		}
+		else
+			new = add_c(new, raw[mic_index++], 0);
+	}
+	*index += mic_index;
+	return (new);
+}
+
+char	*d_q_heredoc(char *raw, int *index)
+{
+	char	*new;
+	int		mic_index;
+
+	new = NULL;
+	mic_index = 0;
+	if (raw[mic_index] == '"')
+		mic_index++;
+	while (raw[mic_index])
+	{
+		if (raw[mic_index] == '"' || !raw[mic_index]) //maybe remove second arg
 		{
 			mic_index++;
 			break ;

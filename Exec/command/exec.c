@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/05 21:36:46 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/06 15:33:13 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,9 @@ void    _exec_(t_node *node)
 void	_exec_arch_(t_node *node)
 {
 	t_token	tok;
-	int		exit_stat;
 	
 	if (!node)
 		return ;
-	exit_stat = 1;
 	tok = (node)->tok;
 	if (tok == OR)
 		_or_(node);

@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 03:57:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/28 10:12:41 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/06 15:38:51 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	rbuddha(t_node *node, int *piped)
 		dup2(piped[0], STDIN_FILENO);
 		close(piped[0]);
 		_exec_arch_(node);
-		exit(0); //should exit with a correct exit stat
+		exit(0);
 	}
 	return (forked);
 }

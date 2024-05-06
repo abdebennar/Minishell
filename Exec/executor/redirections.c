@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 04:00:45 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/30 21:02:28 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:04:12 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,14 @@ int	_left_(t_node **node)
 		{
 			if (fd > 0)
 				close(fd);
+			alter->file = alter_expanding_(alter->file);
 			fd = open(alter->file, O_RDONLY , 0644);
 		}
 		else if (alter->tok == HEREDOC)
 		{
 			if (fd > 0)
 				close(fd);
+			alter->file = alter_expanding_(alter->file);
 			fd = alter->fd;
 		}
 		if (fd < 0)
@@ -80,6 +82,7 @@ int	_redirections_(t_node **node)
 	while (alter)
 	{
 		if (alter->tok == HEREDOC)
+			alter->file = alter_expanding_heredoc(alter->file),
 			alter->fd = _heredoc_(alter);
 		alter = alter->next;
 	}
