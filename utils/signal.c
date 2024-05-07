@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:11:05 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/07 11:08:26 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/07 17:06:54 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,7 @@ void	sigint_h(int sigN)
 
 void	sig_ign()
 {
-	struct sigaction sig;
-	
-	sig.sa_handler = &sigint_h;
-	sigemptyset(&sig.sa_mask);
-	sigaddset(&sig.sa_mask, SIGINT | SIGQUIT);
-	if (sigaction(SIGINT, &sig, NULL) == -1 || signal(SIGQUIT, SIG_IGN) == SIG_ERR)
+	if (signal(SIGINT, sigint_h) == SIG_ERR|| signal(SIGQUIT, SIG_IGN) == SIG_ERR)
 		perror("shell -- signals err");
 }
 

@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 11:01:06 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/26 21:19:33 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/07 16:44:40 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ t_node	*check_tokens(char *cmd, t_token tok, int *i)
 	while (low_pre(tok) && cmd[j])
 	{
 		if (tok != NOT)
-		{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+		{
+			if (!check_syntax(tok, cmd, j))
+				return (NULL);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
 			add_redir_back(new_redir(get_next_word(cmd, &j, tok), tok), &redir);
 		}
 		else
@@ -94,8 +96,7 @@ t_node	*lexer(char *cmd)
 	int	i;
 
 	i = 0;
-	node = NULL;
-	list = NULL;
+	(!i) && (list = NULL, node = NULL);
 	while (cmd[i])
 	{
 		tok = get_token(cmd[i], cmd[i + 1]);
@@ -105,12 +106,13 @@ t_node	*lexer(char *cmd)
 		{
 			node = new_node(NULL, NULL, tok, get_pre(tok));
 			i++;
-			if (tok == OR || tok == AND)
-				i++;
+			(tok == OR || tok == AND) && (i++);
 			skip_space(cmd, &i);
 		}
 		else
 			node = check_tokens(cmd, tok, &i);
+		if (!node)
+			return (NULL);
 		add_node_back(node, &list);
 	}
 	return (list);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:42:10 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/04 18:33:08 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/07 17:53:41 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,30 @@
 //     }
 // }
 
+bool	q_syntax(char *cmd)
+{
+	char q;
+	while (*cmd)
+	{
+		if (*cmd == '"' || *cmd == '\'')
+		{
+			q = *cmd++;
+			while (*cmd && *cmd != q)
+			{
+				cmd++;
+			}
+			if (!(*cmd))
+			{
+				printf("shell: unclosed quotes\n");
+				return (false);
+			}
+		}
+		cmd++;
+	}
+	return (true);
+}
+
+
 t_node	*parsing(char *line)
 {
 	t_node	*node;
@@ -34,6 +58,10 @@ t_node	*parsing(char *line)
 	
 	node = NULL;
 	cmd = ft_strtrim(line, SEP, 0);
+	if (ft_strlen(cmd))
+		add_history(line);
+	if (!q_syntax(cmd))
+		return (NULL);
 	free(line);
 	if (!cmd || !cmd[0])
 		return (NULL);

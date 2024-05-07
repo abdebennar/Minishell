@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/07 10:33:44 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/07 16:17:34 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*ft_strdup_len(char *s1, int len, int group);
 int		doc_strcmp(char *s1, char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		find_c(char *str, char c);
-// void	print_tok(t_token tok); //just tmp
+void	print_tok(t_token tok); //just tmp
 
 //----------------------------------------------//
 
