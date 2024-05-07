@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 04:00:45 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/06 17:04:12 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/07 10:20:44 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ int	_redirections_(t_node **node)
 		if (alter->tok == HEREDOC)
 			alter->file = alter_expanding_heredoc(alter->file),
 			alter->fd = _heredoc_(alter);
+			if (alter->fd == - 1)
+				return (-1);
 		alter = alter->next;
 	}
 	if (_left_((node)) || _right_((node)))

@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:43:59 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/05 09:48:19 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/07 10:01:28 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ char **copy(char **str, bool extra_size, int group)
 void	add_env()
 {
 	extern  char **environ;
+
 	environ = copy(environ, false, 1);
+	rl_catch_signals = 0;
 	_setenv("?", ft_itoa(0));
 }

@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/06 15:33:13 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/07 11:21:55 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	my_execve(t_node *node)
+void	 my_execve(t_node *node)
 {
 	extern char	**environ;
 
+	sig_allow();
 	execve(add_path((node)->cmd[0]), (node)->cmd, environ);
 	printf("bash: %s: Command not found bitch\n", (node)->cmd[0]);
 	if (errno == ENOENT)
@@ -35,7 +36,10 @@ void    _exec_(t_node *node)
 	bk_fd[1]  = dup(STDIN_FILENO);
 	_expanding_(&node);
 	if (!(node)->cmd[0] || _redirections_(&node) || is_builtin(node))
+	{
+		dup2(bk_fd[1], STDIN_FILENO);
 		return ;
+	}
     forked = fork();
     if (forked < 0)
 	{

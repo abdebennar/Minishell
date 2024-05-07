@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 05:50:24 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/06 16:51:48 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/07 11:21:04 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,11 @@ static int	fill_file(t_redir *alter, char *file_name)
 	int		fd_file;
 
 	content = NULL;
+	signal(SIGINT, heredoc_h);
 	while (1)
 	{
 		line = readline("heredoc>");
-		if (!doc_strcmp(line, alter->file))
+		if (!line || !doc_strcmp(line, alter->file) || g_sig == 2)
 		{
 			(1) && (free(line), line = NULL);
 			break ;
@@ -76,9 +77,10 @@ static int	fill_file(t_redir *alter, char *file_name)
 			line = expand_heredoc(line);
 		content = ft_strjoin(content, ft_strjoin(line, "\n", 0), 0);
 	}
+	if (g_sig == 2)
+		return (-1);
 	fd_file = open(file_name, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	(fd_file < 0) && (perror("open"), my_malloc(0, 0, 0), 0); //TODO handle err
-	
 	write(fd_file, content, ft_strlen(content));
 	close(fd_file);
 	return (fd_file);
@@ -91,8 +93,13 @@ int	_heredoc_(t_redir *alter)
 	
 	fd_in = 0;
 	file_name = random_f();
-	fill_file(alter, file_name);
-	(fd_in < 0) && (perror("open"), my_malloc(0, 0, 0)); //TODO correct its return
+	fd_in = fill_file(alter, file_name);
+	if (fd_in < 0)
+	{
+		unlink(file_name);
+		g_sig = 1;
+		return (-1);
+	}
 	fd_in = open(file_name, O_RDWR | O_CREAT, 0777);
 	unlink(file_name);
 	return (fd_in);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/06 17:03:54 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/07 10:33:44 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 # include <dirent.h> //opendir
 # include <readline/readline.h> // readline
 # include <readline/history.h> // readline history
-# include <string.h>
+# include <signal.h>  
+# include <ctype.h>
 # include "prottypes.h"
 
 //utils --------------------------------------------
@@ -142,5 +143,10 @@ void	skip_space(char *cmd, int *i);
 //syntax -> parse
 bool	check_syntax(t_token tok, char *cmd, int i);
 //--------------------------------------------//
+
+// urils -> signal
+void	sig_ign();
+void	sig_allow();
+void	heredoc_h(int n);
 
 #endif

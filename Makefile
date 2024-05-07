@@ -1,24 +1,24 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/04/14 13:36:20 by abennar           #+#    #+#              #
-#    Updated: 2024/05/05 16:22:43 by bel-oirg         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-SRC = utils/*.c Parsing/*/*.c Exec/*/*.c main.c
+SRC = utils/*.c Parsing/*.c Exec/*/*.c main.c
 
 NAME = minishell
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -lreadline
 
-all : 
-	rm -rf minishell
+INCLUDE = -I$(HOME)/goinfre/homebrew/opt/readline/include -I$(PWD)/Include
+LIBRARY = -L/Users/abennar/goinfre/homebrew/opt/readline/lib
+
+all:
+	@if ! brew -v ; then \
+		curl --silent -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C ~/goinfre/homebrew > /dev/null 2>&1; \
+	fi
+	@if ! brew list | grep "readline"; then \
+		brew install readline ; \
+	fi
 	$(MAKE) $(NAME)
 
-$(NAME) :
-	cc  -fsanitize=address -lreadline $(FLAGS) $(SRC) -I$(PWD)/Include  -o $@ #-fsanitize=address  #-g3   
+$(NAME):
+	cc -fsanitize=address $(FLAGS) $(LIBRARY) $(INCLUDE) $(SRC) -I$(PWD)/Include -o $@
+
+re :
+	rm -rf minishell
+	$(MAKE) all

@@ -3,12 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   prottypes.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:42:30 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/05 19:27:51 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/07 10:45:26 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef PROTTYPES_H
+# define PROTTYPES_H
 
 # define GB_GROUPS		2
 # define ALLOC			1 
@@ -16,6 +19,9 @@
 # define SEP			" \t\n\v\r\f"
 # define CMD_N_FOUND	127
 # define NOT_EXEC		126
+
+extern int	g_sig;
+typedef unsigned int uint;
 
 typedef struct s_data
 {
@@ -68,3 +74,5 @@ typedef	struct s_node
 	struct s_node	*left;
 	struct s_node	*right;
 }	t_node;
+
+#endif
