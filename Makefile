@@ -5,7 +5,7 @@ NAME = minishell
 FLAGS = -Wall -Wextra -Werror -lreadline
 
 INCLUDE = -I$(HOME)/goinfre/homebrew/opt/readline/include -I$(PWD)/Include
-LIBRARY = -L/Users/abennar/goinfre/homebrew/opt/readline/lib
+LIBRARY = -L$(HOME)/goinfre/homebrew/opt/readline/lib
 
 all:
 	@alias brew='$(HOME)/goinfre/homebrew/bin/brew';
