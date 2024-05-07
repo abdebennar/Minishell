@@ -8,7 +8,7 @@ INCLUDE = -I$(HOME)/goinfre/homebrew/opt/readline/include -I$(PWD)/Include
 LIBRARY = -L/Users/abennar/goinfre/homebrew/opt/readline/lib
 
 all:
-	@rm minishell
+	@alias brew='$(HOME)/goinfre/homebrew/bin/brew';
 	@if ! brew -v  >/dev/null 2>&1 ; then \
 		echo "\n[x] installing home brew ...";\
 		mkdir ~/goinfre/homebrew >/dev/null 2>&1 ; \
