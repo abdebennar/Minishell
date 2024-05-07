@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/07 11:21:55 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/07 19:51:05 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,14 @@ void    _exec_(t_node *node)
 	int			bk_fd[2];
 	int			out_exit;
 
-	bk_fd[0] = dup(STDOUT_FILENO);
-	bk_fd[1]  = dup(STDIN_FILENO);
+	bk_fd[0] = dup(0);
+	bk_fd[1]  = dup(1);
 	_expanding_(&node);
 	if (!(node)->cmd[0] || _redirections_(&node) || is_builtin(node))
-	{
-		dup2(bk_fd[1], STDIN_FILENO);
-		return ;
-	}
+		return (reset_fds(&node, bk_fd));
     forked = fork();
     if (forked < 0)
-	{
-        perror("fork");
-		return ;
-	}
+		return (perror("fork"));
     if (!forked)
 		my_execve(node);
 	waitpid(forked, &out_exit, 0);

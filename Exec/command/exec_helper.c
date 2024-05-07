@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 21:35:07 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/05 21:36:22 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/07 19:45:27 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,16 @@
 
 void	reset_fds(t_node **node, int *bk_fd)
 {
+		// dup2(bk_fd[0], STDIN_FILENO);
+
+	dup2(bk_fd[0], STDIN_FILENO);
+	close(bk_fd[0]);	
 	if ((*node)->fd[0] != 0)
-	{
 		close((*node)->fd[0]);
-		dup2(bk_fd[0], STDIN_FILENO);
-		close(bk_fd[0]);	
-	}
+	dup2(bk_fd[1], STDOUT_FILENO);
+	close(bk_fd[1]);
 	if ((*node)->fd[1] != 1)
-	{
 		close((*node)->fd[1]);
-		dup2(bk_fd[1], STDOUT_FILENO);
-		close(bk_fd[1]);
-	}
 }
 
 bool	is_builtin(t_node *node)
