@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_word.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 16:41:13 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/01 11:13:19 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/07 21:42:01 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char *get_next_word(char *str, int *i, t_token tok)
 	if (tok == HEREDOC || tok == APPEND)
 		str[++(*i)] = 127;
 	start = 0;
-	while (ft_strchr(" \t\n\v\r\f\177", str[*i]))
+	while (str[*i] && ft_strchr(" \t\n\v\r\f\177", str[*i]))
 		(*i)++;
 	start = *i;
 	while (str[*i])

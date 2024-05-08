@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:42:30 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/07 17:09:37 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/07 20:49:53 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define SEP			" \t\n\v\r\f"
 # define CMD_N_FOUND	127
 # define NOT_EXEC		126
-# define PROMPT			"\033[1;34m┌──(mini㉿shell)\n\033[1;34m└─$\033[0m "
+# define PROMPT			 "$ "//"\033[1;34m┌──(mini㉿shell)\n\033[1;34m└─$\033[0m "
 
 extern int	g_sig;
 typedef unsigned int uint;

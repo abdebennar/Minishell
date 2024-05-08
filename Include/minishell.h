@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/07 16:17:34 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/08 17:34:54 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ char	*add_path(char *cmd);
 bool	is_builtin(t_node *node);
 char	*add_path(char *cmd);
 void	reset_fds(t_node **node, int *bk_fd);
+int		_exit_stat_(int oldx);
 //Exec -> command -> quotes_helpers --------
 char	*add_c(char *str, char c, int group);
 char	*check_envar(char *raw, int *index);

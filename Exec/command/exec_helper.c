@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   exec_helper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 21:35:07 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/07 19:45:27 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/08 19:07:21 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	_exit_stat_(int oldx)
+{
+	if (WIFSIGNALED(oldx))
+	{
+		if (WTERMSIG(oldx) == SIGINT)
+			return (printf("\n"), 128 + SIGINT);
+		else if (WTERMSIG(oldx) == SIGQUIT)
+			return (printf("Quit: 3\n"), 128 + SIGQUIT);
+		else 
+			return (WTERMSIG(oldx) + 128);
+	}
+	else if (WIFEXITED(oldx))
+		return (WEXITSTATUS(oldx));
+	return (0);
+}
 
 void	reset_fds(t_node **node, int *bk_fd)
 {
