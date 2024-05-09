@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:42:30 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/07 20:49:53 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/09 18:29:07 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # define CMD_N_FOUND	127
 # define NOT_EXEC		126
 # define PROMPT			 "$ "//"\033[1;34m┌──(mini㉿shell)\n\033[1;34m└─$\033[0m "
+# define SYNTAX_ERR		"shell: syntax error near unexpected token"
+
 
 extern int	g_sig;
 typedef unsigned int uint;
@@ -49,7 +51,8 @@ typedef enum e_token
 	APPEND,
 	OUT,
 	IN,
-	NOT
+	NOT,
+	END
 }	t_token;
 
 typedef struct s_redir

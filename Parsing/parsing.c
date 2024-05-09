@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:42:10 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/07 17:53:41 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/09 18:27:28 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ t_node	*parsing(char *line)
 	free(line);
 	if (!cmd || !cmd[0])
 		return (NULL);
-	node = lexer(cmd);
+	node = lexer(cmd); 
 	if (!node)
 		return (NULL);
 	lst_iter(node, get_args);
 	node = infix_to_postfix(&node);
 	node = postfix_to_prefix(node);
-	node = tree(node);
+	node = tree(node); 
 	return (node);
 }

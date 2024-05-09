@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 08:47:25 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/04 17:15:40 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/08 20:12:19 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ static void	unset_args(char *env)
 			if (!ft_strncmp(env, *tmp, get_c(*tmp)))
 			{
 				while (*(++tmp))
-				{
 					*(tmp - 1) = *tmp;
-				}
 				*(--tmp) = NULL;
 				break;
 			}
 			tmp++;
 		}
+	else 
+		_setenv("?", ft_itoa(1));
 }
 
 void	_unset_(t_node *node)
@@ -62,7 +62,7 @@ void	_unset_(t_node *node)
 	char	**cmd;
 
 	cmd = node->cmd;
+	_setenv("?", ft_itoa(0));
 	while(*(++cmd))
 		unset_args(*cmd);
-	_setenv("?", ft_itoa(0));
 }
