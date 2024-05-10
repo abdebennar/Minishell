@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:33:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/06 17:02:59 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/10 23:40:26 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*dollar(char *raw, int *index)
 {
 	char	*out;
-	
+
 	raw++;
 	(*index)++;
 	if ((*raw) == '?')
@@ -39,7 +39,7 @@ char	*d_q(char *raw, int *index)
 	{
 		if (raw[mic_index] == '$' && raw[mic_index + 1] != '"')
 			new = ft_strjoin(new, dollar(&raw[mic_index], &mic_index), 0);
-		else if (raw[mic_index] == '"' || !raw[mic_index]) //maybe remove second arg
+		else if (raw[mic_index] == '"')
 		{
 			mic_index++;
 			break ;
@@ -85,7 +85,7 @@ char	*d_q_heredoc(char *raw, int *index)
 		mic_index++;
 	while (raw[mic_index])
 	{
-		if (raw[mic_index] == '"' || !raw[mic_index]) //maybe remove second arg
+		if (raw[mic_index] == '"')
 		{
 			mic_index++;
 			break ;

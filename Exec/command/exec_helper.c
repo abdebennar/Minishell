@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_helper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 21:35:07 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/08 23:01:46 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/10 23:43:35 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ void	reset_fds(t_node **node, int *bk_fd)
 
 	dup2(bk_fd[0], STDIN_FILENO);
 	close(bk_fd[0]);	
-	if ((*node)->fd[0] != 0)
+	if (node && *node && (*node)->fd[0] != 0)
 		close((*node)->fd[0]);
 	dup2(bk_fd[1], STDOUT_FILENO);
 	close(bk_fd[1]);
-	if ((*node)->fd[1] != 1)
+	if ((node && *node && (*node)->fd[1] != 1))
 		close((*node)->fd[1]);
 }
 

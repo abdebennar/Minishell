@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 21:42:49 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/05 16:19:28 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/10 23:44:51 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*add_c(char *str, char c, int group)
 {
 	char	*new;
 	char	*save;
-	
+
 	new = my_malloc(ft_strlen(str) + 2, 1, group);
 	save = new;
 	while (str && *str)
@@ -29,12 +29,12 @@ char	*add_c(char *str, char c, int group)
 int	only_identifier(char *str)
 {
 	char	*save;
-	
+
 	save = str;
 	if (!((*str >= 'a' && *str <= 'z')
-		|| (*str >= 'A' && *str <= 'Z') || (*str == '_')))	
+			|| (*str >= 'A' && *str <= 'Z') || (*str == '_')))
 		return (0);
-	while(*str)
+	while (*str)
 	{
 		if (!(is_alphanum(*str) || (*str == '_')))
 			break ;
@@ -61,7 +61,7 @@ char	*check_envar(char *raw, int *index)
 	size_t	ident;
 	char	*new;
 	char	*possible;
-	
+
 	new = NULL;
 	ident = only_identifier(raw);
 	if (ident)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 04:00:45 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/07 10:20:44 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/10 23:41:43 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	_right_(t_node **node)
 {
-	t_redir *alter;
+	t_redir	*alter;
 	int		fd;
 
 	alter = (*node)->redir;
@@ -43,7 +43,7 @@ int	_right_(t_node **node)
 
 int	_left_(t_node **node)
 {
-	t_redir *alter;
+	t_redir	*alter;
 	int		fd;
 
 	fd = 0;
@@ -54,14 +54,12 @@ int	_left_(t_node **node)
 		{
 			if (fd > 0)
 				close(fd);
-			alter->file = alter_expanding_(alter->file);
-			fd = open(alter->file, O_RDONLY , 0644);
+			fd = open(alter->file, O_RDONLY, 0644);
 		}
 		else if (alter->tok == HEREDOC)
 		{
 			if (fd > 0)
 				close(fd);
-			alter->file = alter_expanding_(alter->file);
 			fd = alter->fd;
 		}
 		if (fd < 0)
@@ -71,21 +69,19 @@ int	_left_(t_node **node)
 	(*node)->fd[0] = fd;
 	return (0);
 }
- 
-//TODO expand inside heredoc 
 
-int	_redirections_(t_node **node)
+int	_redirections_(t_node **node) //TODO bash: file*: ambiguous redirect
 {
-	t_redir *alter;
+	t_redir	*alter;
 
 	alter = (*node)->redir;
 	while (alter)
 	{
+		alter->file = alter_expanding_(alter->file);
 		if (alter->tok == HEREDOC)
-			alter->file = alter_expanding_heredoc(alter->file),
 			alter->fd = _heredoc_(alter);
-			if (alter->fd == - 1)
-				return (-1);
+		if (alter->fd == -1)
+			return (-1);
 		alter = alter->next;
 	}
 	if (_left_((node)) || _right_((node)))
@@ -94,7 +90,7 @@ int	_redirections_(t_node **node)
 	{
 		if (dup2((*node)->fd[0], STDIN_FILENO) < 0)
 			return (perror("dup2 on redirections"), -1);
-		close((*node)->fd[0]);
+		close((*node)->fd[0]); //TODO maybe remove this -> check reset_fds()
 	}
 	if ((*node)->fd[1] != 1)
 	{

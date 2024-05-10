@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/08 20:04:13 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/10 23:46:40 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,31 +26,32 @@ void	 my_execve(t_node *node)
 	exit(1);
 }
 
-void    _exec_(t_node *node)
+void	_exec_(t_node *node)
 {
-    int			forked;
-	int			bk_fd[2];
-	int			out_exit;
+	int		forked;
+	int		bk_fd[2];
+	int		exit_stat;
 
 	bk_fd[0] = dup(0);
-	bk_fd[1]  = dup(1);
-	_expanding_(&node);
-	if (!(node)->cmd[0] || _redirections_(&node) || is_builtin(node))
+	bk_fd[1] = dup(1);
+	node->cmd = _expanding_(&node);
+	if (!node->cmd || !(node)->cmd[0]
+		|| _redirections_(&node) || is_builtin(node))
 		return (reset_fds(&node, bk_fd));
-    forked = fork();
-    if (forked < 0)
+	forked = fork();
+	if (forked < 0)
 		return (perror("fork"));
-    if (!forked)
+	if (!forked)
 		my_execve(node);
-	waitpid(forked, &out_exit, 0);
-	_setenv("?", ft_itoa(_exit_stat_(out_exit)));
+	waitpid(forked, &exit_stat, 0);
+	_setenv("?", ft_itoa(_exit_stat_(exit_stat)));
 	reset_fds(&node, bk_fd);
 }
 
 void	_exec_arch_(t_node *node)
 {
 	t_token	tok;
-	
+
 	if (!node)
 		return ;
 	tok = (node)->tok;
@@ -63,3 +64,4 @@ void	_exec_arch_(t_node *node)
 	else if (tok == NOT)
 		_exec_(node);
 }
+
