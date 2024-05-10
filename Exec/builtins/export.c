@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 03:29:22 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/05 23:20:30 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/11 00:24:01 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ static int check_var(char *str)
 		return (-1);
 	while(*(++str))
 	{
-		if (*str == '+' && *(str + 1) != '=')
-			return (1);
+		if (*str == '+' && *(str + 1) == '=')
+			return (0);
+		else if (*str == '=')
+			return (0);
 		else if (!(is_alphanum(*str) || (*str == '_')))
 			return (-1);
 	}
@@ -139,12 +141,13 @@ void	_export_(t_node *node)
 	char	**cmd;
 
 	cmd = node->cmd;
+	_setenv("?", ft_itoa(0));
 	if (!cmd[1])
 		show_export();
 	else
 		while(*(++cmd))
 		{
-			if (check_var(*cmd))
+			if (check_var(ft_substr(*cmd, 0, get_c(*cmd) + 1, 0)))
 			{
 				printf("export: `%s': not a valid identifier\n", *cmd);
 				_setenv("?", ft_itoa(1));
@@ -152,5 +155,4 @@ void	_export_(t_node *node)
 			}
 			export_args(*cmd);
 		}
-	_setenv("?", ft_itoa(0));
 }
