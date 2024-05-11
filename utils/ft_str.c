@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 06:21:55 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/02 15:54:49 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/11 16:31:22 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,8 @@ char	*ft_strdup(char *s1, int group)
 
 	len_s1 = ft_strlen(s1);
 	str = my_malloc((len_s1 + 1) * (sizeof(char)), 1, group);
-	if (!str)
-		return (NULL);
 	index = -1;
-	while (s1[++index])
+	while (s1 && s1[++index])
 		str[index] = s1[index];
 	str[index] = 0;
 	return (str);

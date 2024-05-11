@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/10 23:42:23 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/11 16:35:33 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <readline/history.h> // readline history
 # include <signal.h>  
 # include <ctype.h>
+#include <string.h>
 # include "prottypes.h"
 
 //utils --------------------------------------------

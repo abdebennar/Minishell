@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mng_args.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:08:54 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/07 17:22:53 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/11 16:21:48 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	get_args(t_node *node)
 	}
 	cmd[i] = '\0';
 	arg_space(cmd);
-	args = ft_split(cmd, " ", 0);
+	args = ft_split(cmd, " \t", 0);
 	reset_sp(args);
 	node->cmd = args;
 }
