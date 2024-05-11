@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prottypes.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:42:30 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/09 18:29:07 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/11 03:23:45 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef	struct s_node
 	t_token			tok;
 	/* your's */
 	int				fd[2];
+	int				pid[2];
 	char			**cmd;
 	t_redir			*redir;
 	t_env			*env;

@@ -2,7 +2,7 @@ SRC = utils/*.c Parsing/*.c Exec/*/*.c main.c
 SHELL := /bin/bash
 NAME = minishell
 BREW = $(HOME)/goinfre/homebrew/bin/brew
-FLAGS = -Wall -Wextra -Werror -lreadline #-fsanitize=address
+FLAGS = -Wall -Wextra -Werror -lreadline -g#-fsanitize=address
 
 INCLUDE = -I$(HOME)/goinfre/homebrew/opt/readline/include -I$(PWD)/Include
 LIBRARY = -L$(HOME)/goinfre/homebrew/opt/readline/lib

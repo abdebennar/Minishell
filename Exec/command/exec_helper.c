@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 21:35:07 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/10 23:43:35 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/11 04:00:30 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ bool	is_builtin(t_node *node)
 {
 	char *str;
 
+	if (!node || !(node->cmd) || !(node->cmd[0]))
+		return (false);
 	str = node->cmd[0];
 	if (!ft_strcmp(str, "cd"))
 		return (_cd_(node), true);

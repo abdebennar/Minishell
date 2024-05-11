@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 01:44:16 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/10 23:40:35 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/11 03:00:31 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	escape_q_wild(char quote, int *dq, int *sq)
 {
-	if (quote == '"') //sq
+	if (quote == '"' && !*sq)
 	{
 		if (!*dq)
 			*dq = 1;
@@ -58,27 +58,11 @@ char	*prep_w(char *pattern)
 	int		sq;
 	char	*out;
 
-	dq = 0;
-	sq = 0;
-	out = NULL;
-	if (!pattern)
-		return (NULL);
-	while (*pattern)
+	(1) && (dq = 0,	sq = 0,	out = NULL);
+	while (pattern && *pattern)
 	{
-		if (*pattern == '"' && !sq)
-		{
-			if (!dq)
-				dq = 1;
-			else
-				dq = 0;
-		}
-		else if (*pattern == '\'' && !dq)
-		{
-			if (!sq)
-				sq = 1;
-			else
-				sq = 0;
-		}
+		if (*pattern == '\'' || *pattern == '"')
+			escape_q_wild(*pattern, &dq, &sq);
 		else if ((*pattern == '*') && (sq || dq))
 			out = add_c(out, '#', 0);
 		else
@@ -94,14 +78,11 @@ char	*_wildcard_(char *pattern)
 	char			*extracted;
 	DIR				*dir;
 
-	(1) && (dir = opendir("."), extracted = NULL);
 	if (!pattern || !*pattern)
 		return (NULL);
+	(1) && (dir = opendir("."), extracted = NULL);
 	if (!dir)
 		return (perror("opendir"), NULL);
-	pattern = prep_w(pattern);
-	if (!pattern)
-		return (NULL);
 	while (1)
 	{
 		entry = readdir(dir);
@@ -115,9 +96,7 @@ char	*_wildcard_(char *pattern)
 			extracted = ft_strjoin(extracted, entry->d_name, 0);
 		}
 	}
-	if (extracted)
-		return (extracted);
-	return (pattern);
+	return (extracted);
 }
 
 //TODO cd ../current/*.c 

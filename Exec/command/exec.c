@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/10 23:46:40 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/11 04:03:15 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	 my_execve(t_node *node)
 	extern char	**environ;
 
 	sig_allow();
+	if (!node->cmd || !(node)->cmd[0])
+		exit(0);
 	execve(add_path((node)->cmd[0]), (node)->cmd, environ);
 	printf("bash: %s: Command not found bitch\n", (node)->cmd[0]);
 	if (errno == ENOENT)
@@ -35,8 +37,7 @@ void	_exec_(t_node *node)
 	bk_fd[0] = dup(0);
 	bk_fd[1] = dup(1);
 	node->cmd = _expanding_(&node);
-	if (!node->cmd || !(node)->cmd[0]
-		|| _redirections_(&node) || is_builtin(node))
+	if (_redirections_(&node) || is_builtin(node))
 		return (reset_fds(&node, bk_fd));
 	forked = fork();
 	if (forked < 0)
