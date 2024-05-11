@@ -1,33 +1,48 @@
-SRC = utils/*.c Parsing/*.c Exec/*/*.c main.c
-SHELL := /bin/bash
-NAME = minishell
-BREW = $(HOME)/goinfre/homebrew/bin/brew
-FLAGS = -Wall -Wextra -Werror -lreadline -fsanitize=address
+SRC			= utils/*.c Parsing/*.c Exec/*/*.c main.c
+SHELL		= /bin/bash
+NAME		= minishell
+CFLAGS		= -Wall -Wextra -Werror -lreadline #-fsanitize=address
+CC			= cc
+BREW		= $(HOME)/goinfre/homebrew/bin/brew
+INCLUDE		= -I$(HOME)/goinfre/homebrew/opt/readline/include -I$(PWD)/Include
+LIBRARY		= -L$(HOME)/goinfre/homebrew/opt/readline/lib
 
-INCLUDE = -I$(HOME)/goinfre/homebrew/opt/readline/include -I$(PWD)/Include
-LIBRARY = -L$(HOME)/goinfre/homebrew/opt/readline/lib
+CHEKC_BREW	:= $(shell command -v brew)
+RDL_CHEKC	:= $(shell brew list | grep "readline")
 
-all:
-	@rm -rf minishell;
-	@alias brew='$(HOME)/goinfre/homebrew/bin/brew';
-	@if ! $(BREW) -v  >/dev/null 2>&1 ; then \
-		echo "\n[x] installing home brew ...";\
-		mkdir ~/goinfre/homebrew >/dev/null 2>&1 ; \
-		curl --silent -L https://github.com/Homebrew/brew/tarball/master |\
-		tar xz --strip 1 -C ~/goinfre/homebrew >/dev/null 2>&1; \
-		$(BREW) update --force --quiet >/dev/null 2>&1; \
-		echo "[+]done"; \
-	fi
-	@if ! $(BREW) list | grep "readline" >/dev/null 2>&1 ; then \
-		echo "[x] installing readline ...";\
-		$(BREW) install readline >/dev/null 2>&1; \
-		echo "[+]done"; \
-	fi
-	$(MAKE) $(NAME)
 
-$(NAME):
-	cc  $(FLAGS) $(LIBRARY) $(INCLUDE) $(SRC) -I$(PWD)/Include -o $@
 
-re :
-	rm -rf minishell
+all	: check_brew
+	@$(MAKE) $(NAME)
+
+check_brew	:
+ifndef CHEKC_BREW
+	@echo
+	@echo "[x] brew not found,installing now"
+	@echo "wait...."
+	@mkdir ~/goinfre/homebrew >/dev/null 2>&1
+	@curl -s -L https://github.com/Homebrew/brew/tarball/master | \
+	tar xz --strip 1 -C ~/goinfre/homebrew >/dev/null 2>&1 
+	@brew update --force >/dev/null 2>&1
+	@echo "[+]done"
+endif
+ifndef RDL_CHEKC
+	@echo "[x]installing readline lib"
+	@echo "wait...."
+	@brew install readline >/dev/null 2>&1
+	@echo "[+] done"
+endif
+
+
+$(NAME)	: $(SRC)
+	cc  $(CFLAGS) $(LIBRARY) $(INCLUDE) $(SRC) -I$(PWD)/Include -o $@
+
+clean	:
+	@echo "[x] nothing to clean"
+
+fclean	:
+	rm -rf $(NAME) >/dev/null 2>&1
+
+re	:
+	$(MAKE) fclean
 	$(MAKE) all

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:43:59 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/11 16:11:44 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/11 17:48:09 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,14 @@ void	add_env()
 {
 	extern  char **environ;
 	extern	int	rl_catch_signals;
+	int			sh_lvl;
 
 	environ = copy(environ, false, 1);
 	rl_catch_signals = 0;
+	if (!getenv("SHLVL"))
+		sh_lvl = 0;
+	else
+		sh_lvl = ft_atoll(getenv("SHLVL"), NULL);
+	_setenv("SHLVL", ft_itoa(sh_lvl + 1));
 	_setenv("?", ft_itoa(0));
 }
