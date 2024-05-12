@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 11:01:06 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/09 14:31:05 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/12 22:34:41 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,18 @@ t_node	*check_tokens(char *cmd, t_token tok, int *i)
 	redir = NULL;
 	while (low_pre(tok) && cmd[j])
 	{
+		if (!check_syntax(tok, cmd, j))
+			return (NULL);  
 		if (tok != NOT)
 		{
-			if (!check_syntax(tok, cmd, j))
-				return (NULL);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
 			add_redir_back(new_redir(get_next_word(cmd, &j, tok), tok), &redir);
 		}
 		else
+		{
+			if (cmd[j] == '"' || cmd[j] == '\'')
+				j+= skip_quotes((cmd + j + 1), cmd[j]);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 			j++;
+		}
 		tok = get_token(cmd[j], cmd[j + 1]);
 	}
 	f = get_cmd_area(cmd, *i);

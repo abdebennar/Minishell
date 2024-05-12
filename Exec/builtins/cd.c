@@ -29,7 +29,7 @@ void    _cd_(t_node *node)
 			printf("%s\n", cmd[1]);
 		else 
 		{
-			printf("bash: cd: OLDPWD not set\n");
+			put_err("bash: cd: OLDPWD not set\n");
 			_setenv("?", ft_itoa(1));
 			return ;
 		}
@@ -38,7 +38,7 @@ void    _cd_(t_node *node)
     exit_err = chdir(cmd[1]);
     if (exit_err)
     {
-        perror(NULL);
+        perror(" ");
 		_setenv("?", ft_itoa(1));
 		return ;
     }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/11 16:35:33 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/12 19:22:45 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,5 +154,10 @@ bool	check_syntax(t_token tok, char *cmd, int i);
 void	sig_ign();
 void	sig_allow();
 void	heredoc_h(int n);
+
+// utils -> error
+void	put_str_err(char *err, char *str);
+bool	put_tok_err(t_token tok);
+void	put_err(char *err);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_helper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 21:35:07 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/11 04:00:30 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/12 18:09:12 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	_exit_stat_(int oldx)
 	if (WIFSIGNALED(oldx))
 	{
 		if (WTERMSIG(oldx) == SIGINT)
-			return (printf("\n"), 128 + SIGINT);
+			return (write(2, "\n", 1), 128 + SIGINT);
 		else if (WTERMSIG(oldx) == SIGQUIT)
-			return (printf("Quit: 3\n"), 128 + SIGQUIT);
+			return (write(2, "Quit: 3\n", 8), 128 + SIGQUIT);
 		else 
 			return (WTERMSIG(oldx) + 128);
 	}

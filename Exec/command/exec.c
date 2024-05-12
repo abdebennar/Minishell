@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/11 04:03:15 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/12 18:03:36 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	 my_execve(t_node *node)
 	if (!node->cmd || !(node)->cmd[0])
 		exit(0);
 	execve(add_path((node)->cmd[0]), (node)->cmd, environ);
-	printf("bash: %s: Command not found bitch\n", (node)->cmd[0]);
+	put_str_err(NOCMD_ERR, node->cmd[0]);
 	if (errno == ENOENT)
 		exit(127);
 	if (errno == EACCES)

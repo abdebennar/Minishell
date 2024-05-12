@@ -7,8 +7,10 @@ BREW		= $(HOME)/goinfre/homebrew/bin/brew
 INCLUDE		= -I$(HOME)/goinfre/homebrew/opt/readline/include -I$(PWD)/Include
 LIBRARY		= -L$(HOME)/goinfre/homebrew/opt/readline/lib
 
-CHEKC_BREW	:= $(shell command -v brew)
-RDL_CHEKC	:= $(shell brew list | grep "readline")
+BREW		=$(HOME)/goinfre/homebrew/bin/brew
+
+CHEKC_BREW	:= $(shell command -v $(BREW))
+RDL_CHEKC	:= $(shell $(BREW) list | grep "readline")
 
 
 
@@ -23,13 +25,13 @@ ifndef CHEKC_BREW
 	@mkdir ~/goinfre/homebrew >/dev/null 2>&1
 	@curl -s -L https://github.com/Homebrew/brew/tarball/master | \
 	tar xz --strip 1 -C ~/goinfre/homebrew >/dev/null 2>&1 
-	@brew update --force >/dev/null 2>&1
+	@$(BREW) update --force >/dev/null 2>&1
 	@echo "[+]done"
 endif
 ifndef RDL_CHEKC
 	@echo "[x]installing readline lib"
 	@echo "wait...."
-	@brew install readline >/dev/null 2>&1
+	@$(BREW) install readline >/dev/null 2>&1
 	@echo "[+] done"
 endif
 
