@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/13 04:56:03 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/13 20:10:25 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,20 @@
 void	 my_execve(t_node *node)
 {
 	extern char	**environ;
+	struct stat	f_stat;
 
 	sig_allow();
+	stat(node->cmd[0], &f_stat);
 	if (!node->cmd || !(node)->cmd[0])
 		exit(0);
 	execve(add_path((node)->cmd[0]), (node)->cmd, environ);
-	put_str_err(NOCMD_ERR, node->cmd[0]);
-	if (errno == ENOENT || errno == EFAULT || errno == EEXIST)
+	if (access(node->cmd[0], X_OK))
+		put_str_err(" No such file or directory", node->cmd[0]);
+	else if (S_ISDIR(f_stat.st_mode))
+		put_str_err(" is a directory", node->cmd[0]);
+	else
+		put_str_err(NOCMD_ERR, node->cmd[0]);
+	if (errno == ENOENT || errno == EFAULT)
 		exit(127);
 	if (errno == EACCES)
 		exit(126);

@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 16:41:13 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/09 18:30:13 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/13 20:12:23 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ char *get_next_word(char *str, int *i, t_token tok)
 	start = *i;
 	while (str[*i])
 	{
+		if (str[*i] == '"' || str[*i] == '\'')
+			*i += skip_quotes((str + *i + 1), str[*i]);
 		if (is_sep(str[*i], " \t\n\v\r\f>|<&()"))
 			break;
 		(*i)++;

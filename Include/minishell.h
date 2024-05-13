@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/13 04:00:37 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/13 20:11:53 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 # include <dirent.h> //opendir
 # include <readline/readline.h> // readline
 # include <readline/history.h> // readline history
-# include <signal.h>  
+# include <signal.h> 
+# include <sys/stat.h>
 # include <ctype.h>
 #include <string.h>
 # include "prottypes.h"
