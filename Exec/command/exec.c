@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/12 18:03:36 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/13 01:12:50 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,16 @@ void	 my_execve(t_node *node)
 		exit(0);
 	execve(add_path((node)->cmd[0]), (node)->cmd, environ);
 	put_str_err(NOCMD_ERR, node->cmd[0]);
-	if (errno == ENOENT)
+	if (errno == ENOENT || errno == EFAULT || errno == EEXIST)
 		exit(127);
 	if (errno == EACCES)
 		exit(126);
 	exit(1);
 }
+//TODO $HOME echo lol
 
-void	_exec_(t_node *node)
+
+void	_exec_(t_node *node) 
 {
 	int		forked;
 	int		bk_fd[2];

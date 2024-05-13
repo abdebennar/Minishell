@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 04:00:45 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/10 23:41:43 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/13 01:09:12 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	_redirections_(t_node **node) //TODO bash: file*: ambiguous redirect
 		alter = alter->next;
 	}
 	if (_left_((node)) || _right_((node)))
-		return (-1);
+		return (_setenv("?", "1"), -1);
 	if ((*node)->fd[0] != 0)
 	{
 		if (dup2((*node)->fd[0], STDIN_FILENO) < 0)
