@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/12 19:22:45 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/13 04:00:37 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,15 @@ void	print_tok(t_token tok); //just tmp
 //----------------------------------------------//
 
 //Exec -----------------------------------------
-//Exec -> command ------------------------------
+//Exec -> command ->expanding --------------------
 char	**_expanding_(t_node **node);
-char	*alter_expanding_(char *file_name);
-char	*alter_expanding_heredoc(char *file_name);
+char	*beta_expanding(char *file_name);
+char	*alter_exp(char *alter);
+char	**b_expanding_(char **cmd);
+// char	*alter_expanding_heredoc(char *file_name);
 //Exec -> command -> expanding_helper ------------
-char **concatenate_strings(char **str1, char **str2);
+char	**concatenate_strings(char **str1, char **str2);
+int		count_strings(char **str1);
 
 //Exec -> command -> exec -------------------
 void	_exec_arch_(t_node *node);

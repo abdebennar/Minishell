@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/13 01:12:50 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/13 04:56:03 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	 my_execve(t_node *node)
 		exit(126);
 	exit(1);
 }
-//TODO $HOME echo lol
+//TODO $NOTFOUND echo lol
 
 
 void	_exec_(t_node *node) 

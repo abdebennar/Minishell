@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 04:00:45 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/13 01:09:12 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/13 04:58:07 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ int	_redirections_(t_node **node) //TODO bash: file*: ambiguous redirect
 	alter = (*node)->redir;
 	while (alter)
 	{
-		alter->file = alter_expanding_(alter->file);
+		alter->file = alter_exp(alter->file);
+		if (!alter->file)
+			return (_setenv("?", "1"), -1);
 		if (alter->tok == HEREDOC)
 			alter->fd = _heredoc_(alter);
 		if (alter->fd == -1)

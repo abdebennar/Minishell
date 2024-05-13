@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 03:57:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/13 00:56:57 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/13 05:13:51 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	rbuddha(t_node *node, int *piped)
 		dup2(piped[0], STDIN_FILENO);
 		close(piped[0]);
 		_exec_arch_(node);
-		exit(222);
+		exit(ft_atoll(getenv("?"), NULL));
 	}
 	return (forked);
 }
@@ -49,7 +49,7 @@ int	lbuddha(t_node *node, int *piped)
 		dup2(piped[1], STDOUT_FILENO);
 		close(piped[1]);
 		_exec_arch_((node));
-		exit(222);
+		exit(ft_atoll(getenv("?"), NULL));
 	}
 	return (forked);
 }
@@ -58,6 +58,7 @@ void	_pipe_(t_node *node)
 {
 	pid_t		pid[2];
 	int			piped[2];
+	int			child_exit;
 
 	if (pipe(piped) < 0)
 		perror("pipe");
@@ -78,5 +79,6 @@ void	_pipe_(t_node *node)
 	close(piped[0]);
 	close(piped[1]);
 	waitpid(pid[0], NULL, 0);
-	waitpid(pid[1], NULL, 0);
+	waitpid(pid[1], &child_exit, 0);
+	_setenv("?", ft_itoa(WEXITSTATUS(child_exit)));
 }

@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 00:29:18 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/13 01:21:08 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/13 04:57:55 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*b_b_expanding_(char *m_cmd)
 	return (clean);
 }
 
-static char	**b_expanding_(char **cmd)
+char	**b_expanding_(char **cmd)
 {
 	int		v_index;
 
@@ -45,11 +45,11 @@ static char	**b_expanding_(char **cmd)
 			if (_wildcard_(prep_w(cmd[v_index])))
 				cmd[v_index] = _wildcard_(prep_w(cmd[v_index]));
 			else
-				cmd[v_index] = alter_expanding_(cmd[v_index]);
+				cmd[v_index] = beta_expanding(cmd[v_index]);
 		}
 		else
 		{
-			if (!alter_expanding_(cmd[v_index]))
+			if (!beta_expanding(cmd[v_index]))
 				cmd[v_index] = ft_strdup("\177", 0);
 			else
 				cmd[v_index] = b_b_expanding_(cmd[v_index]);
@@ -63,15 +63,17 @@ char	**_expanding_(t_node **node)
 	char	**w_cmd;
 	char	**cmd;
 	int		v_index;
-
+	int		raw_len;
+	
+	raw_len = count_strings((*node)->cmd);
 	cmd = b_expanding_((*node)->cmd);
 	(1) && (w_cmd = NULL, v_index = -1);
-	while (cmd && cmd[++v_index])
+	while (cmd && ++v_index < raw_len)
 		w_cmd = concatenate_strings(w_cmd, ft_split(cmd[v_index], "\a", 0));
 	return (w_cmd);
 }
 
-char	*alter_expanding_(char *f_name)
+char	*beta_expanding(char *f_name)
 {
 	char	*clean;
 	int		index;
@@ -87,4 +89,17 @@ char	*alter_expanding_(char *f_name)
 			clean = add_c(clean, f_name[index++], 0);
 	}
 	return (clean);
+}
+
+char	*alter_exp(char *alter)
+{
+	char **tmp_alter;
+
+	tmp_alter = b_expanding_(ft_split(alter, "\177", 0));
+	if (!tmp_alter[0]) //bash: $DSAJKNDAS: ambiguous redirect
+		return (NULL);
+	tmp_alter = ft_split(tmp_alter[0], "\a", 0);
+	if (tmp_alter[1])//bash: $DSAJKNDAS: ambiguous redirect
+		return (NULL);
+	return (tmp_alter[0]);
 }
