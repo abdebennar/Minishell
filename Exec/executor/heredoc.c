@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 05:50:24 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/10 23:41:13 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/13 01:22:31 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,14 @@ static int	fill_file(t_redir *alter, char *file_name)
 			(1) && (free(line), line = NULL);
 			break ;
 		}
-		if (count_c(line, '$'))
-			line = expand_heredoc(line);
+		(count_c(line, '$')) && (line = expand_heredoc(line));
 		content = ft_strjoin(content, ft_strjoin(line, "\n", 0), 0);
 	}
 	if (g_sig == 2)
 		return (-1);
 	fd_file = open(file_name, O_RDWR | O_CREAT | O_TRUNC, 0777);
-	(fd_file < 0) && (perror("open"), my_malloc(0, 0, 0), 0); //TODO handle err
+	if (fd_file < 0)
+		return (perror("open"), -1);
 	write(fd_file, content, ft_strlen(content));
 	close(fd_file);
 	return (fd_file);

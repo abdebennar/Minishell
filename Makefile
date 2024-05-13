@@ -6,13 +6,9 @@ CC			= cc
 BREW		= $(HOME)/goinfre/homebrew/bin/brew
 INCLUDE		= -I$(HOME)/goinfre/homebrew/opt/readline/include -I$(PWD)/Include
 LIBRARY		= -L$(HOME)/goinfre/homebrew/opt/readline/lib
-
 BREW		=$(HOME)/goinfre/homebrew/bin/brew
-
 CHEKC_BREW	:= $(shell command -v $(BREW))
 RDL_CHEKC	:= $(shell $(BREW) list | grep "readline")
-
-
 
 all	: check_brew
 	@$(MAKE) $(NAME)

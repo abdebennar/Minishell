@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prottypes.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:42:30 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/12 17:44:28 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/13 01:24:49 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # define PROMPT			 "$ "//"\033[1;34m┌──(mini㉿shell)\n\033[1;34m└─$\033[0m "
 # define SYNTAX_ERR		"shell: syntax error near unexpected token "
 # define NOCMD_ERR		" command not found"
-
 
 extern int	g_sig;
 typedef unsigned int uint;
