@@ -38,7 +38,6 @@ void    _echo_(t_node *node)
 	cmd++;
     while (check_flags(*(cmd)))
 	{
-		printf("inside checker");
         flag = 1;
 		cmd++;
 	}
