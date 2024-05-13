@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/13 20:10:25 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/13 20:34:58 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ void	 my_execve(t_node *node)
 	if (!node->cmd || !(node)->cmd[0])
 		exit(0);
 	execve(add_path((node)->cmd[0]), (node)->cmd, environ);
-	if (access(node->cmd[0], X_OK))
+
+
+	if (ft_strchr(node->cmd[0], '/') && access(node->cmd[0], X_OK))
 		put_str_err(" No such file or directory", node->cmd[0]);
 	else if (S_ISDIR(f_stat.st_mode))
 		put_str_err(" is a directory", node->cmd[0]);
