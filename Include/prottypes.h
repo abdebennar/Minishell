@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:42:30 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/13 01:24:49 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/15 04:12:42 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@
 # define SEP			" \t\n\v\r\f"
 # define CMD_N_FOUND	127
 # define NOT_EXEC		126
-# define PROMPT			 "$ "//"\033[1;34m┌──(mini㉿shell)\n\033[1;34m└─$\033[0m "
+# define PROMPT			 "$ "
 # define SYNTAX_ERR		"shell: syntax error near unexpected token "
 # define NOCMD_ERR		" command not found"
+# define EXIT_MANY_ARGS "exit\nshell: exit: too many arguments\n"
 
-extern int	g_sig;
-typedef unsigned int uint;
+extern int				g_sig;
+typedef unsigned int	t_uint;
+typedef long long		t_llong;
 
 typedef struct s_data
 {
@@ -64,7 +66,7 @@ typedef struct s_redir
 	struct s_redir	*prev;
 }	t_redir;
 
-typedef	struct s_node
+typedef struct s_node
 {
 	/* my bs*/
 	char			*full_cmd;

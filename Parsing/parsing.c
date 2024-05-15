@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:42:10 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/11 04:14:02 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/15 00:51:34 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,3 +74,9 @@ t_node	*parsing(char *line)
 	node = tree(node); 
 	return (node);
 }
+
+
+// echo "ls" | ./minishell
+
+//export P="ls -la"
+//$P

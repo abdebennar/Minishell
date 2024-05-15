@@ -20,11 +20,11 @@ void    _cd_(t_node *node)
 	char	**cmd;
 
 	cmd = node->cmd;
-    if (!cmd[1])
-        cmd[1] = getenv("HOME");
-    else if (!ft_strcmp(cmd[1], "-"))
+	if (!cmd[1])
+		cmd[1] = getenv("HOME");
+	else if (!ft_strcmp(cmd[1], "-"))
 	{
-        cmd[1] = getenv("OLDPWD");
+		cmd[1] = getenv("OLDPWD");
 		if (cmd[1])
 			printf("%s\n", cmd[1]);
 		else 
@@ -34,15 +34,15 @@ void    _cd_(t_node *node)
 			return ;
 		}
 	}
-    getcwd(old_pwd, PATH_MAX);
-    exit_err = chdir(cmd[1]);
-    if (exit_err)
-    {
-        perror("bash: cd: ");
+	getcwd(old_pwd, PATH_MAX);
+	exit_err = chdir(cmd[1]);
+	if (exit_err)
+	{
+		perror("bash: cd: ");
 		_setenv("?", ft_itoa(1));
 		return ;
-    }
-    getcwd(pwd, PATH_MAX);
+	}
+	getcwd(pwd, PATH_MAX);
 	_setenv("OLDPWD", old_pwd);
 	_setenv("PWD", pwd);
 	_setenv("?", ft_itoa(0));

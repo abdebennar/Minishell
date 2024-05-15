@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_helper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 21:35:07 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/12 18:09:12 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/15 04:27:37 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	_exit_stat_(int oldx)
 			return (write(2, "\n", 1), 128 + SIGINT);
 		else if (WTERMSIG(oldx) == SIGQUIT)
 			return (write(2, "Quit: 3\n", 8), 128 + SIGQUIT);
-		else 
+		else
 			return (WTERMSIG(oldx) + 128);
 	}
 	else if (WIFEXITED(oldx))
@@ -30,10 +30,8 @@ int	_exit_stat_(int oldx)
 
 void	reset_fds(t_node **node, int *bk_fd)
 {
-		// dup2(bk_fd[0], STDIN_FILENO);
-
 	dup2(bk_fd[0], STDIN_FILENO);
-	close(bk_fd[0]);	
+	close(bk_fd[0]);
 	if (node && *node && (*node)->fd[0] != 0)
 		close((*node)->fd[0]);
 	dup2(bk_fd[1], STDOUT_FILENO);
@@ -44,7 +42,7 @@ void	reset_fds(t_node **node, int *bk_fd)
 
 bool	is_builtin(t_node *node)
 {
-	char *str;
+	char	*str;
 
 	if (!node || !(node->cmd) || !(node->cmd[0]))
 		return (false);
@@ -54,7 +52,7 @@ bool	is_builtin(t_node *node)
 	else if (!ft_strcmp(str, "echo"))
 		return (_echo_(node), true);
 	else if (!ft_strcmp(str, "env"))
-		return (_env_(node), true);
+		return (_env_(), true);
 	else if (!ft_strcmp(str, "exit"))
 		return (_exit_(node), true);
 	else if (!ft_strcmp(str, "export"))

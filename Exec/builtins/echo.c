@@ -12,42 +12,42 @@
 
 #include "../Include/minishell.h"
 
-static int  check_flags(char *cmd)
+static int	check_flags(char *cmd)
 {
-    if (!cmd || !*cmd)
-        return (0);
-    if (*cmd == '-')
-    {
+	if (!cmd || !*cmd)
+		return (0);
+	if (*cmd == '-')
+	{
 		cmd++;
-        while (*cmd == 'n')
+		while (*cmd == 'n')
 		{
-        	if (!*(++cmd))
-           		return (1);
+			if (!*(++cmd))
+				return (1);
 		}
-    }
-    return (0);
+	}
+	return (0);
 }
 
-void    _echo_(t_node *node)
+void	_echo_(t_node *node)
 {
-    int		flag;
+	int		flag;
 	char	**cmd;
 
-    flag = 0;
+	flag = 0;
 	cmd = node->cmd;
 	cmd++;
-    while (check_flags(*(cmd)))
+	while (check_flags(*(cmd)))
 	{
-        flag = 1;
+		flag = 1;
 		cmd++;
 	}
-    while(*cmd)
-    {
-        printf("%s", *(cmd++));
-        if (*cmd)
-            printf(" ");
-    }
-    if (!flag)
-        printf("\n");
+	while (*cmd)
+	{
+		printf("%s", *(cmd++));
+		if (*cmd)
+			printf(" ");
+	}
+	if (!flag)
+		printf("\n");
 	_setenv("?", ft_itoa(0));
 }

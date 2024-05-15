@@ -6,16 +6,16 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:08:54 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/11 16:21:48 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/15 04:13:30 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/minishell.h"
 
-static uint	cmd_len(char *str)
+static t_uint	cmd_len(char *str)
 {
-	uint	len;
-	uint	i;
+	t_uint	len;
+	t_uint	i;
 	
 	len = 0;
 	i = 0;
@@ -28,9 +28,9 @@ static uint	cmd_len(char *str)
 	return (len);
 }
 
-static uint	del_sp(char *cmd, char q)
+static t_uint	del_sp(char *cmd, char q)
 {
-	uint i;
+	t_uint i;
 
 	i = 0;
 	while (cmd[i] && cmd[i] != q)
@@ -60,8 +60,8 @@ static void	arg_space(char *cmd)
 
 static void	reset_sp(char **args)
 {
-	uint i;
-	uint j;
+	t_uint i;
+	t_uint j;
 
 	i = 0;
 	while (args[i])
@@ -79,11 +79,11 @@ static void	reset_sp(char **args)
 
 void	get_args(t_node *node)
 {
-	uint	len;
+	t_uint	len;
 	char	*cmd;
 	char	**args;
 	char	*full_cmd;
-	uint	i;
+	t_uint	i;
 
 	full_cmd = node->full_cmd;
 	len = cmd_len(full_cmd);

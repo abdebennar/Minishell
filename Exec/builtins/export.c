@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 23:12:10 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/12 19:29:16 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/14 05:28:33 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void	_export_(t_node *node)
 			{
 				put_err("export:");
 				put_err(*cmd);
-				put_err(": not a valid identifier");
+				put_err(": not a valid identifier"); //TODO add newline
 				_setenv("?", ft_itoa(1));
 				break;
 			}

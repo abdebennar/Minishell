@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 10:09:25 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/12 20:21:28 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/15 00:47:28 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ long long	ft_atoll(char *str, int *err)
 		if (((num > LLONG_MAX) && (sign > 0))
 			|| ((num - 1 > LLONG_MAX) && (sign < 0)))
 		{
-			*err = 1;
+			(err) && (*err = 1);
 			return (-1);
 		}
 	}
 	if (*str)
 	{
-		*err = 1;
+		(err) && (*err = 1);
 		return (255);
 	}
 	return ((long long)num * sign);
@@ -48,18 +48,13 @@ void	_exit_(t_node *node)
 	char		**cmd;
 
 	cmd = node->cmd;
-	if (!cmd[1])
-		exit(0);
+	(!cmd[1]) && (exit(0), 0);
 	if (cmd[2])
-	{
-		put_err("exit\nshell: exit: too many arguments\n");
-		_setenv("?", ft_itoa(1));
-	}
-	err = 0;
-	num = ft_atoll(cmd[1], &err);
+		(put_err(EXIT_MANY_ARGS), _setenv("?", ft_itoa(1)));
+	(1) && (err = 0, num = ft_atoll(cmd[1], &err));
 	if (err)
 	{
-		write(2, "exit\nshell: exit: " , 18);
+		write(2, "exit\nshell: exit: ", 18);
 		write(2, cmd[1], ft_strlen(cmd[1]));
 		write(2, ": numeric argument required\n", 28);
 		exit(num);

@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 21:42:49 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/10 23:44:51 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/15 04:25:26 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,16 @@ char	*check_envar(char *raw, int *index)
 		*index += ident;
 	}
 	return (new);
+}
+
+void	find_replace(char *str, char find, char rep)
+{
+	if (!str)
+		return ;
+	while (*str)
+	{
+		if (*str == find)
+			*str = rep;
+		str++;
+	}
 }

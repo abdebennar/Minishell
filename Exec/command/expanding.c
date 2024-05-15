@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 00:29:18 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/13 20:29:43 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/15 04:24:37 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ char	**b_expanding_(char **cmd)
 			if (!beta_expanding(cmd[v_index]))
 				cmd[v_index] = ft_strdup("\177", 0);
 			else
+			{
 				cmd[v_index] = b_b_expanding_(cmd[v_index]);
+			}
 		}
 	}
 	return (cmd);
@@ -64,7 +66,7 @@ char	**_expanding_(t_node **node)
 	char	**cmd;
 	int		v_index;
 	int		raw_len;
-	
+
 	raw_len = count_strings((*node)->cmd);
 	cmd = b_expanding_((*node)->cmd);
 	(1) && (w_cmd = NULL, v_index = -1);
@@ -93,16 +95,16 @@ char	*beta_expanding(char *f_name)
 
 char	*alter_exp(char *alter)
 {
-	char **tmp_alter;
+	char	**tmp_alter;
 
 	tmp_alter = b_expanding_(ft_split(alter, "\177", 0));
-	if (!tmp_alter[0]) //bash: $DSAJKNDAS: ambiguous redirect
+	if (!tmp_alter[0])
 	{
 		put_str_err(" ambiguous redirect", alter);
 		return (NULL);
 	}
 	tmp_alter = ft_split(tmp_alter[0], "\a", 0);
-	if (tmp_alter[1])//bash: $DSAJKNDAS: ambiguous redirect
+	if (tmp_alter[1])
 	{
 		put_str_err(" ambiguous redirect", beta_expanding(alter));
 		return (NULL);

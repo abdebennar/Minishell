@@ -3,35 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 22:33:06 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/12 22:33:11 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/15 04:34:44 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/minishell.h"
 
-static int check_var(char *str)
+static int	check_var(char *str)
 {
 	char	*save;
-	
+
 	save = str;
 	if (!((*str >= 'a' && *str <= 'z')
-		|| (*str >= 'A' && *str <= 'Z') || (*str == '_')))	
+			|| (*str >= 'A' && *str <= 'Z') || (*str == '_')))
 		return (-1);
-	while(*str)
+	while (*str)
 	{
 		if (!(is_alphanum(*str) && (*str != '_')))
-			return (-1) ;
+			return (-1);
 		str++;
 	}
 	return (0);
 }
 
 static void	unset_args(char *env)
-{	
-	extern char **environ;
+{
+	extern char	**environ;
 	char		**tmp;
 
 	tmp = environ;
@@ -42,6 +42,7 @@ static void	unset_args(char *env)
 		return ;
 	}
 	if (getenv(env))
+	{
 		while (*tmp)
 		{
 			if (!ft_strncmp(env, *tmp, get_c(*tmp)))
@@ -49,10 +50,11 @@ static void	unset_args(char *env)
 				while (*(++tmp))
 					*(tmp - 1) = *tmp;
 				*(--tmp) = NULL;
-				break;
+				break ;
 			}
 			tmp++;
 		}
+	}
 }
 
 void	_unset_(t_node *node)
@@ -61,6 +63,6 @@ void	_unset_(t_node *node)
 
 	cmd = node->cmd;
 	_setenv("?", ft_itoa(0));
-	while(*(++cmd))
+	while (*(++cmd))
 		unset_args(*cmd);
 }

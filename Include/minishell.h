@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/13 20:11:53 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/15 04:10:47 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <signal.h> 
 # include <sys/stat.h>
 # include <ctype.h>
-#include <string.h>
+# include <string.h>
 # include "prottypes.h"
 
 //utils --------------------------------------------
@@ -37,8 +37,8 @@ char	*get_next_word(char *str, int *i, t_token tok);
 void	get_args(t_node *node);
 void	*my_malloc(size_t size, int mode, int group);
 void	_setenv(char *name, char *new_value); // TODO  the setenv function 
-char	**copy(char **str, bool  extra_size, int group);
-void	add_env();
+char	**copy(char **str, bool extra_size, int group);
+void	add_env(void);
 int		get_c(char *s);
 char	*ft_itoa(int n);
 
@@ -48,8 +48,8 @@ int		skip_quotes(char *s, char c);
 int		get_cmd_area(char *s, int start);
 
 //utils ->ft_is
-int is_it_in(t_env *raw_env, char *new_var);
-int	is_alphanum(char c);
+int		is_it_in(t_env *raw_env, char *new_var);
+int		is_alphanum(char c);
 
 //utils -> ft_str
 char	*ft_strdup(char *s, int group);
@@ -69,11 +69,10 @@ void	add_redir_back(t_redir *node, t_redir **list);
 void	ft_lstaddback(t_env **alst, t_env *new);
 
 //utils ->ft_str2
-char    *ft_strcpy(char *s1, char *s2);
+char	*ft_strcpy(char *s1, char *s2);
 char	*ft_strdup_len(char *s1, int len, int group);
 int		doc_strcmp(char *s1, char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-int		find_c(char *str, char c);
 void	print_tok(t_token tok); //just tmp
 
 //----------------------------------------------//
@@ -84,14 +83,12 @@ char	**_expanding_(t_node **node);
 char	*beta_expanding(char *file_name);
 char	*alter_exp(char *alter);
 char	**b_expanding_(char **cmd);
-// char	*alter_expanding_heredoc(char *file_name);
 //Exec -> command -> expanding_helper ------------
 char	**concatenate_strings(char **str1, char **str2);
 int		count_strings(char **str1);
-
 //Exec -> command -> exec -------------------
 void	_exec_arch_(t_node *node);
-void    _exec_(t_node *node);
+void	_exec_(t_node *node);
 char	*add_path(char *cmd);
 //Exec -> command -> exec_helper --------------
 bool	is_builtin(t_node *node);
@@ -103,6 +100,7 @@ char	*add_c(char *str, char c, int group);
 char	*check_envar(char *raw, int *index);
 int		only_identifier(char *str);
 int		count_c(char *str, char c);
+void	find_replace(char *str, char find, char rep);
 //Exec -> command -> quotes ----------------
 char	*dollar(char *raw, int *index);
 char	*s_q(char *raw, int *index);
@@ -113,11 +111,11 @@ char	*_wildcard_(char *pattern);
 char	*prep_w(char *pattern);
 
 //Exec -> builtins
-void    _cd_(t_node *node);
-void    _echo_(t_node *node);
-void	_env_();
+void	_cd_(t_node *node);
+void	_echo_(t_node *node);
+void	_env_(void);
 void	_exit_(t_node *node);
-long long	ft_atoll(char *str, int *err);
+t_llong	ft_atoll(char *str, int *err);
 void	_export_(t_node *node);
 void	_pwd_(void);
 void	_unset_(t_node *node);
@@ -155,8 +153,8 @@ bool	check_syntax(t_token tok, char *cmd, int i);
 //--------------------------------------------//
 
 // urils -> signal
-void	sig_ign();
-void	sig_allow();
+void	sig_ign(void);
+void	sig_allow(void);
 void	heredoc_h(int n);
 
 // utils -> error
