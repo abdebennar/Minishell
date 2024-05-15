@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/15 04:21:50 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/15 12:06:06 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(void)
 		sig_ign();
 		my_malloc(0, 0, 0);
 		line = readline(PROMPT);
+		//TODO where we free line?
 		if (!line)
 			break ;
 		g_sig = 1;
@@ -36,3 +37,10 @@ int	main(void)
 	my_malloc(0, 0, 1);
 	my_malloc(0, 0, 0);
 }
+
+//TODO (a)
+// export l="   p"
+// export p=$l
+// (a) > out
+// opendir 
+// $DSALKM""

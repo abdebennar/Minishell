@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 23:12:10 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/14 05:28:33 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/15 09:06:50 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void	_export_(t_node *node)
 			{
 				put_err("export:");
 				put_err(*cmd);
-				put_err(": not a valid identifier"); //TODO add newline
+				put_err(": not a valid identifier\n");
 				_setenv("?", ft_itoa(1));
 				break;
 			}

@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 04:00:45 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/13 04:58:07 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/15 09:06:16 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	_right_(t_node **node)
 	int		fd;
 
 	alter = (*node)->redir;
-	fd = 1;
+	fd = (*node)->fd[1];
 	while (alter)
 	{
 		if (alter->tok == OUT)
@@ -46,7 +46,7 @@ int	_left_(t_node **node)
 	t_redir	*alter;
 	int		fd;
 
-	fd = 0;
+	fd = (*node)->fd[0];
 	alter = (*node)->redir;
 	while (alter)
 	{
@@ -70,7 +70,7 @@ int	_left_(t_node **node)
 	return (0);
 }
 
-int	_redirections_(t_node **node) //TODO bash: file*: ambiguous redirect
+int	_redirections_(t_node **node)
 {
 	t_redir	*alter;
 
@@ -91,13 +91,13 @@ int	_redirections_(t_node **node) //TODO bash: file*: ambiguous redirect
 	if ((*node)->fd[0] != 0)
 	{
 		if (dup2((*node)->fd[0], STDIN_FILENO) < 0)
-			return (perror("dup2 on redirections"), -1);
+			return (perror("dup2 on redirections"),close((*node)->fd[0]),  -1);
 		close((*node)->fd[0]); //TODO maybe remove this -> check reset_fds()
 	}
 	if ((*node)->fd[1] != 1)
 	{
 		if (dup2((*node)->fd[1], STDOUT_FILENO) < 0)
-			return (perror("dup2 on redirections"), -1);
+			return (perror("dup2 on redirections"), close((*node)->fd[1]), -1);
 		close((*node)->fd[1]);
 	}
 	return (0);

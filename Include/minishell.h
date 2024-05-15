@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/15 04:10:47 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/15 12:03:38 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ char	*ft_strtrim(const char *s1, const char *set, int group);
 char	*ft_strjoin(char *s1, char *s2, int group);
 char	*get_next_word(char *str, int *i, t_token tok);
 void	get_args(t_node *node);
+
 void	*my_malloc(size_t size, int mode, int group);
-void	_setenv(char *name, char *new_value); // TODO  the setenv function 
+void	_setenv(char *name, char *new_value);
 char	**copy(char **str, bool extra_size, int group);
 void	add_env(void);
 int		get_c(char *s);

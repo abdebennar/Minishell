@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:33:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/15 04:23:52 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/15 09:03:07 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char	*dollar(char *raw, int *index)
 
 	raw++;
 	(*index)++;
+	out = NULL;
 	if ((*raw) == '?')
 		return ((*index)++, getenv("?"));
 	else if (!*raw || *raw == ' ' || *raw == '\t')
