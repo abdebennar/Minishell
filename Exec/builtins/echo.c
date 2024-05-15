@@ -41,13 +41,13 @@ void	_echo_(t_node *node)
 		flag = 1;
 		cmd++;
 	}
-	while (*cmd)
-	{
-		printf("%s", *(cmd++));
-		if (*cmd)
-			printf(" ");
-	}
+	while(*cmd)
+    {
+        write(1, *cmd, ft_strlen(*cmd));
+        if (*(++cmd))
+            write(1, " ", 1);
+    }
 	if (!flag)
-		printf("\n");
+		write(1, "\n", 1);
 	_setenv("?", ft_itoa(0));
 }
