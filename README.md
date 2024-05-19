@@ -1,1 +1,1 @@
-![Alt text] (.k.jpg)
+![My Image](.k.jpg)
