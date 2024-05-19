@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 17:17:54 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/24 05:01:05 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/19 06:55:46 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_node	*infix_to_postfix(t_node **lst)
 			back_push(&head, &postfix);		
 		else if (head->tok != LPR && head->tok != RPR)
 		{
-			while (token_stack && token_stack->pre >= head->pre)
+			while (token_stack && (token_stack->pre > head->pre || (token_stack->pre == head->pre && token_stack->tok != PIPE)))
 				back_push(&token_stack, &postfix);
 			top_push(&head, &token_stack);
 		}

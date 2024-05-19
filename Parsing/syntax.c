@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:50:12 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/12 17:50:51 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/19 19:32:23 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,28 @@ t_token	get_next_token(char *cmd, int i)
 	return (get_token(cmd[i], cmd[i + 1]));
 }
 
+bool is_redir(t_token tok)
+{
+	return (tok == IN || tok == OUT || tok == HEREDOC || tok == APPEND);
+}
 
-bool	par_check(char *cmd, int i)
+bool	par_check(char *cmd, t_token tok, int i)
 {
 	t_token t_tok;
 	int		j;
+	static	int st = 0;
 
 	j = i;
 	t_tok = get_next_token(cmd, i);
-	if (!(t_tok == NOT || t_tok == RPR || t_tok == LPR))
+	if (tok == RPR)
+	{
+		if (is_redir(t_tok) || st <= 0)
+			return (put_tok_err(tok));
+		st--;
+		return (true);
+	}
+	st++;
+	if (!(t_tok == NOT || t_tok == LPR))
 		return (put_tok_err(t_tok));
 	while (cmd[i])
 	{
@@ -46,8 +59,8 @@ bool	check_syntax(t_token tok, char *cmd, int i)
 
 	i++;
 	(tok == HEREDOC || tok == OR || tok == APPEND || tok == AND) && (i++);
-	if (tok == LPR)
-		return (par_check(cmd, i));
+	if (tok == LPR || tok == RPR)
+		return (par_check(cmd, tok, i));
 	else if (tok == AND || tok == OR || tok == PIPE)
 	{
 		t_tok = get_next_token(cmd, i);
