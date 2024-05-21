@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 22:33:06 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/15 04:34:44 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/21 05:47:30 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	check_var(char *str)
 		return (-1);
 	while (*str)
 	{
-		if (!(is_alphanum(*str) && (*str != '_')))
+		if (!is_alphanum(*str) && (*str != '_'))
 			return (-1);
 		str++;
 	}

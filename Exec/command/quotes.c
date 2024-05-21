@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:33:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/15 09:03:07 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/21 05:48:31 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ char	*dollar(char *raw, int *index)
 	else if (!*raw || *raw == ' ' || *raw == '\t')
 		return (ft_strdup("$", 0));
 	out = check_envar(raw, index);
+	if (out && _wildcard_(prep_w(out)))
+		out = _wildcard_(prep_w(out));
 	if (out)
-		find_replace(out, ' ', '\a');
+		find_replace(out, ' ', '\a');  //used to sep if there for "ls -la"
 	return (out);
 }
 

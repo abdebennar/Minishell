@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 21:35:07 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/15 04:27:37 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/21 05:50:12 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	_exit_stat_(int oldx)
 			return (write(2, "\n", 1), 128 + SIGINT);
 		else if (WTERMSIG(oldx) == SIGQUIT)
 			return (write(2, "Quit: 3\n", 8), 128 + SIGQUIT);
+		else if (WTERMSIG(oldx) == SIGSEGV)
+			return (write(2, "sigf : 11\n", 8), 128 + SIGSEGV);
 		else
 			return (WTERMSIG(oldx) + 128);
 	}

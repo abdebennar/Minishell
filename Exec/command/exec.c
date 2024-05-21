@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/15 04:28:36 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/21 05:48:05 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,15 @@ void	my_execve(t_node *node)
 	struct stat	f_stat;
 
 	sig_allow();
-	stat(node->cmd[0], &f_stat);
-	if (!node->cmd || !(node)->cmd[0])
+	if (node->cmd && node->cmd[0])
+		stat(node->cmd[0], &f_stat);
+	if (!node->cmd)
 		exit(0);
+	if (!(node)->cmd[0])
+	{
+		put_str_err(NOCMD_ERR, node->cmd[0]);
+		exit(127);
+	}
 	execve(add_path((node)->cmd[0]), (node)->cmd, environ);
 	if (ft_strchr(node->cmd[0], '/') && access(node->cmd[0], X_OK))
 		put_str_err(" No such file or directory", node->cmd[0]);

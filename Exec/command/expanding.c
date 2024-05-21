@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 00:29:18 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/15 04:24:37 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/21 05:48:19 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,17 @@ static char	*b_b_expanding_(char *m_cmd)
 	while (m_cmd && m_cmd[index])
 	{
 		if (m_cmd[index] == '\'')
+		{
 			clean = ft_strjoin(clean, s_q(&m_cmd[index], &index), 0);
+			if (!clean)
+				clean = ft_strdup("\0", 0);
+		}
 		else if (m_cmd[index] == '"')
+		{
 			clean = ft_strjoin(clean, d_q(&m_cmd[index], &index), 0);
+			if (!clean)
+				clean = ft_strdup("\0", 0);
+		}
 		else if (m_cmd[index] == '$')
 			clean = ft_strjoin(clean, dollar(&m_cmd[index], &index), 0);
 		else
@@ -71,7 +79,10 @@ char	**_expanding_(t_node **node)
 	cmd = b_expanding_((*node)->cmd);
 	(1) && (w_cmd = NULL, v_index = -1);
 	while (cmd && ++v_index < raw_len)
+	{
+		// find_replace(cmd[v_index], '\177', '\0');
 		w_cmd = concatenate_strings(w_cmd, ft_split(cmd[v_index], "\a", 0));
+	}
 	return (w_cmd);
 }
 
@@ -97,6 +108,11 @@ char	*alter_exp(char *alter)
 {
 	char	**tmp_alter;
 
+	if (!beta_expanding(alter))
+	{
+		put_str_err("No such file or directory", alter);
+		return (NULL);
+	}
 	tmp_alter = b_expanding_(ft_split(alter, "\177", 0));
 	if (!tmp_alter[0])
 	{
@@ -109,5 +125,6 @@ char	*alter_exp(char *alter)
 		put_str_err(" ambiguous redirect", beta_expanding(alter));
 		return (NULL);
 	}
+	// find_replace(tmp_alter[0], '\177', '\0');
 	return (tmp_alter[0]);
 }
