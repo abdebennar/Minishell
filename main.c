@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/21 05:44:08 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/21 16:54:29 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	handle_heredoc(t_node *root)
 		alter->file = beta_expanding(alter->file);
 		if (!alter->file)
 		{
-			alter->file = my_malloc(1, 1, 1);
+			alter->file = my_malloc(1, 1, 0);
 			alter->file = "\0";	
 		}
 		if (alter->tok == HEREDOC)
@@ -69,9 +69,10 @@ int	main(void)
 // export p=$l
 // (a) > out
 // $DSALKM""   					///////////
-// << l | << l
-//(<<"|)")
+// << l | << l					///////////
+//(<<"|)")               //CHECKTHIS
 // "(")
+//RESET THE FDS if CTRL+C on multiple heredoc `<< l | << k`
 //<<"|(")
 //<< &"&"
 //<< ""   					///////////
@@ -81,9 +82,9 @@ int	main(void)
 //$_ | $_
 // << s>  
 //echo h > ''      					///////////
-//<< ''			   					///////////
 //ulimits -s 5 this set the limit of stack to 5kb
 //  ~ ?
 // echo 1 && echo
 // export a=' * ' && echo $a
 //strdup_len - I changed the last arg on while do the test
+// create var a="*" and expand it inside the heredoc

@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 00:29:18 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/21 05:48:19 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:10:24 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*b_b_expanding_(char *m_cmd)
 				clean = ft_strdup("\0", 0);
 		}
 		else if (m_cmd[index] == '$')
-			clean = ft_strjoin(clean, dollar(&m_cmd[index], &index), 0);
+			clean = ft_strjoin(clean, dollar(&m_cmd[index], &index, 0), 0);
 		else
 			clean = add_c(clean, m_cmd[index++], 0);
 	}
@@ -48,22 +48,10 @@ char	**b_expanding_(char **cmd)
 	v_index = -1;
 	while (cmd[++v_index])
 	{
-		if (count_c(prep_w(cmd[v_index]), '*'))
-		{
-			if (_wildcard_(prep_w(cmd[v_index])))
-				cmd[v_index] = _wildcard_(prep_w(cmd[v_index]));
-			else
-				cmd[v_index] = beta_expanding(cmd[v_index]);
-		}
+		if (_wildcard_(prep_w(cmd[v_index])))
+			cmd[v_index] = _wildcard_(prep_w(cmd[v_index]));
 		else
-		{
-			if (!beta_expanding(cmd[v_index]))
-				cmd[v_index] = ft_strdup("\177", 0);
-			else
-			{
-				cmd[v_index] = b_b_expanding_(cmd[v_index]);
-			}
-		}
+			cmd[v_index] = b_b_expanding_(cmd[v_index]);
 	}
 	return (cmd);
 }
@@ -81,7 +69,7 @@ char	**_expanding_(t_node **node)
 	while (cmd && ++v_index < raw_len)
 	{
 		// find_replace(cmd[v_index], '\177', '\0');
-		w_cmd = concatenate_strings(w_cmd, ft_split(cmd[v_index], "\a", 0));
+		w_cmd = concatenate_strings(w_cmd, ft_split(cmd[v_index], "\a", 0)); /// ls\a-la -> [ls] [-la]
 	}
 	return (w_cmd);
 }

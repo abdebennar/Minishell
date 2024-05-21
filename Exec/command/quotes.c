@@ -6,28 +6,31 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:33:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/21 05:48:31 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:12:53 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*dollar(char *raw, int *index)
+char	*dollar(char *raw, int *index, int heredoc)
 {
 	char	*out;
 
 	raw++;
 	(*index)++;
 	out = NULL;
+	printf("start %s\n", raw);
 	if ((*raw) == '?')
 		return ((*index)++, getenv("?"));
 	else if (!*raw || *raw == ' ' || *raw == '\t')
 		return (ft_strdup("$", 0));
 	out = check_envar(raw, index);
-	if (out && _wildcard_(prep_w(out)))
+	if (!heredoc && out && _wildcard_(prep_w(out))) //export a=*  --> echo $a
 		out = _wildcard_(prep_w(out));
-	if (out)
-		find_replace(out, ' ', '\a');  //used to sep if there for "ls -la"
+	if (!heredoc && out)
+		find_replace(out, ' ', '\a');  //used to sep if there for "ls -la" -> "ls\a-la"
+	printf("start %s\n", out);
+	
 	return (out);
 }
 
@@ -43,7 +46,7 @@ char	*d_q(char *raw, int *index)
 	while (raw[mic_index])
 	{
 		if (raw[mic_index] == '$' && raw[mic_index + 1] != '"')
-			new = ft_strjoin(new, dollar(&raw[mic_index], &mic_index), 0);
+			new = ft_strjoin(new, dollar(&raw[mic_index], &mic_index, 0), 0);
 		else if (raw[mic_index] == '"')
 		{
 			mic_index++;

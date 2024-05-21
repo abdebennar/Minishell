@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 05:50:24 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/15 11:52:39 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/21 17:32:24 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*expand_heredoc(char *line)
 	{
 		if (line[index] == '$' && only_identifier(&line[index + 1]))
 		{
-			dollar_out = dollar(&line[index], &index);
+			dollar_out = dollar(&line[index], &index, 1);
 			clean = ft_strjoin(clean, dollar_out, 0);
 		}
 		else
@@ -61,6 +61,7 @@ static int	fill_file(t_redir *alter, char *file_name)
 {
 	char	*line;
 	char	*content;
+	char	*exp_line;
 	int		fd_file;
 
 	content = NULL;
@@ -73,8 +74,9 @@ static int	fill_file(t_redir *alter, char *file_name)
 			(1) && (free(line), line = NULL);
 			break ;
 		}
-		(count_c(line, '$')) && (line = expand_heredoc(line));
-		content = ft_strjoin(content, ft_strjoin(line, "\n", 0), 0);
+		exp_line = expand_heredoc(line);
+		(line) && (free(line), line = NULL);
+		content = ft_strjoin(content, ft_strjoin(exp_line, "\n", 0), 0);
 	}
 	if (g_sig == 2)
 		return (-1);
@@ -82,8 +84,7 @@ static int	fill_file(t_redir *alter, char *file_name)
 	if (fd_file < 0)
 		return (perror("open"), -1);
 	write(fd_file, content, ft_strlen(content));
-	close(fd_file);
-	return (fd_file);
+	return (close(fd_file), fd_file);
 }
 
 int	_heredoc_(t_redir *alter)

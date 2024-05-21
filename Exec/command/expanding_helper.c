@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 01:54:13 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/15 04:26:19 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/21 16:24:45 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	**concatenate_strings(char **str1, char **str2)
 		return (NULL);
 	index1 = count_strings(str1);
 	index2 = count_strings(str2);
-	out = my_malloc(sizeof(char *) * (index1 + index2 + 1), 1, 1);
+	out = my_malloc(sizeof(char *) * (index1 + index2 + 1), 1, 0);
 	out_index = 0;
 	while (str1 && str1[out_index])
 	{

@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/15 12:03:38 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/21 17:32:34 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int		only_identifier(char *str);
 int		count_c(char *str, char c);
 void	find_replace(char *str, char find, char rep);
 //Exec -> command -> quotes ----------------
-char	*dollar(char *raw, int *index);
+char	*dollar(char *raw, int *index, int heredoc);
 char	*s_q(char *raw, int *index);
 char	*d_q(char *raw, int *index);
 char	*d_q_heredoc(char *raw, int *index);
