@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 06:21:55 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/11 16:31:22 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/21 20:36:31 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,14 @@
 
 int	ft_strlen(const char *str)
 {
+	int counter;
+	
 	if (!str || !*str)
 		return (0);
-	return (1 + ft_strlen(++str));
+	counter = 0;
+	while (*str)
+		counter++, str++;
+	return (counter);
 }
 
 int	ft_strcmp(char *s1, char *s2)

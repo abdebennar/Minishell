@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:33:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/21 18:12:53 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/21 20:22:01 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ char	*dollar(char *raw, int *index, int heredoc)
 	raw++;
 	(*index)++;
 	out = NULL;
-	printf("start %s\n", raw);
 	if ((*raw) == '?')
 		return ((*index)++, getenv("?"));
 	else if (!*raw || *raw == ' ' || *raw == '\t')
@@ -29,7 +28,6 @@ char	*dollar(char *raw, int *index, int heredoc)
 		out = _wildcard_(prep_w(out));
 	if (!heredoc && out)
 		find_replace(out, ' ', '\a');  //used to sep if there for "ls -la" -> "ls\a-la"
-	printf("start %s\n", out);
 	
 	return (out);
 }

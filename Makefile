@@ -1,7 +1,7 @@
 SRC			= utils/*.c Parsing/*.c Exec/*/*.c main.c
 SHELL		= /bin/bash
 NAME		= minishell
-CFLAGS		= -Wall -Wextra -Werror -lreadline #-fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror -lreadline -g3
 CC			= cc
 HEADER		= Include/minishell.h Include/prottypes.h
 BREW		= $(HOME)/goinfre/homebrew/bin/brew

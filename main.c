@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/21 16:54:29 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/21 20:56:48 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	main(void)
 	char	*line;
 	t_node	*node;
 
-	if (!isatty(0))
-		return (put_err("khrj t9wd\n"), 0);
+	// if (!isatty(0))
+	// 	return (put_err("khrj t9wd\n"), 0);
 	add_env();
 	while (666)
 	{
@@ -65,13 +65,12 @@ int	main(void)
 	my_malloc(0, 0, 0);
 }
 
-// export l="   p"
-// export p=$l
+// export l="   p" && export p=$l && echo $p
 // (a) > out
 // $DSALKM""   					///////////
 // << l | << l					///////////
 //(<<"|)")               //CHECKTHIS
-// "(")
+// "(")							
 //RESET THE FDS if CTRL+C on multiple heredoc `<< l | << k`
 //<<"|(")
 //<< &"&"
@@ -86,5 +85,4 @@ int	main(void)
 //  ~ ?
 // echo 1 && echo
 // export a=' * ' && echo $a
-//strdup_len - I changed the last arg on while do the test
-// create var a="*" and expand it inside the heredoc
+// create var a="*" and expand it inside the heredoc 	////////
