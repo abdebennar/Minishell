@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:50:12 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/22 01:38:56 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/22 20:59:49 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ bool	check_syntax(t_token tok, char *cmd, int i)
 	else if (tok == AND || tok == OR || tok == PIPE)
 	{
 		t_tok = get_next_token(cmd, i);
-		if (!(t_tok == NOT || !is_redir(t_tok)) || (tok == PIPE && i < 2)
+		if (!(t_tok == NOT || is_redir(t_tok)) || (tok == PIPE && i < 2)
 			|| (tok != PIPE && i < 3) || t_tok == END)
 		{
 			if ((tok == PIPE && i < 2) || (tok != PIPE && i < 3))
