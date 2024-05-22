@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/21 16:24:15 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/22 00:40:51 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ void	_exec_(t_node *node)
 		return (reset_fds(&node, bk_fd));
 	forked = fork();
 	if (forked < 0)
+	{
 		return (perror("fork"));
+		exit(1);
+	}
 	if (!forked)
 		my_execve(node);
 	waitpid(forked, &exit_stat, 0);

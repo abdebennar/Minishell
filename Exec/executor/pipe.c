@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 03:57:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/15 11:26:34 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/22 00:42:19 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	rbuddha(t_node *node, int *piped)
 	if (forked < 0)
 	{
 		perror("fork");
-		return (-1);
+		exit(1);
 	}
 	if (!forked)
 	{
@@ -41,7 +41,7 @@ int	lbuddha(t_node *node, int *piped)
 	if (forked < 0)
 	{
 		perror("fork");
-		return (-1);
+		exit(1);
 	}
 	if (!forked)
 	{
@@ -61,7 +61,10 @@ void	_pipe_(t_node *node)
 	int			child_exit;
 
 	if (pipe(piped) < 0)
+	{
 		perror("pipe");
+		exit(1);
+	}
 	pid[0] = lbuddha(node->left, piped);
 	if (pid[0] < 0)
 	{

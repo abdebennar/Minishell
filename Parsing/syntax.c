@@ -6,12 +6,11 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:50:12 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/19 19:32:23 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/22 01:38:56 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 t_token	get_next_token(char *cmd, int i)
 {
@@ -19,28 +18,25 @@ t_token	get_next_token(char *cmd, int i)
 	return (get_token(cmd[i], cmd[i + 1]));
 }
 
-bool is_redir(t_token tok)
+bool	is_redir(t_token tok)
 {
 	return (tok == IN || tok == OUT || tok == HEREDOC || tok == APPEND);
 }
 
 bool	par_check(char *cmd, t_token tok, int i)
 {
-	t_token t_tok;
+	t_token	t_tok;
 	int		j;
-	static	int st = 0;
 
 	j = i;
 	t_tok = get_next_token(cmd, i);
 	if (tok == RPR)
 	{
-		if (is_redir(t_tok) || st <= 0)
+		if (is_redir(t_tok))
 			return (put_tok_err(tok));
-		st--;
 		return (true);
 	}
-	st++;
-	if (!(t_tok == NOT || t_tok == LPR))
+	if (!(t_tok == NOT || is_redir(t_tok)))
 		return (put_tok_err(t_tok));
 	while (cmd[i])
 	{
@@ -55,7 +51,7 @@ bool	par_check(char *cmd, t_token tok, int i)
 
 bool	check_syntax(t_token tok, char *cmd, int i)
 {
-	t_token t_tok;
+	t_token	t_tok;
 
 	i++;
 	(tok == HEREDOC || tok == OR || tok == APPEND || tok == AND) && (i++);
@@ -64,8 +60,8 @@ bool	check_syntax(t_token tok, char *cmd, int i)
 	else if (tok == AND || tok == OR || tok == PIPE)
 	{
 		t_tok = get_next_token(cmd, i);
-		if (!(t_tok == NOT || t_tok == IN || t_tok == OUT || t_tok == HEREDOC 
-		|| t_tok == APPEND || t_tok == LPR) || (tok == PIPE && i < 2) || (tok != PIPE && i < 3))
+		if (!(t_tok == NOT || !is_redir(t_tok)) || (tok == PIPE && i < 2)
+			|| (tok != PIPE && i < 3) || t_tok == END)
 		{
 			if ((tok == PIPE && i < 2) || (tok != PIPE && i < 3))
 				return (put_tok_err(tok));

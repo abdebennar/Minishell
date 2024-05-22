@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 11:01:06 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/21 21:01:52 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/22 18:18:29 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,13 @@ t_node	*check_tokens(char *cmd, t_token tok, int *i)
 	int		j;
 	int		f;
 
-	j = *i;
-	redir = NULL;
+	(1337) && (j = *i, redir = NULL);
 	while (low_pre(tok) && cmd[j])
 	{
 		if (!check_syntax(tok, cmd, j))
 			return (NULL);  
 		if (tok != NOT)
-		{
 			add_redir_back(new_redir(get_next_word(cmd, &j, tok), tok), &redir);
-		}
 		else
 		{
 			if (cmd[j] == '"' || cmd[j] == '\'')
@@ -45,7 +42,8 @@ t_node	*check_tokens(char *cmd, t_token tok, int *i)
 
 bool	low_pre(t_token tok)
 {
-	return (tok == NOT || tok == APPEND || tok == HEREDOC || tok == IN || tok == OUT);
+	return (tok == NOT || tok == APPEND
+	|| tok == HEREDOC || tok == IN || tok == OUT);
 }
 
 int	get_pre(t_token tok)
@@ -99,7 +97,7 @@ t_node	*lexer(char *cmd)
 	t_token	tok;
 	int	i;
 
-	(99) && (list = NULL, node = NULL, i = 0);
+	(1337) && (list = NULL, node = NULL, i = 0);
 	while (cmd[i])
 	{
 		tok = get_token(cmd[i], cmd[i + 1]);

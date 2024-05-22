@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:42:10 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/19 19:42:10 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/22 18:13:36 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ bool	q_syntax(char *cmd)
 			}
 			if (!(*cmd))
 			{
-				printf("shell: unclosed quotes\n");
+				put_err("shell: unclosed quotes\n");
 				return (false);
 			}
 		}
@@ -50,6 +50,35 @@ bool	q_syntax(char *cmd)
 	return (true);
 }
 
+bool	pr_syntax(char *cmd)
+{
+	int		i = 0;
+	int		o = 0;
+
+	while (cmd[i])
+	{
+		if (cmd[i] == '"' || cmd[i] == '\'')
+			i+= skip_quotes((cmd + i + 1), cmd[i]);
+		if (get_token(cmd[i], cmd[i + 1]) == LPR)
+			o++;
+		else if (get_token(cmd[i], cmd[i + 1]) == RPR)
+			o--;
+		i++;
+	}
+	if (o > 0)
+	{
+		put_err("shell: syntax error near unexpected token `('\n");
+		_setenv("?", ft_itoa(258));
+		return (false);
+	}
+	else if (o < 0)
+	{
+		put_err("shell: syntax error near unexpected token `)'\n");
+		_setenv("?", ft_itoa(258));
+		return (false);
+	}
+	return (true);
+}
 
 t_node	*parsing(char *line)
 {
@@ -60,7 +89,7 @@ t_node	*parsing(char *line)
 	cmd = ft_strtrim(line, SEP, 0);
 	if (ft_strlen(cmd))
 		add_history(line);
-	if (!q_syntax(cmd))
+	if (!q_syntax(cmd) || !pr_syntax(cmd))
 		return (NULL);
 	free(line);
 	if (!cmd || !cmd[0])

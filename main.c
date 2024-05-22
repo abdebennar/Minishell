@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/21 20:56:48 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/22 18:05:32 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,17 @@
 
 int	g_sig = 0;
 
-void	handle_heredoc(t_node *root)
+int	handle_heredoc(t_node *root)
 {
 	t_redir	*alter;
-	
+	int		c;
+
+	c = 0;
+	int	fd[2];
+	fd[0] = dup(STDIN_FILENO);
+	fd[1] = dup(STDOUT_FILENO);
 	if (!root)
-		return ;
+		return 0 ;
 	alter = root->redir;
 	while (alter)
 	{
@@ -31,12 +36,23 @@ void	handle_heredoc(t_node *root)
 		}
 		if (alter->tok == HEREDOC)
 			alter->fd = _heredoc_(alter);
+			if (alter->fd == -1)
+			{
+				dup2(fd[0], 0);
+				dup2(fd[1], 1);
+				close(fd[0]);
+				close(fd[1]);
+				return (1);
+			}
 		alter = alter->next;
 	}
-	if (root->left)
-		handle_heredoc(root->left);
+	if (root->left && !c)
+		if (handle_heredoc(root->left))
+			return (1);
 	if (root->right)
-		handle_heredoc(root->right);
+		if (handle_heredoc(root->right))
+			return (1);
+	return (0);
 }
 
 int	main(void)
@@ -44,8 +60,6 @@ int	main(void)
 	char	*line;
 	t_node	*node;
 
-	// if (!isatty(0))
-	// 	return (put_err("khrj t9wd\n"), 0);
 	add_env();
 	while (666)
 	{
@@ -56,7 +70,8 @@ int	main(void)
 			break ;
 		g_sig = 1;
 		node = parsing(line);
-		handle_heredoc(node);
+		if (handle_heredoc(node))
+			node = NULL;
 		_exec_arch_(node);
 		g_sig = 0;
 	}
@@ -86,3 +101,6 @@ int	main(void)
 // echo 1 && echo
 // export a=' * ' && echo $a
 // create var a="*" and expand it inside the heredoc 	////////
+
+// export l="      1"
+// export p=$l

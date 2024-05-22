@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 01:44:16 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/15 04:23:37 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/22 00:41:09 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,10 @@ char	*_wildcard_(char *pattern)
 		return (NULL);
 	(1) && (dir = opendir("."), extracted = NULL);
 	if (!dir)
+	{
 		return (perror("opendir"), NULL);
+		exit(1);
+	}
 	while (1)
 	{
 		entry = readdir(dir);
