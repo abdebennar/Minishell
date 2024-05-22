@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:50:12 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/22 20:59:49 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/23 00:35:09 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool	par_check(char *cmd, t_token tok, int i)
 			return (put_tok_err(tok));
 		return (true);
 	}
-	if (!(t_tok == NOT || is_redir(t_tok)))
+	if (!(t_tok == NOT || t_tok == LPR || is_redir(t_tok)))
 		return (put_tok_err(t_tok));
 	while (cmd[i])
 	{
@@ -51,29 +51,29 @@ bool	par_check(char *cmd, t_token tok, int i)
 
 bool	check_syntax(t_token tok, char *cmd, int i)
 {
-	t_token	t_tok;
+	t_token	n;
 
-	i++;
+	++i;
 	(tok == HEREDOC || tok == OR || tok == APPEND || tok == AND) && (i++);
 	if (tok == LPR || tok == RPR)
 		return (par_check(cmd, tok, i));
 	else if (tok == AND || tok == OR || tok == PIPE)
 	{
-		t_tok = get_next_token(cmd, i);
-		if (!(t_tok == NOT || is_redir(t_tok)) || (tok == PIPE && i < 2)
-			|| (tok != PIPE && i < 3) || t_tok == END)
+		n = get_next_token(cmd, i);
+		if (!(n == NOT || is_redir(n) || n == LPR) || (tok == PIPE
+				&& (i < 2 || n == LPR)) || (tok != PIPE && i < 3) || n == END)
 		{
 			if ((tok == PIPE && i < 2) || (tok != PIPE && i < 3))
 				return (put_tok_err(tok));
 			else
-				return (put_tok_err(t_tok));
+				return (put_tok_err(n));
 		}
 	}
 	else if (tok == IN || tok == OUT || tok == APPEND || tok == HEREDOC)
 	{
-		t_tok = get_next_token(cmd, i);
-		if (t_tok != NOT)
-			return (put_tok_err(t_tok));
+		n = get_next_token(cmd, i);
+		if (n != NOT)
+			return (put_tok_err(n));
 	}
 	return (true);
 }
