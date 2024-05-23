@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 23:12:10 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/21 18:13:21 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/23 14:20:00 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ void	_export_(t_node *node)
 	else
 		while(*(++cmd))
 		{
+			printf("this is the arg : %s\n", *cmd);
 			if (check_var(ft_substr(*cmd, 0, get_c(*cmd) + 1, 0)))
 			{
 				put_err("export:");
