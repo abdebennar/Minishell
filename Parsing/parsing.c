@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:42:10 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/22 18:13:36 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/23 16:24:45 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ bool	pr_syntax(char *cmd)
 			i+= skip_quotes((cmd + i + 1), cmd[i]);
 		if (get_token(cmd[i], cmd[i + 1]) == LPR)
 			o++;
-		else if (get_token(cmd[i], cmd[i + 1]) == RPR)
+		else if (get_token(cmd[i], cmd[i + 1]) == RPR && o > 0)
 			o--;
 		i++;
 	}

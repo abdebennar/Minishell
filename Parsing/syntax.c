@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:50:12 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/23 00:35:09 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/23 16:23:42 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ bool	par_check(char *cmd, t_token tok, int i)
 	t_tok = get_next_token(cmd, i);
 	if (tok == RPR)
 	{
-		if (is_redir(t_tok))
+		if (is_redir(t_tok) || i < 2)
 			return (put_tok_err(tok));
 		return (true);
 	}
