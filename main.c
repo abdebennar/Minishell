@@ -1,4 +1,60 @@
-       0       0       0
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
+/*   Updated: 2024/05/24 20:40:44 by bel-oirg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+int	g_sig = 0;
+
+int	handle_heredoc(t_node *root)
+{
+	t_redir	*alter;
+	int		c;
+
+	c = 0;
+	int	fd[2];
+	fd[0] = dup(STDIN_FILENO);
+	fd[1] = dup(STDOUT_FILENO);
+	if (!root)
+		return 0 ;
+	alter = root->redir;
+	while (alter)
+	{
+		alter->file = beta_expanding(alter->file);
+		if (!alter->file)
+		{
+			alter->file = my_malloc(1, 1, 0);
+			alter->file = "\0";	
+		}
+		if (alter->tok == HEREDOC)
+			alter->fd = _heredoc_(alter);
+			if (alter->fd == -1)
+			{
+				dup2(fd[0], 0);
+				dup2(fd[1], 1);
+				close(fd[0]);
+				close(fd[1]);
+				return (1);
+			}
+		alter = alter->next;
+	}
+	close(fd[0]), close(fd[1]);
+	if (root->left && !c)
+		if (handle_heredoc(root->left))
+			return (1);
+	if (root->right)
+		if (handle_heredoc(root->right))
+			return (1);
+	return (0);
+}
 
 int	main(void)
 {
