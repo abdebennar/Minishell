@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 03:57:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/22 00:42:19 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/24 18:15:17 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,7 @@ void	_pipe_(t_node *node)
 
 	if (pipe(piped) < 0)
 	{
-		perror("pipe");
-		exit(1);
+		return ;
 	}
 	pid[0] = lbuddha(node->left, piped);
 	if (pid[0] < 0)

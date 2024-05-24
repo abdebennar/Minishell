@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:42:30 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/15 12:04:49 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/24 13:48:54 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ typedef struct s_node
 	t_token			tok;
 	/* your's */
 	int				fd[2];
-	int				pid[2];
+	int				io_bk[2];
+	// int				pid[2];
 	char			**cmd;
 	t_redir			*redir;
 	t_env			*env;

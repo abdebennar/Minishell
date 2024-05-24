@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 23:12:10 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/23 14:20:00 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/24 16:17:35 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,14 +147,13 @@ void	_export_(t_node *node)
 	else
 		while(*(++cmd))
 		{
-			printf("this is the arg : %s\n", *cmd);
 			if (check_var(ft_substr(*cmd, 0, get_c(*cmd) + 1, 0)))
 			{
 				put_err("export:");
 				put_err(*cmd);
 				put_err(": not a valid identifier\n");
 				_setenv("?", ft_itoa(1));
-				break;
+				break ;
 			}
 			export_args(*cmd);
 		}
