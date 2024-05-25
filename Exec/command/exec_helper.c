@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_helper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 21:35:07 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/21 05:50:12 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/25 14:59:05 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*add_path(char *cmd)
 	{
 		out = ft_strjoin(path_v[index], "/", 0);
 		out = ft_strjoin(out, cmd, 0);
-		if (!access(out, X_OK))
+		if (!access(out, F_OK))
 			return (out);
 	}
 	return (NULL);

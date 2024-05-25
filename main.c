@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/24 20:40:44 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/25 17:59:21 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	handle_heredoc(t_node *root)
 {
 	t_redir	*alter;
 	int		c;
+
 
 	c = 0;
 	int	fd[2];
@@ -76,7 +77,8 @@ int	main(void)
 		_exec_arch_(node);
 		g_sig = 0;
 	}
-	printf("exit\n");
+	put_err("exit\n");
+	rl_clear_history();
 	my_malloc(0, 0, 1);
 	my_malloc(0, 0, 0);
 }

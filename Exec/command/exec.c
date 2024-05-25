@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/22 00:40:51 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/25 14:50:15 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,15 @@
 void	my_execve(t_node *node)
 {
 	extern char	**environ;
-	struct stat	f_stat;
 
 	sig_allow();
-	if (node->cmd && node->cmd[0])
-		stat(node->cmd[0], &f_stat);
 	if (!node->cmd)
 		exit(0);
 	if (!(node)->cmd[0])
-	{
-		put_str_err(NOCMD_ERR, node->cmd[0]);
-		exit(127);
-	}
-	execve(add_path((node)->cmd[0]), (node)->cmd, environ);
-	if (ft_strchr(node->cmd[0], '/') && access(node->cmd[0], X_OK))
-		put_str_err(" No such file or directory", node->cmd[0]);
-	else if (S_ISDIR(f_stat.st_mode))
-		put_str_err(" is a directory", node->cmd[0]);
-	else
-		put_str_err(NOCMD_ERR, node->cmd[0]);
-	if (errno == ENOENT || errno == EFAULT)
-		exit(127);
-	if (errno == EACCES)
-		exit(126);
-	exit(1);
+		(put_str_err(NOCMD_ERR, node->cmd[0]), exit (127));
+	char *path = add_path((node)->cmd[0]);
+	execve(path, (node)->cmd, environ);
+	exit (exec_err(errno, path, node->cmd[0]));
 }
 
 void	_exec_(t_node *node)
