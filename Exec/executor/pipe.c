@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 03:57:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/24 18:15:17 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/25 19:20:41 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ int	rbuddha(t_node *node, int *piped)
 	if (forked < 0)
 	{
 		perror("fork");
-		exit(1);
+		return (-1);
 	}
 	if (!forked)
 	{
 		close(piped[1]);
-		dup2(piped[0], STDIN_FILENO);
+		if (dup2(piped[0], STDIN_FILENO) < 0)
+			close(piped[0]), exit(1);
 		close(piped[0]);
 		_exec_arch_(node);
 		exit(ft_atoll(getenv("?"), NULL));
@@ -41,14 +42,14 @@ int	lbuddha(t_node *node, int *piped)
 	if (forked < 0)
 	{
 		perror("fork");
-		exit(1);
+		return (-1);
 	}
 	if (!forked)
 	{
 		close(piped[0]);
-		dup2(piped[1], STDOUT_FILENO);
-		close(piped[1]);
-		_exec_arch_((node));
+		if (dup2(piped[1], STDOUT_FILENO) < 0)
+			close(piped[1]), exit(1);
+		_exec_arch_(node);
 		exit(ft_atoll(getenv("?"), NULL));
 	}
 	return (forked);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/25 17:59:21 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/25 19:34:26 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,43 +17,28 @@ int	g_sig = 0;
 int	handle_heredoc(t_node *root)
 {
 	t_redir	*alter;
-	int		c;
+	int		fd;
 
-
-	c = 0;
-	int	fd[2];
-	fd[0] = dup(STDIN_FILENO);
-	fd[1] = dup(STDOUT_FILENO);
 	if (!root)
-		return 0 ;
+		return (0);
+	fd = dup(STDIN_FILENO);
 	alter = root->redir;
 	while (alter)
 	{
 		alter->file = beta_expanding(alter->file);
 		if (!alter->file)
-		{
-			alter->file = my_malloc(1, 1, 0);
-			alter->file = "\0";	
-		}
+			alter->file = ft_strdup("\0", 0);
 		if (alter->tok == HEREDOC)
 			alter->fd = _heredoc_(alter);
-			if (alter->fd == -1)
-			{
-				dup2(fd[0], 0);
-				dup2(fd[1], 1);
-				close(fd[0]);
-				close(fd[1]);
-				return (1);
-			}
+		if (alter->fd == -1)
+			return (dup2(fd, 0), close(fd), 1);
 		alter = alter->next;
 	}
-	close(fd[0]), close(fd[1]);
-	if (root->left && !c)
-		if (handle_heredoc(root->left))
-			return (1);
-	if (root->right)
-		if (handle_heredoc(root->right))
-			return (1);
+	close(fd);
+	if (root->left && handle_heredoc(root->left))
+		return (1);
+	if (root->right && handle_heredoc(root->right))
+		return (1);
 	return (0);
 }
 
@@ -77,8 +62,7 @@ int	main(void)
 		_exec_arch_(node);
 		g_sig = 0;
 	}
-	put_err("exit\n");
-	rl_clear_history();
+	printf("exit\n");
 	my_malloc(0, 0, 1);
 	my_malloc(0, 0, 0);
 }
