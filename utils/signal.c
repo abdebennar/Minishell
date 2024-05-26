@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:11:05 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/07 17:06:54 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/26 19:02:34 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	sigint_h(int sigN)
 	if (g_sig == 0)
 	{
 		(void)sigN;
+		_setenv("?", ft_itoa(1));
 		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);

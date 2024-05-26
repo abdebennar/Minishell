@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 23:50:48 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/23 18:17:28 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/26 23:04:16 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ char	*ft_strtrim(const char *s1, const char *set, int group)
 	end = ft_strlen(s1);
 	while (end > start && check_the_set(s1[end - 1], set))
 		end--;
-	str = (char *)my_malloc(sizeof(char) * (end - start + 3), 1, group);
+	str = (char *)my_malloc(sizeof(char) * (end - start + 2), 1, group);
 	while (start < end && s1[start])
 	{
 		str[trk++] = s1[start++];
 	}
 	str[trk] = '\0';
 	str[++trk] = '\0';
-	str[++trk] = '\0';
+	// str[++trk] = '\0';
 	return (str);
 }

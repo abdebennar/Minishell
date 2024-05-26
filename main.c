@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/26 17:14:03 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/26 21:20:58 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,11 @@ int	main(void)
 }
 
 // export l="   p" && export p=$l && echo $p
-// (a) > out
 // $DSALKM""   					///////////
 // << l | << l					///////////
 //(<<"|)")               ////////////
 // "(")					///////////	
 //RESET THE FDS if CTRL+C on multiple heredoc `<< l | << k`		//////////////
-//<< &						->CHECK THIS
 //<< ""   					///////////
 //cat > ''    					///////////
 //ls .... (using recursion in the parse) 	/////////////
@@ -90,10 +88,6 @@ int	main(void)
 
 // unset with a var without value
 // top with (sig quit) ruines the readline 
-// exit : "random shit" number -> exit with 255
-// exit : number "random shit" -> do not exit -> exit status 
-// syntax error exit status 258
-// ctrl c exit status = 1
 
 // fd leak : multi heredoc in pipe and ||
 // heredoc file change its place to /tmp or any

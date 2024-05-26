@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 11:01:06 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/22 18:18:29 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/26 21:00:36 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ t_node	*check_tokens(char *cmd, t_token tok, int *i)
 {	
 	t_redir *redir;
 	char	*full_cmd; 
-	int		j;
+	int		j = *i;
 	int		f;
 
-	(1337) && (j = *i, redir = NULL);
+	(1337) && (redir = NULL);
 	while (low_pre(tok) && cmd[j])
 	{
 		if (!check_syntax(tok, cmd, j))
-			return (NULL);  
+			return (_setenv("?", ft_itoa(1)), NULL);  
 		if (tok != NOT)
 			add_redir_back(new_redir(get_next_word(cmd, &j, tok), tok), &redir);
 		else
@@ -102,7 +102,7 @@ t_node	*lexer(char *cmd)
 	{
 		tok = get_token(cmd[i], cmd[i + 1]);
 		if (!check_syntax(tok, cmd, i))
-			return (NULL);
+			return (_setenv("?", ft_itoa(1)), NULL);
 		if (!low_pre(tok) && ++i)
 		{
 			node = new_node(NULL, NULL, tok, get_pre(tok));

@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:42:10 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/25 23:27:32 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/26 19:09:23 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ bool	q_syntax(char *cmd)
 			if (!(*cmd))
 			{
 				put_err("shell: unclosed quotes\n");
+				_setenv("?", ft_itoa(1));
 				return (false);
 			}
 		}

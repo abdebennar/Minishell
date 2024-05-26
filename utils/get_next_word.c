@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 16:41:13 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/13 20:12:23 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/26 23:03:01 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,29 @@ static bool	is_sep(char c, char *sep)
 	return (false);	
 }
 
-char *get_next_word(char *str, int *i, t_token tok)
+char *get_next_word(char *str, int *j, t_token tok)
 {
 	int		start;
 	char *substr;
 
-	str[*i] = 127;
+	str[*j] = 127;
 	if (tok == HEREDOC || tok == APPEND)
-		str[++(*i)] = 127;
+		str[++(*j)] = 127;
 	start = 0;
-	while (str[*i] && ft_strchr(" \t\n\v\r\f\177", str[*i]))
-		(*i)++;
-	start = *i;
-	while (str[*i])
+	while (str[*j] && ft_strchr(" \t\n\v\r\f\177", str[*j]))
+		(*j)++;
+	start = *j;
+	while (str[*j])
 	{
-		if (str[*i] == '"' || str[*i] == '\'')
-			*i += skip_quotes((str + *i + 1), str[*i]);
-		if (is_sep(str[*i], " \t\n\v\r\f>|<&()"))
+		if (str[*j] == '"' || str[*j] == '\'')
+			*j += skip_quotes((str + *j + 1), str[*j]);
+		if (is_sep(str[*j], " \t\n\v\r\f") || get_token(str[*j], str[(*j) + 1]) != NOT
+			|| get_token(str[*j], str[(*j) + 1]) == END)
 			break;
-		(*i)++;
+		(*j)++;
 	}
-	substr = ft_substr(str, start, *i - start, 0);
-	while (start < *i)
+	substr = ft_substr(str, start, *j - start, 0);
+	while (start < *j)
 		str[start++] = 127;
 	return (substr);
 }
