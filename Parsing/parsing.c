@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:42:10 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/25 14:52:14 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/25 23:27:32 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,12 @@ bool	pr_syntax(char *cmd)
 	if (o > 0)
 	{
 		put_err("shell: syntax error near unexpected token `('\n");
-		_setenv("?", ft_itoa(258));
-		return (false);
+		return (_setenv("?", ft_itoa(258)), false);
 	}
 	else if (o < 0)
 	{
 		put_err("shell: syntax error near unexpected token `)'\n");
-		_setenv("?", ft_itoa(258));
-		return (false);
+		return (_setenv("?", ft_itoa(258)), false);
 	}
 	return (true);
 }

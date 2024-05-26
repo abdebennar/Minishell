@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 05:50:24 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/21 22:07:53 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/25 23:35:58 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ static int	fill_file(t_redir *alter, char *file_name)
 	int		fd_file;
 
 	content = NULL;
-	signal(SIGINT, heredoc_h);
 	while (1)
 	{
 		line = readline("heredoc>");
@@ -93,6 +92,7 @@ int	_heredoc_(t_redir *alter)
 	int		fd_in;
 
 	fd_in = 0;
+	signal(SIGINT, heredoc_h);
 	file_name = random_f();
 	fd_in = fill_file(alter, file_name);
 	if (fd_in < 0)
