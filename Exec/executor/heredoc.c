@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 05:50:24 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/25 23:35:58 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/26 17:06:15 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static int	fill_file(t_redir *alter, char *file_name)
 	while (1)
 	{
 		line = readline("heredoc>");
+		
 		if (!line || !doc_strcmp(line, alter->file) || g_sig == 2)
 		{
 			(1) && (free(line), line = NULL);

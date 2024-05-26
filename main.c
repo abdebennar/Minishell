@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/25 19:34:26 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/26 17:14:03 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,23 +71,29 @@ int	main(void)
 // (a) > out
 // $DSALKM""   					///////////
 // << l | << l					///////////
-//(<<"|)")               //CHECKTHIS
-// "(")							
-//RESET THE FDS if CTRL+C on multiple heredoc `<< l | << k`
-//<<"|(")
-//<< &"&"
+//(<<"|)")               ////////////
+// "(")					///////////	
+//RESET THE FDS if CTRL+C on multiple heredoc `<< l | << k`		//////////////
+//<< &						->CHECK THIS
 //<< ""   					///////////
 //cat > ''    					///////////
-//ls .... (using recursion in the parse)
-//< test.c cat >> out && << ok (cat || ls)   -> << and () 
-//$_ | $_
-// << s>  
+//ls .... (using recursion in the parse) 	/////////////
+//< test.c cat >> out && << ok (cat || ls)   -> << and ()   (   ls (whoami)  )
+//./minishell | ./minishell ??
+// << s>  							/////
 //echo h > ''      					///////////
-//ulimits -s 5 this set the limit of stack to 5kb
-//  ~ ?
-// echo 1 && echo
-// export a=' * ' && echo $a
+// export a=' * ' && echo $a  ??
 // create var a="*" and expand it inside the heredoc 	////////
 
 // export l="      1"
 // export p=$l
+
+// unset with a var without value
+// top with (sig quit) ruines the readline 
+// exit : "random shit" number -> exit with 255
+// exit : number "random shit" -> do not exit -> exit status 
+// syntax error exit status 258
+// ctrl c exit status = 1
+
+// fd leak : multi heredoc in pipe and ||
+// heredoc file change its place to /tmp or any
