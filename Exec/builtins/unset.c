@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 22:33:06 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/21 05:47:30 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/27 16:24:10 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	unset_args(char *env)
 {
 	extern char	**environ;
 	char		**tmp;
+	int			offset;
 
 	tmp = environ;
 	if (check_var(env))
@@ -41,7 +42,7 @@ static void	unset_args(char *env)
 		_setenv("?", ft_itoa(1));
 		return ;
 	}
-	if (getenv(env))
+	if (find_env(&offset, env))
 	{
 		while (*tmp)
 		{

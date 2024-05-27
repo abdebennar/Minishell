@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/27 16:03:14 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/27 16:26:32 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	main(void)
 //RESET THE FDS if CTRL+C on multiple heredoc `<< l | << k`		//////////////
 //<< ""   					///////////
 //cat > ''    					///////////
-//ls .... (using recursion in the parse) 	/////////////
+//ls .... (using recursion in the parse) 	/////////////`
 //< test.c cat >> out && << ok (cat || ls)   -> << and ()   (   ls (whoami)  )
 //./minishell | ./minishell ??
 // << s>  							/////
@@ -96,7 +96,7 @@ int	main(void)
 // export l="      1"
 // export p=$l
 
-// unset with a var without value
+// unset with a var without value /////////////
 // top with (sig quit) ruines the readline ///////////
 
 // fd leak : multi heredoc in pipe and ||

@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/27 15:19:12 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/27 16:23:35 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	**copy(char **str, bool extra_size, int group);
 void	add_env(void);
 int		get_c(char *s);
 char	*ft_itoa(int n);
+bool	find_env(int *offset, char *name);
 
 //utils ->mng_cmd
 t_token	get_token(const char c1, const char c2);
