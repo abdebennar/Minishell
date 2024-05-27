@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/27 16:26:32 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/27 17:18:02 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	handle_heredoc(t_node *root)
 
 void	term_attr(struct termios *att)
 {
-	if (tcgetattr(0, att))
+	if (isatty(0) && tcgetattr(0, att))
 		perror("termios");
 }
 
@@ -69,7 +69,7 @@ int	main(void)
 			node = NULL;
 		_exec_arch_(node);
 		g_sig = 0;
-		if (tcsetattr(0, TCSANOW, &att))
+		if (isatty(0) && tcsetattr(0, TCSANOW, &att))
 			perror("termios");
 	}
 	put_err("exit\n");
