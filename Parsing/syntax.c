@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:50:12 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/26 21:20:04 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/27 16:13:30 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,7 @@ bool	check_syntax(t_token tok, char *cmd, int i)
 	else if (tok == NOT)
 	{
 		if (get_next_token(cmd, i) == LPR)
-		{
-			put_tok_err(LPR);
-			return (false);
-		}
+			return (put_tok_err(LPR));
 	}
 	return (true);
 }

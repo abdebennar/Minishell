@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:42:10 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/26 19:09:23 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/27 16:07:03 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ t_node	*parsing(char *line)
 	t_node	*node;
 	char	*cmd;
 	
+	g_sig = 1;
 	node = NULL;
 	cmd = ft_strtrim(line, SEP, 0);
 	if (ft_strlen(cmd))
@@ -103,8 +104,3 @@ t_node	*parsing(char *line)
 	return (node);
 }
 
-
-// echo "ls" | ./minishell
-
-//export P="ls -la"
-//$P

@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/26 21:20:58 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/27 16:03:14 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,21 @@ int	handle_heredoc(t_node *root)
 	return (0);
 }
 
+void	term_attr(struct termios *att)
+{
+	if (tcgetattr(0, att))
+		perror("termios");
+}
+
+
 int	main(void)
 {
 	char	*line;
 	t_node	*node;
+	struct termios att;
 
 	add_env();
+	term_attr(&att);
 	while (666)
 	{
 		sig_ign();
@@ -55,14 +64,15 @@ int	main(void)
 		line = readline(PROMPT);
 		if (!line)
 			break ;
-		g_sig = 1;
 		node = parsing(line);
 		if (handle_heredoc(node))
 			node = NULL;
 		_exec_arch_(node);
 		g_sig = 0;
+		if (tcsetattr(0, TCSANOW, &att))
+			perror("termios");
 	}
-	printf("exit\n");
+	put_err("exit\n");
 	my_malloc(0, 0, 1);
 	my_malloc(0, 0, 0);
 }
@@ -87,7 +97,7 @@ int	main(void)
 // export p=$l
 
 // unset with a var without value
-// top with (sig quit) ruines the readline 
+// top with (sig quit) ruines the readline ///////////
 
 // fd leak : multi heredoc in pipe and ||
 // heredoc file change its place to /tmp or any
