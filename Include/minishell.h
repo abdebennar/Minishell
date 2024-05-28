@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/28 02:26:02 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/28 17:00:47 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,9 @@ void	_env_(void);
 void	_exit_(t_node *node);
 t_llong	ft_atoll(char *str, int *err);
 void	_export_(t_node *node);
+int		check_var_exp(char *str);
+void	swap_env(char **str1, char **str2);
+char	**sort_env(void);
 void	_pwd_(void);
 void	_unset_(t_node *node);
 

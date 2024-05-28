@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 04:00:45 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/28 00:41:22 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/28 16:40:31 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,23 @@ int	_left_(t_node **node)
 	return (0);
 }
 
+int	redir_io(t_node *node)
+{
+	if ((node)->fd[0] != 0)
+	{
+		if (dup2((node)->fd[0], STDIN_FILENO) < 0)
+			return (perror("dup2"), close((node)->fd[0]), -1);
+		close((node)->fd[0]);
+	}
+	if ((node)->fd[1] != 1)
+	{
+		if (dup2((node)->fd[1], STDOUT_FILENO) < 0)
+			return (perror("dup2"), close((node)->fd[1]), -1);
+		close((node)->fd[1]);
+	}
+	return (0);
+}
+
 int	_redirections_(t_node **node)
 {
 	t_redir	*alter;
@@ -85,19 +102,7 @@ int	_redirections_(t_node **node)
 			return (-1);
 		alter = alter->next;
 	}
-	if (_left_((node)) || _right_((node)))
+	if (_left_(node) || _right_(node))
 		return (_setenv("?", "1"), -1);
-	if ((*node)->fd[0] != 0)
-	{
-		if (dup2((*node)->fd[0], STDIN_FILENO) < 0)
-			return (perror("dup2 on redirections"), close((*node)->fd[0]),  -1);
-		close((*node)->fd[0]); //TODO maybe remove this -> check reset_fds()
-	}
-	if ((*node)->fd[1] != 1)
-	{
-		if (dup2((*node)->fd[1], STDOUT_FILENO) < 0)
-			return (perror("dup2 on redirections"), close((*node)->fd[1]), -1);
-		close((*node)->fd[1]);
-	}
-	return (0);
+	return (redir_io(*node));
 }

@@ -2,6 +2,7 @@ SRCS 		=	Exec/builtins/cd.c \
 				Exec/builtins/echo.c \
 				Exec/builtins/env.c \
 				Exec/builtins/exit.c \
+				Exec/builtins/export_helper.c \
 				Exec/builtins/export.c \
 				Exec/builtins/pwd.c \
 				Exec/builtins/unset.c \
@@ -44,7 +45,7 @@ SRCS 		=	Exec/builtins/cd.c \
 OBJDIR		= obj
 SHELL		= /bin/bash
 NAME		= minishell
-CFLAGS		= -Wall -Wextra -Werror -lreadline -fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror -lreadline #-fsanitize=address
 CC			= cc
 HEADER		= Include/minishell.h Include/prottypes.h
 BREW		= $(HOME)/goinfre/homebrew/bin/brew
@@ -78,6 +79,8 @@ endif
 
 $(NAME)	: $(HEADER) $(OBJS)
 	cc  $(CFLAGS) $(LIBRARY) $(INCLUDE) $(OBJS) -I$(PWD)/Include -o $@
+
+#//TODO is Include duplicated?
 
 $(OBJDIR)/%.o: %.c $(HEADER)
 	@mkdir -p $(dir $@)

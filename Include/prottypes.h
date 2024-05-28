@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:42:30 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/28 02:26:18 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/28 17:09:55 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 extern int				g_sig;
 typedef unsigned int	t_uint;
 typedef long long		t_llong;
-
+extern char				**environ;
 
 typedef struct s_data
 {

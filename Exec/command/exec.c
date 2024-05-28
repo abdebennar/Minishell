@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/26 19:34:26 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/28 16:34:55 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	my_execve(t_node *node)
 {
-	extern char	**environ;
+	char	*path;
 
 	sig_allow();
 	if (!node->cmd)
 		exit(0);
 	if (!(node)->cmd[0])
 		(put_str_err(NOCMD_ERR, node->cmd[0]), exit (127));
-	char *path = add_path((node)->cmd[0]);
+	path = add_path((node)->cmd[0]);
 	execve(path, (node)->cmd, environ);
 	exit (exec_err(errno, path, node->cmd[0]));
 }

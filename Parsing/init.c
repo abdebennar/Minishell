@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:43:59 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/25 15:14:40 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/28 16:31:34 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ char **copy(char **str, bool extra_size, int group)
 
 void	add_env()
 {
-	extern  char **environ;
 	extern	int	rl_catch_signals;
 	int			sh_lvl;
 	int			err;

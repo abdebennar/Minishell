@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 00:29:18 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/21 18:10:24 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/28 16:28:47 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,7 @@ char	**_expanding_(t_node **node)
 	cmd = b_expanding_((*node)->cmd);
 	(1) && (w_cmd = NULL, v_index = -1);
 	while (cmd && ++v_index < raw_len)
-	{
-		// find_replace(cmd[v_index], '\177', '\0');
-		w_cmd = concatenate_strings(w_cmd, ft_split(cmd[v_index], "\a", 0)); /// ls\a-la -> [ls] [-la]
-	}
+		w_cmd = concatenate_strings(w_cmd, ft_split(cmd[v_index], "\a", 0));
 	return (w_cmd);
 }
 
@@ -113,6 +110,5 @@ char	*alter_exp(char *alter)
 		put_str_err(" ambiguous redirect", beta_expanding(alter));
 		return (NULL);
 	}
-	// find_replace(tmp_alter[0], '\177', '\0');
 	return (tmp_alter[0]);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 22:33:06 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/27 16:24:10 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/28 16:30:49 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static int	check_var(char *str)
 
 static void	unset_args(char *env)
 {
-	extern char	**environ;
 	char		**tmp;
 	int			offset;
 

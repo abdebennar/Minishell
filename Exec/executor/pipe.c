@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 03:57:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/28 01:25:48 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/28 16:25:37 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ int	rbuddha(t_node *node, int *piped)
 	{
 		close(piped[1]);
 		if (dup2(piped[0], STDIN_FILENO) < 0)
-			close(piped[0]), exit(1);
+		{
+			close(piped[0]);
+			exit(1);
+		}
 		close(piped[0]);
 		_exec_arch_(node);
 		exit(ft_atoll(getenv("?"), NULL));
@@ -48,7 +51,10 @@ int	lbuddha(t_node *node, int *piped)
 	{
 		close(piped[0]);
 		if (dup2(piped[1], STDOUT_FILENO) < 0)
-			close(piped[1]), exit(1);
+		{
+			close(piped[1]);
+			exit(1);
+		}
 		_exec_arch_(node);
 		exit(ft_atoll(getenv("?"), NULL));
 	}
@@ -62,17 +68,17 @@ void	_pipe_(t_node *node)
 	int			child_exit;
 
 	if (pipe(piped) < 0)
-		return ; //TODO in case we have heredoc you should close it then return
+		return ;
 	pid[0] = lbuddha(node->left, piped);
 	if (pid[0] < 0)
 	{
-		close(piped[0]), close(piped[1]);
+		(1) && (close(piped[0]), close(piped[1]));
 		return ;
 	}
 	pid[1] = rbuddha(node->right, piped);
 	if (pid[1] < 0)
 	{
-		close(piped[0]), close(piped[1]);
+		(1) && (close(piped[0]), close(piped[1]));
 		return ;
 	}
 	close(piped[0]);
