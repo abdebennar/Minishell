@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 05:50:24 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/26 17:06:15 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/28 01:04:16 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,17 @@ static char	*random_f(void)
 	int		fd_rd;
 	int		fd_tmp;
 
-	file_len = 16;
-	file_name = my_malloc(file_len + 1, 1, 0);
 	fd_rd = open("/dev/urandom", O_RDONLY, 0777);
 	if (fd_rd < 0)
 		return (perror("cannot open /dev/urandom"), NULL);
-	read(fd_rd, file_name, file_len);
+	file_len = 21;
+	file_name = my_malloc(file_len + 1, 1, 0);
+	file_name[0] = '/';
+	file_name[1] = 't';
+	file_name[2] = 'm';
+	file_name[3] = 'p';
+	file_name[4] = '/';
+	read(fd_rd, file_name + 5, 16);
 	close(fd_rd);
 	file_name[file_len] = 0;
 	fd_tmp = open(file_name, O_RDWR | O_CREAT | O_TRUNC, 0777);
@@ -68,7 +73,6 @@ static int	fill_file(t_redir *alter, char *file_name)
 	while (1)
 	{
 		line = readline("heredoc>");
-		
 		if (!line || !doc_strcmp(line, alter->file) || g_sig == 2)
 		{
 			(1) && (free(line), line = NULL);
@@ -102,7 +106,9 @@ int	_heredoc_(t_redir *alter)
 		g_sig = 1;
 		return (-1);
 	}
-	fd_in = open(file_name, O_RDWR | O_CREAT, 0777);
+	fd_in = open(file_name, O_RDWR | O_CREAT, 0644);
 	unlink(file_name);
+	if (fd_in < 0)
+		return (perror("open"), -1);
 	return (fd_in);
 }

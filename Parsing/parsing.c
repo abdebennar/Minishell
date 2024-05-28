@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:42:10 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/27 16:07:03 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/28 00:16:46 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@ t_node	*parsing(char *line)
 	cmd = ft_strtrim(line, SEP, 0);
 	if (ft_strlen(cmd))
 		add_history(line);
+	free(line);  //TODO is it in the right place?
 	if (!q_syntax(cmd) || !pr_syntax(cmd))
 		return (NULL);
-	free(line);
 	if (!cmd || !cmd[0])
 		return (NULL);
 	node = lexer(cmd); 

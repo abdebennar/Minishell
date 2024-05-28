@@ -3,44 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/27 17:18:02 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/28 01:34:48 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	g_sig = 0;
-
-int	handle_heredoc(t_node *root)
-{
-	t_redir	*alter;
-	int		fd;
-
-	if (!root)
-		return (0);
-	fd = dup(STDIN_FILENO);
-	alter = root->redir;
-	while (alter)
-	{
-		alter->file = beta_expanding(alter->file);
-		if (!alter->file)
-			alter->file = ft_strdup("\0", 0);
-		if (alter->tok == HEREDOC)
-			alter->fd = _heredoc_(alter);
-		if (alter->fd == -1)
-			return (dup2(fd, 0), close(fd), 1);
-		alter = alter->next;
-	}
-	close(fd);
-	if (root->left && handle_heredoc(root->left))
-		return (1);
-	if (root->right && handle_heredoc(root->right))
-		return (1);
-	return (0);
-}
 
 void	term_attr(struct termios *att)
 {
@@ -68,6 +40,7 @@ int	main(void)
 		if (handle_heredoc(node))
 			node = NULL;
 		_exec_arch_(node);
+		close_doc(node);
 		g_sig = 0;
 		if (isatty(0) && tcsetattr(0, TCSANOW, &att))
 			perror("termios");
@@ -91,7 +64,6 @@ int	main(void)
 // << s>  							/////
 //echo h > ''      					///////////
 // export a=' * ' && echo $a  ??
-// create var a="*" and expand it inside the heredoc 	////////
 
 // export l="      1"
 // export p=$l
@@ -99,5 +71,5 @@ int	main(void)
 // unset with a var without value /////////////
 // top with (sig quit) ruines the readline ///////////
 
-// fd leak : multi heredoc in pipe and ||
-// heredoc file change its place to /tmp or any
+// fd leak : multi heredoc in pipe and || ///////////
+// heredoc file change its place to /tmp or any  ///////////

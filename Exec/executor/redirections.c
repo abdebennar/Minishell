@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 04:00:45 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/21 05:49:18 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/28 00:41:22 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	_right_(t_node **node)
 	t_redir	*alter;
 	int		fd;
 
+	fd = 1;
 	alter = (*node)->redir;
-	fd = (*node)->fd[1];
 	while (alter)
 	{
 		if (alter->tok == OUT)
@@ -46,7 +46,7 @@ int	_left_(t_node **node)
 	t_redir	*alter;
 	int		fd;
 
-	fd = (*node)->fd[0];
+	fd = 0;
 	alter = (*node)->redir;
 	while (alter)
 	{
@@ -90,7 +90,7 @@ int	_redirections_(t_node **node)
 	if ((*node)->fd[0] != 0)
 	{
 		if (dup2((*node)->fd[0], STDIN_FILENO) < 0)
-			return (perror("dup2 on redirections"),close((*node)->fd[0]),  -1);
+			return (perror("dup2 on redirections"), close((*node)->fd[0]),  -1);
 		close((*node)->fd[0]); //TODO maybe remove this -> check reset_fds()
 	}
 	if ((*node)->fd[1] != 1)
