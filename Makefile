@@ -1,4 +1,47 @@
-SRC			= utils/*.c Parsing/*.c Exec/*/*.c main.c
+SRCS 		=	Exec/builtins/cd.c \
+				Exec/builtins/echo.c \
+				Exec/builtins/env.c \
+				Exec/builtins/exit.c \
+				Exec/builtins/export.c \
+				Exec/builtins/pwd.c \
+				Exec/builtins/unset.c \
+				Exec/command/exec.c \
+				Exec/command/exec_helper.c \
+				Exec/command/expanding.c \
+				Exec/command/expanding_helper.c \
+				Exec/command/quotes.c \
+				Exec/command/quotes_helper.c \
+				Exec/command/wildcard.c \
+				Exec/executor/and_or.c \
+				Exec/executor/heredoc.c \
+				Exec/executor/heredoc_helper.c \
+				Exec/executor/pipe.c \
+				Exec/executor/redirections.c \
+				Parsing/algo.c \
+				Parsing/algo_utils.c \
+				Parsing/error.c \
+				Parsing/init.c \
+				Parsing/lexer.c \
+				Parsing/mng_args.c \
+				Parsing/mng_cmd.c \
+				Parsing/parsing.c \
+				Parsing/syntax.c \
+				Parsing/tree.c \
+				utils/ft_is.c \
+				utils/ft_itoa.c \
+				utils/ft_split.c \
+				utils/ft_str.c \
+				utils/ft_str2.c \
+				utils/ft_strjoin.c \
+				utils/ft_strtrim.c \
+				utils/get_next_word.c \
+				utils/link_lst.c \
+				utils/link_lst2.c \
+				utils/my_malloc.c \
+				utils/setenv.c \
+				utils/signal.c \
+				main.c
+OBJDIR		= obj
 SHELL		= /bin/bash
 NAME		= minishell
 CFLAGS		= -Wall -Wextra -Werror -lreadline -fsanitize=address
@@ -7,10 +50,10 @@ HEADER		= Include/minishell.h Include/prottypes.h
 BREW		= $(HOME)/goinfre/homebrew/bin/brew
 INCLUDE		= -I$(HOME)/goinfre/homebrew/opt/readline/include -I$(PWD)/Include
 LIBRARY		= -L$(HOME)/goinfre/homebrew/opt/readline/lib
-BREW		=$(HOME)/goinfre/homebrew/bin/brew
+BREW		= $(HOME)/goinfre/homebrew/bin/brew
 CHEKC_BREW	:= $(shell command -v $(BREW))
 RDL_CHEKC	:= $(shell $(BREW) list | grep "readline")
-
+OBJS 		= $(SRCS:%.c=$(OBJDIR)/%.o)
 
 all	: check_brew
 	@$(MAKE) $(NAME)
@@ -33,16 +76,17 @@ ifndef RDL_CHEKC
 	@echo "[+] done"
 endif
 
+$(NAME)	: $(HEADER) $(OBJS)
+	cc  $(CFLAGS) $(LIBRARY) $(INCLUDE) $(OBJS) -I$(PWD)/Include -o $@
 
-$(NAME)	: $(SRC) $(HEADER)
-	cc  $(CFLAGS) $(LIBRARY) $(INCLUDE) $(SRC) -I$(PWD)/Include -o $@
+$(OBJDIR)/%.o: %.c $(HEADER)
+	@mkdir -p $(dir $@)
+	$(CC)  $(INCLUDE) -c $< -o $@
 
 clean	:
-	@echo "[x] nothing to clean"
+	rm -rf obj
 
-fclean	:
-	rm -rf $(NAME) >/dev/null 2>&1
+fclean	: clean
+	rm -f $(NAME)
 
-re	:
-	$(MAKE) fclean
-	$(MAKE) all
+re	: fclean all
