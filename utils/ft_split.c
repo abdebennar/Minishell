@@ -6,11 +6,11 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 23:58:29 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/23 18:12:38 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/28 19:55:50 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Include/minishell.h"
+#include "minishell.h"
 
 static int	is_in(char s, char *delim)
 {

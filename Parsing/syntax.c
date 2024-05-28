@@ -6,24 +6,24 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:50:12 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/27 16:13:30 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/28 19:48:40 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	get_next_token(char *cmd, int i)
+static t_token	get_next_token(char *cmd, int i)
 {
 	skip_space(cmd, &i);
 	return (get_token(cmd[i], cmd[i + 1]));
 }
 
-bool	is_redir(t_token tok)
+static bool	is_redir(t_token tok)
 {
 	return (tok == IN || tok == OUT || tok == HEREDOC || tok == APPEND);
 }
 
-bool	par_check(char *cmd, t_token tok, int i)
+static bool	par_check(char *cmd, t_token tok, int i)
 {
 	t_token	t_tok;
 	int		j;
@@ -49,6 +49,16 @@ bool	par_check(char *cmd, t_token tok, int i)
 	return (put_tok_err(t_tok));
 }
 
+static bool	redir_check(char *cmd, int i)
+{
+	t_token	n;
+
+	n = get_next_token(cmd, i);
+	if (n != NOT)
+		return (put_tok_err(n));
+	return (true);
+}
+
 bool	check_syntax(t_token tok, char *cmd, int i)
 {
 	t_token	n;
@@ -70,15 +80,9 @@ bool	check_syntax(t_token tok, char *cmd, int i)
 		}
 	}
 	else if (tok == IN || tok == OUT || tok == APPEND || tok == HEREDOC)
-	{
-		n = get_next_token(cmd, i);
-		if (n != NOT)
-			return (put_tok_err(n));
-	}
+		return (redir_check(cmd, i));
 	else if (tok == NOT)
-	{
 		if (get_next_token(cmd, i) == LPR)
 			return (put_tok_err(LPR));
-	}
 	return (true);
 }

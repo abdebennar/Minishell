@@ -6,47 +6,19 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 11:01:06 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/26 21:00:36 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/28 19:55:50 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Include/minishell.h"
+#include "minishell.h"
 
-t_node	*check_tokens(char *cmd, t_token tok, int *i)
-{	
-	t_redir *redir;
-	char	*full_cmd; 
-	int		j = *i;
-	int		f;
-
-	(1337) && (redir = NULL);
-	while (low_pre(tok) && cmd[j])
-	{
-		if (!check_syntax(tok, cmd, j))
-			return (_setenv("?", ft_itoa(1)), NULL);  
-		if (tok != NOT)
-			add_redir_back(new_redir(get_next_word(cmd, &j, tok), tok), &redir);
-		else
-		{
-			if (cmd[j] == '"' || cmd[j] == '\'')
-				j+= skip_quotes((cmd + j + 1), cmd[j]);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
-			j++;
-		}
-		tok = get_token(cmd[j], cmd[j + 1]);
-	}
-	f = get_cmd_area(cmd, *i);
-	full_cmd = ft_substr(cmd, *i, f, 0);
-	*i += f;
-	return (new_node(full_cmd, redir, NOT, 0));
-}
-
-bool	low_pre(t_token tok)
+static bool	low_pre(t_token tok)
 {
 	return (tok == NOT || tok == APPEND
-	|| tok == HEREDOC || tok == IN || tok == OUT);
+		|| tok == HEREDOC || tok == IN || tok == OUT);
 }
 
-int	get_pre(t_token tok)
+static int	get_pre(t_token tok)
 {
 	if (tok == IN || tok == OUT || tok == APPEND || tok == HEREDOC)
 		return (4);
@@ -57,37 +29,42 @@ int	get_pre(t_token tok)
 	return (1);
 }
 
-void	print_tok(t_token tok) // TMP
-{
-	if (tok == PIPE)
-		printf("pipe\n");
-	if (tok == AND)
-		printf("and\n");
-	if (tok == OR)
-		printf("or\n");
-	if (tok == HEREDOC)
-		printf("herdoc\n");
-	if (tok == OUT)
-		printf("out\n");
-	if (tok == IN)
-		printf("in\n");
-	if (tok == LPR)
-		printf("lrp (\n");
-	if (tok == RPR)
-		printf("rpr ) \n");
-	if (tok == NOT)
-		printf("not\n");
-	
-}
-
 void	skip_space(char *cmd, int *i)
 {
 	while (cmd[*i])
 	{
 		if (!ft_strchr(SEP, cmd[*i]))
-			break;
+			break ;
 		(*i)++;
-	} 
+	}
+}
+
+static t_node	*check_tokens(char *cmd, t_token tok, int *i)
+{
+	t_redir	*redir;
+	char	*full_cmd;
+	int		j;
+	int		f;
+
+	(1337) && (j = *i, redir = NULL);
+	while (low_pre(tok) && cmd[j])
+	{
+		if (!check_syntax(tok, cmd, j))
+			return (_setenv("?", ft_itoa(1)), NULL);
+		if (tok != NOT)
+			add_redir_back(new_redir(get_next_word(cmd, &j, tok), tok), &redir);
+		else
+		{
+			if (cmd[j] == '"' || cmd[j] == '\'')
+				j += skip_quotes((cmd + j + 1), cmd[j]);
+			j++;
+		}
+		tok = get_token(cmd[j], cmd[j + 1]);
+	}
+	f = get_cmd_area(cmd, *i);
+	full_cmd = ft_substr(cmd, *i, f, 0);
+	*i += f;
+	return (new_node(full_cmd, redir, NOT, 0));
 }
 
 t_node	*lexer(char *cmd)
@@ -95,7 +72,7 @@ t_node	*lexer(char *cmd)
 	t_node	*list;
 	t_node	*node;
 	t_token	tok;
-	int	i;
+	int		i;
 
 	(1337) && (list = NULL, node = NULL, i = 0);
 	while (cmd[i])

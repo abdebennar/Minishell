@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tree.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 17:37:42 by abennar           #+#    #+#             */
-/*   Updated: 2024/04/24 05:01:18 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/28 19:55:50 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Include/minishell.h"
+#include "minishell.h"
 
 t_node	*tree(t_node	*node)
 {

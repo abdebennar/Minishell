@@ -3,24 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 06:21:55 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/21 20:36:31 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/28 19:55:50 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Include/minishell.h"
+#include "minishell.h"
 
 int	ft_strlen(const char *str)
 {
-	int counter;
-	
+	int	counter;
+
 	if (!str || !*str)
 		return (0);
 	counter = 0;
 	while (*str)
-		counter++, str++;
+	{
+		counter++;
+		str++;
+	}
 	return (counter);
 }
 

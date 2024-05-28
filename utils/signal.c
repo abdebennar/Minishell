@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:11:05 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/28 02:24:52 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/28 18:46:02 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,17 @@ void	sigint_h(int sigN)
 	}
 }
 
-void	sig_ign()
+void	sig_ign(void)
 {
-	if (signal(SIGINT, sigint_h) == SIG_ERR|| signal(SIGQUIT, SIG_IGN) == SIG_ERR)
+	if (signal(SIGINT, sigint_h) == SIG_ERR
+		|| signal(SIGQUIT, SIG_IGN) == SIG_ERR)
 		perror("shell -- signals err");
 }
 
-void	sig_allow()
+void	sig_allow(void)
 {
-	if (signal(SIGINT, SIG_DFL) == SIG_ERR || signal(SIGQUIT, SIG_DFL) == SIG_ERR)
+	if (signal(SIGINT, SIG_DFL) == SIG_ERR
+		|| signal(SIGQUIT, SIG_DFL) == SIG_ERR)
 		perror("shell -- signals err");
 }
 

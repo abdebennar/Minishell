@@ -6,11 +6,11 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 23:50:48 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/26 23:04:16 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/28 19:55:50 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Include/minishell.h"
+#include "minishell.h"
 
 static int	check_the_set(char c, const char *set)
 {
@@ -50,6 +50,5 @@ char	*ft_strtrim(const char *s1, const char *set, int group)
 	}
 	str[trk] = '\0';
 	str[++trk] = '\0';
-	// str[++trk] = '\0';
 	return (str);
 }

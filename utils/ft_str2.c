@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 02:44:18 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/21 05:44:53 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/28 19:00:39 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int	doc_strcmp(char *s1, char *s2)
 	return (*s1 - *s2);
 }
 
-char    *ft_strcpy(char *s1, char *s2)
+char	*ft_strcpy(char *s1, char *s2)
 {
 	int	i;
-	
+
 	i = 0;
 	if (!s2 || !s1)
 		return (NULL);

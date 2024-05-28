@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:43:59 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/28 16:31:34 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/28 19:55:50 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Include/minishell.h"
+#include "minishell.h"
 
-char **copy(char **str, bool extra_size, int group)
+char	**copy(char **str, bool extra_size, int group)
 {
-	int	l_cnt;
-	char **new;
-	int i;
-	int j;
-	
+	int		l_cnt;
+	char	**new;
+	int		i;
+	int		j;
+
 	l_cnt = 0;
 	while (str[l_cnt])
 		l_cnt++;
@@ -38,9 +38,9 @@ char **copy(char **str, bool extra_size, int group)
 	return (new);
 }
 
-void	add_env()
+void	add_env(void)
 {
-	extern	int	rl_catch_signals;
+	extern int	rl_catch_signals;
 	int			sh_lvl;
 	int			err;
 

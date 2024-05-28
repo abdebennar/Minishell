@@ -6,17 +6,17 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:08:54 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/23 15:05:47 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/28 19:55:50 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Include/minishell.h"
+#include "minishell.h"
 
-static t_uint	cmd_len(char *str)
+static int	cmd_len(char *str)
 {
-	t_uint	len;
-	t_uint	i;
-	
+	int	len;
+	int	i;
+
 	len = 0;
 	i = 0;
 	while (str[i])
@@ -28,9 +28,9 @@ static t_uint	cmd_len(char *str)
 	return (len);
 }
 
-static t_uint	del_sp(char *cmd, char q)
+static int	del_sp(char *cmd, char q)
 {
-	t_uint i;
+	int	i;
 
 	i = 0;
 	while (cmd[i] && cmd[i] != q)
@@ -44,7 +44,7 @@ static t_uint	del_sp(char *cmd, char q)
 
 static void	arg_space(char *cmd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (cmd[i])
@@ -57,13 +57,12 @@ static void	arg_space(char *cmd)
 		}
 		i++;
 	}
-	
 }
 
 static void	reset_sp(char **args)
 {
-	t_uint i;
-	t_uint j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (args[i])
@@ -81,11 +80,11 @@ static void	reset_sp(char **args)
 
 void	get_args(t_node *node)
 {
-	t_uint	len;
+	int		len;
 	char	*cmd;
 	char	**args;
 	char	*full_cmd;
-	t_uint	i;
+	int		i;
 
 	full_cmd = node->full_cmd;
 	len = cmd_len(full_cmd);

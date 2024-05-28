@@ -2,7 +2,6 @@ SRCS 		=	Exec/builtins/cd.c \
 				Exec/builtins/echo.c \
 				Exec/builtins/env.c \
 				Exec/builtins/exit.c \
-				Exec/builtins/export_helper.c \
 				Exec/builtins/export.c \
 				Exec/builtins/pwd.c \
 				Exec/builtins/unset.c \
@@ -42,14 +41,14 @@ SRCS 		=	Exec/builtins/cd.c \
 				utils/setenv.c \
 				utils/signal.c \
 				main.c
-OBJDIR		= obj
+OBJDIR		= $(CURDIR)/obj
 SHELL		= /bin/bash
 NAME		= minishell
 CFLAGS		= -Wall -Wextra -Werror -lreadline #-fsanitize=address
 CC			= cc
-HEADER		= Include/minishell.h Include/prottypes.h
+HEADER		= $(CURDIR)/Include/minishell.h $(CURDIR)/Include/prottypes.h
 BREW		= $(HOME)/goinfre/homebrew/bin/brew
-INCLUDE		= -I$(HOME)/goinfre/homebrew/opt/readline/include -I$(PWD)/Include
+INCLUDE		= -I$(HOME)/goinfre/homebrew/opt/readline/include -I$(CURDIR)/Include
 LIBRARY		= -L$(HOME)/goinfre/homebrew/opt/readline/lib
 BREW		= $(HOME)/goinfre/homebrew/bin/brew
 CHEKC_BREW	:= $(shell command -v $(BREW))
@@ -62,32 +61,31 @@ all	: check_brew
 check_brew	:
 ifndef CHEKC_BREW
 	@echo
-	@echo "[x] brew not found,installing now"
-	@echo "wait...."
+	@echo "[x] Homebrew not found. Initiating installation..."
+	@echo "Please wait..."
 	@mkdir ~/goinfre/homebrew >/dev/null 2>&1
 	@curl -s -L https://github.com/Homebrew/brew/tarball/master | \
 	tar xz --strip 1 -C ~/goinfre/homebrew >/dev/null 2>&1 
 	@$(BREW) update --force >/dev/null 2>&1
-	@echo "[+]done"
+	@echo "[+] Homebrew installation complete."
 endif
 ifndef RDL_CHEKC
-	@echo "[x]installing readline lib"
-	@echo "wait...."
+	@echo "[x] Installing readline library..."
+	@echo "Please wait..."
 	@$(BREW) install readline >/dev/null 2>&1
-	@echo "[+] done"
+	@echo "[+] Readline library installation complete."
 endif
 
 $(NAME)	: $(HEADER) $(OBJS)
-	cc  $(CFLAGS) $(LIBRARY) $(INCLUDE) $(OBJS) -I$(PWD)/Include -o $@
+	cc  $(CFLAGS) $(LIBRARY) $(INCLUDE) $(OBJS) -o $@
 
-#//TODO is Include duplicated?
 
 $(OBJDIR)/%.o: %.c $(HEADER)
 	@mkdir -p $(dir $@)
 	$(CC)  $(INCLUDE) -c $< -o $@
 
 clean	:
-	rm -rf obj
+	rm -rf $(OBJDIR)
 
 fclean	: clean
 	rm -f $(NAME)

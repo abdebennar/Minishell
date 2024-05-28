@@ -6,11 +6,11 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 13:45:49 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/07 17:22:18 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/28 19:55:50 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Include/minishell.h"
+#include "minishell.h"
 
 void	lst_iter(t_node	*lst, void (*f)(t_node *))
 {
@@ -38,17 +38,15 @@ t_node	*new_node(char *cmd, t_redir *redir, t_token tok, int pre)
 	return (new);
 }
 
-
 t_redir	*new_redir(char *file, t_token tok)
 {
 	t_redir	*new;
-	
+
 	new = my_malloc(sizeof(t_redir), ALLOC, 0);
 	new->file = file;
 	new->tok = tok;
 	new->next = NULL;
 	new->prev = NULL;
-	
 	return (new);
 }
 
@@ -57,7 +55,7 @@ void	add_redir_back(t_redir *node, t_redir **list)
 	t_redir	*tmp;
 
 	if (!node || !list)
-		return;
+		return ;
 	if (!*list)
 	{
 		*list = node;

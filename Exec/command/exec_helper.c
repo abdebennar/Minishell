@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_helper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 21:35:07 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/26 16:44:22 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/28 19:57:01 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ int	_exit_stat_(int oldx)
 			return (write(2, "\n", 1), 128 + SIGINT);
 		else if (WTERMSIG(oldx) == SIGQUIT)
 			return (write(2, "Quit: 3\n", 8), 128 + SIGQUIT);
-		else if (WTERMSIG(oldx) == SIGSEGV)
-			return (write(2, "sigf : 11\n", 8), 128 + SIGSEGV);
 		else
 			return (WTERMSIG(oldx) + 128);
 	}

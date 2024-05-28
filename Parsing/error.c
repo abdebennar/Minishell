@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 17:40:17 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/25 14:50:36 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/28 19:45:31 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	exec_err(errno_t err, char *path, char *cmd)
 		return (put_str_err(NOCMD_ERR, cmd), 127);
 	else
 		put_str_err(strerror(err), "execve ");
-	if (E2BIG || err == EACCES || err == EISDIR|| err == ENOEXEC
+	if (E2BIG || err == EACCES || err == EISDIR || err == ENOEXEC
 		|| err == ENOTDIR || err == EPERM)
 		return (126);
 	else if (err == ENOENT)
@@ -35,7 +35,7 @@ int	exec_err(errno_t err, char *path, char *cmd)
 	return (1);
 }
 
-char *get_token_format(t_token tok)
+static char	*get_token_format(t_token tok)
 {
 	if (tok == PIPE)
 		return ("`|'");
@@ -60,7 +60,7 @@ char *get_token_format(t_token tok)
 
 bool	put_tok_err(t_token tok)
 {
-	char *tok_f;
+	char	*tok_f;
 
 	tok_f = get_token_format(tok);
 	write(2, SYNTAX_ERR, ft_strlen(SYNTAX_ERR));

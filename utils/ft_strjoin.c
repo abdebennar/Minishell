@@ -6,11 +6,11 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 22:16:11 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/04/23 19:54:49 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/28 19:55:50 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Include/minishell.h"
+#include "minishell.h"
 
 static char	*one_null(char *s1, char *s2, int group)
 {
@@ -29,7 +29,8 @@ char	*ft_strjoin(char *s1, char *s2, int group)
 
 	if (!s1 || !s2)
 		return (one_null(s1, s2, group));
-	join = my_malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char), 1, group);
+	join = my_malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char), 1,
+			group);
 	if (!join)
 		return (NULL);
 	index = -1;

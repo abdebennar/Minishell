@@ -6,13 +6,13 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 17:17:54 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/25 23:25:30 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/28 19:55:50 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Include/minishell.h"
+#include "minishell.h"
 
-void	tok_push(t_node **head, t_node **postfix, t_node **tk_st)
+static void	tok_push(t_node **head, t_node **postfix, t_node **tk_st)
 {
 	while ((*tk_st) && ((*tk_st)->pre > (*head)->pre
 			|| ((*tk_st)->pre == (*head)->pre && (*tk_st)->tok != PIPE)))
@@ -22,7 +22,7 @@ void	tok_push(t_node **head, t_node **postfix, t_node **tk_st)
 	top_push(head, tk_st);
 }
 
-void	par_push(t_node **head, t_node **postfix, t_node **tk_st)
+static void	par_push(t_node **head, t_node **postfix, t_node **tk_st)
 {
 	t_node	*trash;
 

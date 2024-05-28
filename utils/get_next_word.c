@@ -6,23 +6,23 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 16:41:13 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/26 23:03:01 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/28 19:55:50 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Include/minishell.h"
+#include "minishell.h"
 
 static bool	is_sep(char c, char *sep)
 {
 	if (ft_strchr(sep, c) != NULL)
 		return (true);
-	return (false);	
+	return (false);
 }
 
-char *get_next_word(char *str, int *j, t_token tok)
+char	*get_next_word(char *str, int *j, t_token tok)
 {
 	int		start;
-	char *substr;
+	char	*substr;
 
 	str[*j] = 127;
 	if (tok == HEREDOC || tok == APPEND)
@@ -35,9 +35,10 @@ char *get_next_word(char *str, int *j, t_token tok)
 	{
 		if (str[*j] == '"' || str[*j] == '\'')
 			*j += skip_quotes((str + *j + 1), str[*j]);
-		if (is_sep(str[*j], " \t\n\v\r\f") || get_token(str[*j], str[(*j) + 1]) != NOT
+		if (is_sep(str[*j], " \t\n\v\r\f")
+			|| get_token(str[*j], str[(*j) + 1]) != NOT
 			|| get_token(str[*j], str[(*j) + 1]) == END)
-			break;
+			break ;
 		(*j)++;
 	}
 	substr = ft_substr(str, start, *j - start, 0);
