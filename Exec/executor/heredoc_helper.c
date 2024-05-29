@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 01:34:18 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/29 22:16:43 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/30 00:09:31 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,15 @@ int	handle_heredoc(t_node *root)
 	alter = root->redir;
 	while (alter)
 	{
-		alter->file = beta_expanding(alter->file);
-		if (!alter->file)
-			alter->file = ft_strdup("\0", 0);
 		if (alter->tok == HEREDOC)
+		{
+			alter->file = beta_expanding(alter->file);
+			if (!alter->file)
+				alter->file = ft_strdup("\0", 0);
 			alter->content = _heredoc_(alter);
-		if (alter->content == NULL)
+			if (alter->content == NULL)
 			return (1);
+		}
 		alter = alter->next;
 	}
 	if (root->left && handle_heredoc(root->left))
