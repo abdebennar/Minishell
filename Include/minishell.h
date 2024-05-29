@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/28 19:50:05 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/29 01:09:58 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include <readline/history.h>
 # include <signal.h> 
 # include <sys/stat.h>
-// # include <ctype.h>
 # include <string.h>
 # include <termios.h>
 # include "prottypes.h"

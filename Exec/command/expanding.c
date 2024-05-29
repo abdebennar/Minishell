@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expanding.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 00:29:18 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/28 16:28:47 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/29 01:04:18 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,14 @@ char	**_expanding_(t_node **node)
 
 	raw_len = count_strings((*node)->cmd);
 	cmd = b_expanding_((*node)->cmd);
-	(1) && (w_cmd = NULL, v_index = -1);
-	while (cmd && ++v_index < raw_len)
-		w_cmd = concatenate_strings(w_cmd, ft_split(cmd[v_index], "\a", 0));
-	return (w_cmd);
+	return (cmd);
 }
+
+/*
+** 	(1) && (w_cmd = NULL, v_index = -1);
+** 	while (cmd && ++v_index < raw_len)
+** 		w_cmd = concatenate_strings(w_cmd, ft_split(cmd[v_index], "\a", 0));
+*/
 
 char	*beta_expanding(char *f_name)
 {
