@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_helper.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 01:34:18 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/30 00:09:31 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/30 00:33:00 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	handle_heredoc(t_node *root)
 				alter->file = ft_strdup("\0", 0);
 			alter->content = _heredoc_(alter);
 			if (alter->content == NULL)
-			return (1);
+				return (1);
 		}
 		alter = alter->next;
 	}

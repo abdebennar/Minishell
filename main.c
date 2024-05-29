@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/30 00:10:50 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/30 00:30:26 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(void)
 		if (handle_heredoc(node))
 			node = NULL;
 		_exec_arch_(node);
-		close_doc(node);
+		// close_doc(node);
 		g_sig = 0;
 		if (isatty(0) && tcsetattr(0, TCSANOW, &att))
 			perror("termios");
