@@ -6,43 +6,36 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/29 04:05:13 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/29 18:55:26 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**trim_cmd(char **cmd)
+char	**trim_cmd(char **cmd, int raw_len)
 {
-	char	**ret;
-	char	**tmp;
+	char	**w_cmd;
+	int		v_index;
 
-	ret = NULL;
-	while (!cmd[0])
-		cmd = cmd + 1;
-	while (*cmd)
+ 	(1) && (w_cmd = NULL, v_index = -1);
+ 	while (cmd && ++v_index < raw_len)
 	{
-		tmp = ft_split(*cmd, "\a", 0);
-		ret = concatenate_strings(ret, tmp);
-		cmd++;
+		w_cmd = concatenate_strings(w_cmd, ft_split(cmd[v_index], "\a", 0));
 	}
-	return (ret);
+	return (w_cmd);
 }
 
-void	my_execve(t_node *node)
+void	my_execve(t_node *node, int raw_len)
 {
 	char	*path;
 	
 	sig_allow();
-	if (!node->cmd)
+	node->cmd = trim_cmd(node->cmd, raw_len);
+	if (!(node->cmd))
 		exit(0);
-	// if (!(node)->cmd[0])
-		// (put_str_err(NOCMD_ERR, node->cmd[0]), exit (127));
-	node->cmd = trim_cmd(node->cmd);
-	if (node->cmd && node->cmd[0])
-		path = add_path((node)->cmd[0]);
-	else
-		node->cmd[0] = ft_strdup("", 0);
+	if (!((node)->cmd[0]))
+		(put_str_err(NOCMD_ERR, node->cmd[0]), exit(127));
+	path = add_path((node)->cmd[0]);
 	execve(path, (node)->cmd, environ);
 	exit (exec_err(errno, path, node->cmd[0]));
 }
@@ -52,11 +45,11 @@ void	_exec_(t_node *node)
 	int	forked;
 	int	bk_fd[2];
 	int	exit_stat;
-	// int	count_cmds;
+	int	raw_len;
 
 	bk_fd[0] = dup(0);
 	bk_fd[1] = dup(1);
-	//ft count how many args on cmd and set it to count_cmd and pass it to my_exec
+	raw_len = count_strings(node->cmd);
 	node->cmd = _expanding_(&node);
 	if (_redirections_(&node) || is_builtin(node))
 		return (reset_fds(&node, bk_fd));
@@ -69,7 +62,7 @@ void	_exec_(t_node *node)
 		exit(1);
 	}
 	if (!forked)
-		my_execve(node);
+		my_execve(node, raw_len);
 	waitpid(forked, &exit_stat, 0);
 	_setenv("?", ft_itoa(_exit_stat_(exit_stat)));
 	reset_fds(&node, bk_fd);

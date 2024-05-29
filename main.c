@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/28 18:42:12 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/29 17:42:21 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,3 +72,6 @@ int	main(void)
 
 // fd leak : multi heredoc in pipe and || ///////////
 // heredoc file change its place to /tmp or any  ///////////
+//(3232) ls
+//env -i bash --> echo $PATH
+//exit stat of SYNXT ERR is 258 not 2
