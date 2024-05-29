@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_helper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 21:35:07 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/28 19:57:01 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/29 04:02:35 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,8 @@ void	reset_fds(t_node **node, int *bk_fd)
 		close((*node)->fd[1]);
 }
 
-bool	is_builtin(t_node *node)
+bool	b_is_builtin(t_node *node, char *str)
 {
-	char	*str;
-
-	if (!node || !(node->cmd) || !(node->cmd[0]))
-		return (false);
-	str = node->cmd[0];
 	if (!ft_strcmp(str, "cd"))
 		return (_cd_(node), true);
 	else if (!ft_strcmp(str, "echo"))
@@ -61,6 +56,25 @@ bool	is_builtin(t_node *node)
 		return (_pwd_(), true);
 	else if (!ft_strcmp(str, "unset"))
 		return (_unset_(node), true);
+	return (false);
+}
+
+bool	is_builtin(t_node *node)
+{
+	char	*str;
+	int		index;
+
+	if (!node || !(node->cmd) || !(node->cmd[0]))
+		return (false);
+	index = -1;
+	while (node->cmd[++index])
+		find_replace(node->cmd[index], '\a', ' ');
+	str = node->cmd[0];
+	if (b_is_builtin(node, str))
+		return (true);
+	index = -1;
+	while (node->cmd[++index])
+		find_replace(node->cmd[index], ' ', '\a');
 	return (false);
 }
 

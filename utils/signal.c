@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:11:05 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/28 18:46:02 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/29 04:07:29 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	sig_allow(void)
 	if (signal(SIGINT, SIG_DFL) == SIG_ERR
 		|| signal(SIGQUIT, SIG_DFL) == SIG_ERR)
 		perror("shell -- signals err");
+		// || signal(SIGSEGV, SIG_IGN) == SIG_ERR)
 }
 
 void	heredoc_h(int n)

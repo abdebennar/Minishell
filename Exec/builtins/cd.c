@@ -36,6 +36,7 @@ void	_cd_(t_node *node)
 	char	old_pwd[PATH_MAX];
 	char	pwd[PATH_MAX];
 	int		exit_err;
+	char	*err;
 	char	**cmd;
 
 	cmd = node->cmd;
@@ -49,7 +50,9 @@ void	_cd_(t_node *node)
 		_setenv("?", ft_itoa(1));
 		return ;
 	}
-	getcwd(pwd, PATH_MAX);
+	err = getcwd(pwd, PATH_MAX);
+	if (!err)
+		perror("cd: error retrieving current directory");
 	_setenv("OLDPWD", old_pwd);
 	_setenv("PWD", pwd);
 	_setenv("?", ft_itoa(0));

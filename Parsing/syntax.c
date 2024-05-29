@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:50:12 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/28 19:48:40 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/29 03:49:32 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static bool	par_check(char *cmd, t_token tok, int i)
 	t_tok = get_next_token(cmd, i);
 	if (tok == RPR)
 	{
-		if (is_redir(t_tok) || i < 2)
+		if (t_tok == NOT || is_redir(t_tok) || i < 2)
 			return (put_tok_err(tok));
 		return (true);
 	}
