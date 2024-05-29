@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 13:45:49 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/28 19:55:50 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/29 22:23:28 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ t_redir	*new_redir(char *file, t_token tok)
 	new = my_malloc(sizeof(t_redir), ALLOC, 0);
 	new->file = file;
 	new->tok = tok;
+	new->content = NULL;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);

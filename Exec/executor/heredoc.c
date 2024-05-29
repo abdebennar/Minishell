@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 05:50:24 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/28 01:04:16 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/29 22:38:21 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*random_f(void)
+char	*random_f(void)
 {
 	char	*file_name;
 	int		file_len;
@@ -62,12 +62,10 @@ char	*expand_heredoc(char *line)
 	return (clean);
 }
 
-static int	fill_file(t_redir *alter, char *file_name)
+static char *fill_file(t_redir *alter)
 {
 	char	*line;
 	char	*content;
-	char	*exp_line;
-	int		fd_file;
 
 	content = NULL;
 	while (1)
@@ -78,37 +76,29 @@ static int	fill_file(t_redir *alter, char *file_name)
 			(1) && (free(line), line = NULL);
 			break ;
 		}
-		exp_line = expand_heredoc(line);
+		content = ft_strjoin(content, ft_strjoin(line, "\n", 0), 0);
 		(line) && (free(line), line = NULL);
-		content = ft_strjoin(content, ft_strjoin(exp_line, "\n", 0), 0);
 	}
 	if (g_sig == 2)
-		return (-1);
-	fd_file = open(file_name, O_RDWR | O_CREAT | O_TRUNC, 0777);
-	if (fd_file < 0)
-		return (perror("open"), -1);
-	write(fd_file, content, ft_strlen(content));
-	return (close(fd_file), fd_file);
+		return (NULL);
+	return (content);
 }
 
-int	_heredoc_(t_redir *alter)
+char	*_heredoc_(t_redir *alter)
 {
-	char	*file_name;
-	int		fd_in;
+	char	*content;
+	int		fd;
 
-	fd_in = 0;
+	fd = dup(STDIN_FILENO);
 	signal(SIGINT, heredoc_h);
-	file_name = random_f();
-	fd_in = fill_file(alter, file_name);
-	if (fd_in < 0)
+	content = fill_file(alter);
+	if (!content)
 	{
-		unlink(file_name);
 		g_sig = 1;
-		return (-1);
+		dup2(fd, STDIN_FILENO);
+		close(fd);
+		return (NULL);
 	}
-	fd_in = open(file_name, O_RDWR | O_CREAT, 0644);
-	unlink(file_name);
-	if (fd_in < 0)
-		return (perror("open"), -1);
-	return (fd_in);
+	close(fd);
+	return (content);
 }

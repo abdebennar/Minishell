@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expanding.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 00:29:18 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/29 19:03:56 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/29 22:26:14 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,7 @@ char	**b_expanding_(char **cmd)
 
 char	**_expanding_(t_node **node)
 {
-	char	**w_cmd;
 	char	**cmd;
-	int		v_index;
-	int		raw_len;
 
 	cmd = b_expanding_((*node)->cmd);
 	return (cmd);

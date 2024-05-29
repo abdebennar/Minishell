@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 11:01:06 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/29 17:51:26 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/29 23:03:47 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static t_node	*check_tokens(char *cmd, t_token tok, int *i)
 	while (low_pre(tok) && cmd[j])
 	{
 		if (!check_syntax(tok, cmd, j))
-			return (_setenv("?", ft_itoa(1)), NULL); // TODO exit stat on SYNTX ERR
+			return (_setenv("?", ft_itoa(258)), NULL); // TODO exit stat on SYNTX ERR
 		if (tok != NOT)
 			add_redir_back(new_redir(get_next_word(cmd, &j, tok), tok), &redir);
 		else
@@ -79,7 +79,7 @@ t_node	*lexer(char *cmd)
 	{
 		tok = get_token(cmd[i], cmd[i + 1]);
 		if (!check_syntax(tok, cmd, i))
-			return (_setenv("?", ft_itoa(1)), NULL);
+			return (_setenv("?", ft_itoa(258)), NULL);
 		if (!low_pre(tok) && ++i)
 		{
 			node = new_node(NULL, NULL, tok, get_pre(tok));

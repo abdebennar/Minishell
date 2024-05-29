@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:50:12 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/29 03:49:32 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/29 23:19:38 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static t_token	get_next_token(char *cmd, int i)
 {
 	skip_space(cmd, &i);
+	i += skip_quotes((cmd + i + 1), cmd[i]);
 	return (get_token(cmd[i], cmd[i + 1]));
 }
 
@@ -63,7 +64,7 @@ bool	check_syntax(t_token tok, char *cmd, int i)
 {
 	t_token	n;
 
-	++i;
+	(cmd[i] != '"' &&  cmd[i] != '\'') && (++i);
 	(tok == HEREDOC || tok == OR || tok == APPEND || tok == AND) && (i++);
 	if (tok == LPR || tok == RPR)
 		return (par_check(cmd, tok, i));

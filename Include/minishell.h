@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/29 01:09:58 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/29 22:17:10 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,10 +179,12 @@ void	_unset_(t_node *node);
 void	_and_(t_node *node);
 void	_or_(t_node *node);
 int		_redirections_(t_node **node);
-int		_heredoc_(t_redir *alter);
+char	*_heredoc_(t_redir *alter);
 void	_pipe_(t_node *node);
 void	close_doc(t_node *root);
 int		handle_heredoc(t_node *root);
+char	*random_f(void);
+char	*expand_heredoc(char *line);
 
 /*
 ** Parsing

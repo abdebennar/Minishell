@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_helper.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 01:34:18 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/28 16:23:18 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/29 22:16:43 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,9 @@ void	close_doc(t_node *root)
 int	handle_heredoc(t_node *root)
 {
 	t_redir	*alter;
-	int		fd;
 
 	if (!root)
 		return (0);
-	fd = dup(STDIN_FILENO);
 	alter = root->redir;
 	while (alter)
 	{
@@ -46,12 +44,11 @@ int	handle_heredoc(t_node *root)
 		if (!alter->file)
 			alter->file = ft_strdup("\0", 0);
 		if (alter->tok == HEREDOC)
-			alter->fd = _heredoc_(alter);
-		if (alter->fd == -1)
-			return (dup2(fd, 0), close(fd), 1);
+			alter->content = _heredoc_(alter);
+		if (alter->content == NULL)
+			return (1);
 		alter = alter->next;
 	}
-	close(fd);
 	if (root->left && handle_heredoc(root->left))
 		return (1);
 	if (root->right && handle_heredoc(root->right))

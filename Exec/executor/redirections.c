@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 04:00:45 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/28 16:40:31 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/29 23:01:49 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,51 @@ int	_right_(t_node **node)
 	return (0);
 }
 
+void	find_replace2(char *str, char find, char rep)
+{
+	if (!str)
+		return ;
+	while (*str)
+	{
+		if (*str == find && *(str + 1) == find)
+		{
+			str++;
+			*str = rep;
+		}
+		str++;
+	}
+}
+
+int	heredoc_file(char *content)
+{
+	int 	fd;
+	char 	*line;
+	char	*file_name;
+	char	**her_cnt;
+	char	*new_cnt;
+
+	file_name = random_f();
+	new_cnt = NULL;
+	if (content)
+	{
+		find_replace2(content, '\n', '\a');
+		her_cnt = ft_split(content, "\a", 0);
+		while (*her_cnt)
+		{
+			line = expand_heredoc(*her_cnt);
+			new_cnt = ft_strjoin(new_cnt, ft_strjoin(line, "\n", 0), 0);
+			line = NULL;
+			her_cnt++;
+		}
+	}
+	fd = open(file_name, O_RDWR | O_CREAT | O_TRUNC, 0777);
+	write(fd, new_cnt, ft_strlen(new_cnt));
+	close(fd);
+	fd = open(file_name, O_RDWR);
+	unlink(file_name);
+	return (fd);
+}
+
 int	_left_(t_node **node)
 {
 	t_redir	*alter;
@@ -60,7 +105,7 @@ int	_left_(t_node **node)
 		{
 			if (fd > 0)
 				close(fd);
-			fd = alter->fd;
+			fd = heredoc_file(alter->content);
 		}
 		if (fd < 0)
 			return (perror("open"), -1);
@@ -69,6 +114,7 @@ int	_left_(t_node **node)
 	(*node)->fd[0] = fd;
 	return (0);
 }
+
 
 int	redir_io(t_node *node)
 {

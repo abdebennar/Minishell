@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:42:30 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/28 19:30:38 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/29 22:17:38 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_redir
 	char			*file;
 	t_token			tok;
 	int				fd;
+	char			*content;
 	struct s_redir	*next;
 	struct s_redir	*prev;
 }	t_redir;
