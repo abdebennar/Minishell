@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/30 20:08:25 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/30 20:27:56 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ char	**trim_cmd(char **cmd, int raw_len)
 	{
 		splited = ft_split(cmd[v_index], "\a", 0);
 		if (splited && !splited[0])
+		{
+			splited = my_malloc(sizeof(char *) * 2, 1, 0);
 			splited[0] = ft_strdup("", 0);
+			splited[1] = NULL;
+		}
 		w_cmd = concatenate_strings(w_cmd, splited);
 	}
 	return (w_cmd);

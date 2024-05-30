@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 01:44:16 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/25 23:37:32 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/30 20:36:49 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ bool	check_pattern(char *s, char *p)
 	{
 		if (*p == '*')
 			(1) && (p_star = p++, s_star = s);
-		else if (*p == *s || (*p == '#' && *s == '*'))
+		else if (*p == *s || (*p == '\f' && *s == '*'))
 			(1) && (s++, p++);
 		else if (p_star)
 			(1) && (p = p_star + 1, s = ++s_star);
@@ -66,7 +66,7 @@ char	*prep_w(char *pattern)
 		if (*pattern == '\'' || *pattern == '"')
 			escape_q_wild(*pattern, &dq, &sq);
 		else if ((*pattern == '*') && (sq || dq))
-			out = add_c(out, '#', 0);
+			out = add_c(out, '\f', 0);
 		else
 			out = add_c(out, *pattern, 0);
 		pattern++;
