@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:50:12 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/30 20:38:42 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/31 00:16:54 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ bool	check_syntax(t_token tok, char *cmd, int i)
 {
 	t_token	n;
 
-	(cmd[i] != '"' &&  cmd[i] != '\'') && (++i);
+	(cmd[i] != '"' && cmd[i] != '\'') && (++i);
 	(tok == HEREDOC || tok == OR || tok == APPEND || tok == AND) && (i++);
 	if (tok == LPR || tok == RPR)
 		return (par_check(cmd, tok, i));

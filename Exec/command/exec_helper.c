@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_helper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 21:35:07 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/30 23:30:24 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/31 00:14:30 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ bool	b_is_builtin(t_node *node, char *str)
 bool	check_builtin(char *str)
 {
 	if (!ft_strcmp(str, "cd"))
-		return ( true);
+		return (true);
 	else if (!ft_strcmp(str, "echo"))
 		return (true);
 	else if (!ft_strcmp(str, "env"))
@@ -70,14 +70,13 @@ bool	check_builtin(char *str)
 	else if (!ft_strcmp(str, "exit"))
 		return (true);
 	else if (!ft_strcmp(str, "export"))
-		return ( true);
+		return (true);
 	else if (!ft_strcmp(str, "pwd"))
 		return (true);
 	else if (!ft_strcmp(str, "unset"))
 		return (true);
 	return (false);
 }
-
 
 bool	is_builtin(t_node *node)
 {
@@ -94,39 +93,11 @@ bool	is_builtin(t_node *node)
 		{
 			find_replace(node->cmd[index], '\v', ' ');
 			find_replace(node->cmd[index], '\177', ' ');
-			// find_replace(node->cmd[index], '\a', ' ');
-			printf("current : %s\n", node->cmd[index]);
-			splited = concatenate_strings(splited, ft_split(node->cmd[index], "\a", 0));
+			splited = concatenate_strings(splited,
+					ft_split(node->cmd[index], "\a", 0));
 		}
 		node->cmd = splited;
 		return (b_is_builtin(node, node->cmd[0]));
 	}
 	return (false);
-}
-
-char	*add_path(char *cmd)
-{
-	int		index;
-	char	*path;
-	char	*out;
-	char	**path_v;
-
-	if (!cmd)
-		return (NULL);
-	if (ft_strchr(cmd, '/'))
-		return (cmd);
-	index = -1;
-	path = getenv("PATH");
-	if (!path)
-		return (NULL);
-	path_v = ft_split(path, ":", 0);
-	index = -1;
-	while (path_v[++index])
-	{
-		out = ft_strjoin(path_v[index], "/", 0);
-		out = ft_strjoin(out, cmd, 0);
-		if (!access(out, F_OK))
-			return (out);
-	}
-	return (NULL);
 }

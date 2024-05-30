@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 04:00:45 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/29 23:01:49 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/31 00:15:21 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	find_replace2(char *str, char find, char rep)
 
 int	heredoc_file(char *content)
 {
-	int 	fd;
-	char 	*line;
+	int		fd;
+	char	*line;
 	char	*file_name;
 	char	**her_cnt;
 	char	*new_cnt;
@@ -82,8 +82,7 @@ int	heredoc_file(char *content)
 	write(fd, new_cnt, ft_strlen(new_cnt));
 	close(fd);
 	fd = open(file_name, O_RDWR);
-	unlink(file_name);
-	return (fd);
+	return (unlink(file_name), fd);
 }
 
 int	_left_(t_node **node)
@@ -112,24 +111,6 @@ int	_left_(t_node **node)
 		alter = alter->next;
 	}
 	(*node)->fd[0] = fd;
-	return (0);
-}
-
-
-int	redir_io(t_node *node)
-{
-	if ((node)->fd[0] != 0)
-	{
-		if (dup2((node)->fd[0], STDIN_FILENO) < 0)
-			return (perror("dup2"), close((node)->fd[0]), -1);
-		close((node)->fd[0]);
-	}
-	if ((node)->fd[1] != 1)
-	{
-		if (dup2((node)->fd[1], STDOUT_FILENO) < 0)
-			return (perror("dup2"), close((node)->fd[1]), -1);
-		close((node)->fd[1]);
-	}
 	return (0);
 }
 

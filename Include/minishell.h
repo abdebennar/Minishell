@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/30 20:08:56 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/31 00:16:04 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ void	close_doc(t_node *root);
 int		handle_heredoc(t_node *root);
 char	*random_f(void);
 char	*expand_heredoc(char *line);
+int		redir_io(t_node *node);
 
 /*
 ** Parsing

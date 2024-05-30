@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/30 22:21:37 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/30 23:48:36 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ int	main(void)
 // FIX // TODO //
 
 /*
-** ls " > file "
-** cat "" ls "" ...  non stable behaviour 
+** ls " > file " ////////////////
+** cat "" ls "" ...  non stable behaviour ////////////////
 */
 
-// export l="   p" && export p=$l && echo $p
+// export l="   p" && export p=$l && echo $p ////////////////
 // $DSALKM""   					///////////
 // << l | << l					///////////
 //(<<"|)")               ////////////
@@ -70,9 +70,6 @@ int	main(void)
 // << s>  							/////
 //echo h > ''      					///////////
 // export a=' * ' && echo $a  ??
-
-// export l="      1"
-// export p=$l
 
 // unset with a var without value /////////////
 // top with (sig quit) ruines the readline ///////////

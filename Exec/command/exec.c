@@ -3,14 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/30 22:35:15 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/31 00:12:55 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*add_path(char *cmd)
+{
+	int		index;
+	char	*path;
+	char	*out;
+	char	**path_v;
+
+	if (!cmd)
+		return (NULL);
+	if (ft_strchr(cmd, '/'))
+		return (cmd);
+	index = -1;
+	path = getenv("PATH");
+	if (!path)
+		return (NULL);
+	path_v = ft_split(path, ":", 0);
+	index = -1;
+	while (path_v[++index])
+	{
+		out = ft_strjoin(path_v[index], "/", 0);
+		out = ft_strjoin(out, cmd, 0);
+		if (!access(out, F_OK))
+			return (out);
+	}
+	return (NULL);
+}
 
 char	**trim_cmd(char **cmd, int raw_len)
 {
@@ -18,8 +45,8 @@ char	**trim_cmd(char **cmd, int raw_len)
 	char	**splited;
 	int		v_index;
 
- 	(1) && (w_cmd = NULL, v_index = -1);
- 	while (cmd && ++v_index < raw_len)
+	(1) && (w_cmd = NULL, v_index = -1);
+	while (cmd && ++v_index < raw_len)
 	{
 		find_replace(cmd[v_index], '\177', '\a');
 		splited = ft_split(cmd[v_index], "\a", 0);
@@ -37,7 +64,7 @@ char	**trim_cmd(char **cmd, int raw_len)
 void	my_execve(t_node *node, int raw_len)
 {
 	char	*path;
-	
+
 	sig_allow();
 	node->cmd = trim_cmd(node->cmd, raw_len);
 	if (!(node->cmd))

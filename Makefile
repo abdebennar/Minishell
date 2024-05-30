@@ -17,6 +17,7 @@ SRCS 		=	Exec/builtins/cd.c \
 				Exec/executor/heredoc_helper.c \
 				Exec/executor/pipe.c \
 				Exec/executor/redirections.c \
+				Exec/executor/redirections_helper.c \
 				Parsing/algo.c \
 				Parsing/algo_utils.c \
 				Parsing/error.c \
@@ -45,7 +46,7 @@ OBJDIR		= $(CURDIR)/obj
 SHELL		= /bin/bash
 NAME		= minishell
 CFLAGS		= -Wall -Wextra -Werror
-XFLAGS		= -lreadline #-fsanitize=
+XFLAGS		= -lreadline# -fsanitize=address
 CC			= cc
 HEADER		= $(CURDIR)/Include/minishell.h $(CURDIR)/Include/prottypes.h
 BREW		= $(HOME)/goinfre/homebrew/bin/brew
