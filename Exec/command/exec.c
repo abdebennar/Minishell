@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/30 20:27:56 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/30 22:35:15 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char	**trim_cmd(char **cmd, int raw_len)
  	(1) && (w_cmd = NULL, v_index = -1);
  	while (cmd && ++v_index < raw_len)
 	{
+		find_replace(cmd[v_index], '\177', '\a');
 		splited = ft_split(cmd[v_index], "\a", 0);
 		if (splited && !splited[0])
 		{

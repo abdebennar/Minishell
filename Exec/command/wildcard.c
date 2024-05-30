@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 01:44:16 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/30 20:36:49 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/30 21:07:23 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ char	*_wildcard_(char *pattern)
 		{
 			if (*(entry->d_name) == '.' && *pattern != '.')
 				continue ;
-			(extracted) && (extracted = ft_strjoin(extracted, "\a", 0), 0);
+			(extracted) && (extracted = ft_strjoin(extracted, "\a", 0), 0); // FIX 
 			extracted = ft_strjoin(extracted, entry->d_name, 0);
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:33:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/28 16:28:13 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/30 21:22:10 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ char	*dollar(char *raw, int *index, int heredoc)
 	out = NULL;
 	if ((*raw) == '?')
 		return ((*index)++, getenv("?"));
-	else if (!*raw || *raw == ' ' || *raw == '\t')
+	else if (!*raw || *raw == ' ' || *raw == '\t') //TODO add ' OR ""
 		return (ft_strdup("$", 0));
 	out = check_envar(raw, index);
 	if (!heredoc && out && _wildcard_(prep_w(out)))
 		out = _wildcard_(prep_w(out));
 	if (!heredoc && out)
-		find_replace(out, ' ', '\a');
+		find_replace(out, ' ', '\177'); // * inside $
 	return (out);
 }
 

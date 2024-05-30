@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/30 03:43:31 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/30 22:21:37 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	g_sig = 0;
 
 void	term_attr(struct termios *att)
 {
-	if (isatty(0) && tcgetattr(0, att))
+	if (isatty(STDIN_FILENO) && tcgetattr(STDIN_FILENO, att))
 		perror("termios");
 }
 
@@ -40,11 +40,11 @@ int	main(void)
 		term_attr(&att);
 		_exec_arch_(node);
 		g_sig = 0;
-		if (isatty(0) && tcsetattr(0, TCSANOW, &att))
+		if (isatty(STDIN_FILENO) && tcsetattr(1, TCSANOW, &att))
 			perror("termios");
 	}
 	put_err("exit\n");
-	clear_history();
+	rl_clear_history();
 	my_malloc(0, 0, 1);
 	my_malloc(0, 0, 0);
 }

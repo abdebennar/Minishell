@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_helper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 21:35:07 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/29 04:02:35 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/30 23:30:24 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,22 +59,48 @@ bool	b_is_builtin(t_node *node, char *str)
 	return (false);
 }
 
+bool	check_builtin(char *str)
+{
+	if (!ft_strcmp(str, "cd"))
+		return ( true);
+	else if (!ft_strcmp(str, "echo"))
+		return (true);
+	else if (!ft_strcmp(str, "env"))
+		return (true);
+	else if (!ft_strcmp(str, "exit"))
+		return (true);
+	else if (!ft_strcmp(str, "export"))
+		return ( true);
+	else if (!ft_strcmp(str, "pwd"))
+		return (true);
+	else if (!ft_strcmp(str, "unset"))
+		return (true);
+	return (false);
+}
+
+
 bool	is_builtin(t_node *node)
 {
-	char	*str;
 	int		index;
+	char	**splited;
 
 	if (!node || !(node->cmd) || !(node->cmd[0]))
 		return (false);
 	index = -1;
-	while (node->cmd[++index])
-		find_replace(node->cmd[index], '\a', ' ');
-	str = node->cmd[0];
-	if (b_is_builtin(node, str))
-		return (true);
-	index = -1;
-	while (node->cmd[++index])
-		find_replace(node->cmd[index], ' ', '\a');
+	splited = NULL;
+	if (check_builtin(node->cmd[0]))
+	{
+		while (node->cmd[++index])
+		{
+			find_replace(node->cmd[index], '\v', ' ');
+			find_replace(node->cmd[index], '\177', ' ');
+			// find_replace(node->cmd[index], '\a', ' ');
+			printf("current : %s\n", node->cmd[index]);
+			splited = concatenate_strings(splited, ft_split(node->cmd[index], "\a", 0));
+		}
+		node->cmd = splited;
+		return (b_is_builtin(node, node->cmd[0]));
+	}
 	return (false);
 }
 

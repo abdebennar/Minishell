@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mng_args.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:08:54 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/30 20:39:09 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/30 21:27:31 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	del_sp(char *cmd, char q)
 	while (cmd[i] && cmd[i] != q)
 	{
 		if (cmd[i] == ' ')
-			cmd[i] = '\177';
+			cmd[i] = '\v';
 		i++;
 	}
 	return (i + 1);
@@ -70,7 +70,7 @@ void	reset_sp(char **args)
 		j = 0;
 		while (args[i][j])
 		{
-			if (args[i][j] == '\177')
+			if (args[i][j] == '\v')
 				args[i][j] = ' ';
 			j++;
 		}
@@ -101,7 +101,7 @@ void	get_args(t_node *node)
 		len++;
 	}
 	cmd[i] = '\0';
-	arg_space(cmd);
+	arg_space(cmd);  // NOTE // 177 betw " "
 	args = ft_split(cmd, " ", 0);
 	node->cmd = args;
 }

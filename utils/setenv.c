@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 00:01:17 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/30 20:06:21 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/30 21:39:35 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ void	_setenv(char *name, char *new_value)
 {
 	int	offset;
 
-	find_replace(new_value, '\a', ' ');
-	find_replace(new_value, '\177', ' ');
 	if (find_env(&offset, name))
 		_exist(name, new_value);
 	else
