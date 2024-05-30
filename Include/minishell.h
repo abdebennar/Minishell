@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/29 22:17:10 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/30 20:08:56 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	add_env(void);
 int		get_c(char *s);
 char	*ft_itoa(int n);
 bool	find_env(int *offset, char *name);
+void	reset_sp(char **args);
 
 /*
 ** utils : mng_cmd

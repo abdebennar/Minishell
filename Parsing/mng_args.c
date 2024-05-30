@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:08:54 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/28 19:55:50 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/30 19:54:31 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	arg_space(char *cmd)
 	}
 }
 
-static void	reset_sp(char **args)
+void	reset_sp(char **args)
 {
 	int	i;
 	int	j;
@@ -103,6 +103,6 @@ void	get_args(t_node *node)
 	cmd[i] = '\0';
 	arg_space(cmd);
 	args = ft_split(cmd, " ", 0);
-	reset_sp(args);
+	// reset_sp(args);
 	node->cmd = args;
 }
