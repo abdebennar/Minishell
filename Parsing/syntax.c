@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:50:12 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/29 23:19:38 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/30 01:42:36 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 static t_token	get_next_token(char *cmd, int i)
 {
 	skip_space(cmd, &i);
-	i += skip_quotes((cmd + i + 1), cmd[i]);
+	if ((cmd[i] == '"' &&  cmd[i] == '\''))
+		i += skip_quotes((cmd + i + 1), cmd[i]);
 	return (get_token(cmd[i], cmd[i + 1]));
 }
 

@@ -44,7 +44,8 @@ SRCS 		=	Exec/builtins/cd.c \
 OBJDIR		= $(CURDIR)/obj
 SHELL		= /bin/bash
 NAME		= minishell
-CFLAGS		= -Wall -Wextra -Werror  #-fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror
+XFLAGS		= -lreadline #-fsanitize=
 CC			= cc
 HEADER		= $(CURDIR)/Include/minishell.h $(CURDIR)/Include/prottypes.h
 BREW		= $(HOME)/goinfre/homebrew/bin/brew
@@ -77,7 +78,7 @@ ifndef RDL_CHEKC
 endif
 
 $(NAME)	: $(HEADER) $(OBJS)
-	$(CC) -lreadline $(LIBRARY) $(INCLUDE) $(OBJS) -o $@
+	$(CC) $(XFLAGS) $(LIBRARY) $(INCLUDE) $(OBJS) -o $@
 
 
 $(OBJDIR)/%.o: %.c $(HEADER)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/30 00:30:26 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/30 03:43:31 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	main(void)
 	struct termios	att;
 
 	add_env();
-	term_attr(&att);
 	while (666)
 	{
 		sig_ign();
@@ -38,17 +37,24 @@ int	main(void)
 		node = parsing(line);
 		if (handle_heredoc(node))
 			node = NULL;
+		term_attr(&att);
 		_exec_arch_(node);
-		// close_doc(node);
 		g_sig = 0;
 		if (isatty(0) && tcsetattr(0, TCSANOW, &att))
 			perror("termios");
 	}
-	// put_err("exit\n");
+	put_err("exit\n");
 	clear_history();
 	my_malloc(0, 0, 1);
 	my_malloc(0, 0, 0);
 }
+
+// FIX // TODO //
+
+/*
+** ls " > file "
+** cat "" ls "" ...  non stable behaviour 
+*/
 
 // export l="   p" && export p=$l && echo $p
 // $DSALKM""   					///////////

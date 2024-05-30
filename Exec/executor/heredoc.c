@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 05:50:24 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/29 22:38:21 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/30 03:45:35 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ static char *fill_file(t_redir *alter)
 			(1) && (free(line), line = NULL);
 			break ;
 		}
-		content = ft_strjoin(content, ft_strjoin(line, "\n", 0), 0);
+		if (line)
+			content = ft_strjoin(content, ft_strjoin(line, "\n", 0), 0);
 		(line) && (free(line), line = NULL);
 	}
 	if (g_sig == 2)
