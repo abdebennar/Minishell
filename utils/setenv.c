@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setenv.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 00:01:17 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/31 21:32:19 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/31 21:43:06 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	_setenv(char *name, char *new_value)
 {
 	int	offset;
 
-	
 	if (find_env(&offset, name))
 		_exist(name, new_value);
 	else

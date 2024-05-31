@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 05:50:24 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/31 00:08:49 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/31 21:43:49 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,9 @@ char	*expand_heredoc(char *line)
 
 static char	*fill_file(t_redir *alter)
 {
-	char	*line;
-	char	*content;
+	char		*line;
+	char		*content;
+	extern int	g_sig;
 
 	content = NULL;
 	while (1)
@@ -87,8 +88,9 @@ static char	*fill_file(t_redir *alter)
 
 char	*_heredoc_(t_redir *alter)
 {
-	char	*content;
-	int		fd;
+	char		*content;
+	int			fd;
+	extern int	g_sig;
 
 	fd = dup(STDIN_FILENO);
 	signal(SIGINT, heredoc_h);

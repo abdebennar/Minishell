@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:11:05 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/30 22:00:32 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/31 21:45:08 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	sigint_h(int sigN)
 {
+	extern int	g_sig;
+
 	if (g_sig == 0)
 	{
 		(void)sigN;
@@ -41,6 +43,8 @@ void	sig_allow(void)
 
 void	heredoc_h(int n)
 {
+	extern int	g_sig;
+
 	(void)n;
 	g_sig = 2;
 	close(STDIN_FILENO);

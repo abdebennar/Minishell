@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:42:10 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/30 22:07:48 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/31 21:43:24 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,9 @@ static bool	pr_syntax(char *cmd)
 
 t_node	*parsing(char *line)
 {
-	t_node	*node;
-	char	*cmd;
+	t_node		*node;
+	char		*cmd;
+	extern int	g_sig;
 
 	g_sig = 1;
 	node = NULL;

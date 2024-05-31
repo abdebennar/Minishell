@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 10:09:25 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/31 06:31:55 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/31 21:44:36 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ long long	ft_atoll(char *str, int *err)
 	while (*str == ' ' || *str == '\t')
 		str++;
 	if (*str)
-	{
-		(err) && (*err = 1);
-		return (255);
-	}
+		return ((err) && (*err = 1), 255);
 	return ((long long)num * sign);
 }
 

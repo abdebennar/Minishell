@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prottypes.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:42:30 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/29 22:17:38 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/31 21:39:54 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # define NOCMD_ERR		" command not found"
 # define EXIT_MANY_ARGS "exit\nshell: exit: too many arguments\n"
 
-extern int				g_sig;
 typedef unsigned int	t_uint;
 typedef long long		t_llong;
 extern char				**environ;
