@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_helper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 21:35:07 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/31 06:05:17 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/31 18:35:58 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ bool	b_is_builtin(t_node *node, char *str)
 {
 	if (!ft_strcmp(str, "cd"))
 		return (_cd_(node), true);
-	else if (!ft_strcmp(str, "echo"))
-		return (_echo_(node), true);
 	else if (!ft_strcmp(str, "env"))
 		return (_env_(), true);
 	else if (!ft_strcmp(str, "exit"))
@@ -62,8 +60,6 @@ bool	b_is_builtin(t_node *node, char *str)
 bool	check_builtin(char *str)
 {
 	if (!ft_strcmp(str, "cd"))
-		return (true);
-	else if (!ft_strcmp(str, "echo"))
 		return (true);
 	else if (!ft_strcmp(str, "env"))
 		return (true);

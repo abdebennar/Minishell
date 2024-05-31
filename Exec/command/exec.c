@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/31 06:03:23 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/31 21:31:43 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	my_execve(t_node *node, int raw_len)
 	reset_sp(node->cmd);
 	if (!((node)->cmd[0]) || !((node)->cmd[0][0]))
 		(put_str_err(NOCMD_ERR, node->cmd[0]), exit(127));
+	if (!ft_strcmp("echo", node->cmd[0]))
+		return (_echo_(node), exit(0));
 	path = add_path((node)->cmd[0]);
 	execve(path, (node)->cmd, environ);
 	exit (exec_err(errno, path, node->cmd[0]));

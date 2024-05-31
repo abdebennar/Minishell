@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 00:01:17 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/30 21:39:35 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/31 21:32:19 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool	find_env(int *offset, char *name)
 	*offset = 0;
 	while (environ[*offset])
 	{
-		if (ft_strncmp(name, (environ[*offset]), get_c(environ[*offset])) == 0)
+		if (ft_strncmp(name, (environ[*offset]), ft_strlen(name)) == 0)
 			return (true);
 		(*offset)++;
 	}
@@ -49,7 +49,7 @@ void	_exist(char *name, char *new_value)
 					get_c(environ[offset]) + 1, 0), new_value, 1);
 	else
 		environ[offset] = ft_strjoin(ft_substr(environ[offset], 0,
-					get_c(environ[offset]) + 1, 0), ft_strjoin("=",
+					get_c(environ[offset]), 0), ft_strjoin("=",
 					new_value, 0), 1);
 }
 
@@ -71,6 +71,7 @@ void	_setenv(char *name, char *new_value)
 {
 	int	offset;
 
+	
 	if (find_env(&offset, name))
 		_exist(name, new_value);
 	else

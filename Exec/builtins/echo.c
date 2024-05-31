@@ -49,5 +49,4 @@ void	_echo_(t_node *node)
 	}
 	if (!flag)
 		write(1, "\n", 1);
-	_setenv("?", ft_itoa(0));
 }
