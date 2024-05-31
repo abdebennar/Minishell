@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 21:35:07 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/31 00:14:30 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/31 06:05:17 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ bool	check_builtin(char *str)
 	return (false);
 }
 
-bool	is_builtin(t_node *node)
+bool	is_builtin(t_node *node, int raw_len)
 {
 	int		index;
 	char	**splited;
@@ -89,8 +89,10 @@ bool	is_builtin(t_node *node)
 	splited = NULL;
 	if (check_builtin(node->cmd[0]))
 	{
-		while (node->cmd[++index])
+		while (node->cmd && ++index < raw_len)
 		{
+			if (!node->cmd[index])
+				continue ;
 			find_replace(node->cmd[index], '\v', ' ');
 			find_replace(node->cmd[index], '\177', ' ');
 			splited = concatenate_strings(splited,

@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/31 00:16:04 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/31 06:03:50 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ char	*add_path(char *cmd);
 ** Exec : command : exec_helper
 */
 
-bool	is_builtin(t_node *node);
+bool	is_builtin(t_node *node, int raw_len);
 char	*add_path(char *cmd);
 void	reset_fds(t_node **node, int *bk_fd);
 int		_exit_stat_(int oldx);

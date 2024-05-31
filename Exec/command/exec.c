@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/31 00:12:55 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/31 06:03:23 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	_exec_(t_node *node)
 	bk_fd[1] = dup(1);
 	raw_len = count_strings(node->cmd);
 	node->cmd = _expanding_(&node);
-	if (_redirections_(&node) || is_builtin(node))
+	if (_redirections_(&node) || is_builtin(node, raw_len))
 		return (reset_fds(&node, bk_fd));
 	forked = fork();
 	if (forked < 0)
