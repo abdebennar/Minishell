@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 10:09:25 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/28 19:55:50 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/31 06:31:55 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ long long	ft_atoll(char *str, int *err)
 			return (-1);
 		}
 	}
+	while (*str == ' ' || *str == '\t')
+		str++;
 	if (*str)
 	{
 		(err) && (*err = 1);
