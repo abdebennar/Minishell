@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 02:44:18 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/28 19:00:39 by abennar          ###   ########.fr       */
+/*   Updated: 2024/06/01 00:45:27 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	doc_strcmp(char *s1, char *s2)
 {
-	if (!*s2 && !s1)
-		return (0);
 	if (!s2 || !s1)
 		return (1);
 	while (*s1 == *s2 && *s1)
@@ -23,8 +21,6 @@ int	doc_strcmp(char *s1, char *s2)
 		s1++;
 		s2++;
 	}
-	if (*s1 == '\n' && !*s2)
-		return (0);
 	return (*s1 - *s2);
 }
 

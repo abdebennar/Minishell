@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 03:57:42 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/28 16:25:37 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/31 23:46:16 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	rbuddha(t_node *node, int *piped)
 	forked = fork();
 	if (forked < 0)
 	{
-		perror("fork");
+		perror("pipe");
 		return (-1);
 	}
 	if (!forked)
@@ -44,7 +44,7 @@ int	lbuddha(t_node *node, int *piped)
 	forked = fork();
 	if (forked < 0)
 	{
-		perror("fork");
+		perror("pipe");
 		return (-1);
 	}
 	if (!forked)

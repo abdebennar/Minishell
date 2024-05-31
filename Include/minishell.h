@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:16:16 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/31 06:03:50 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/31 22:27:16 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,20 +199,26 @@ void	lst_iter(t_node	*lst, void (*f)(t_node *));
 ** algo
 */
 
+//remove the priority
 t_node	*infix_to_postfix(t_node **lst);
+
+//ls wc | -> | wc ls
 t_node	*postfix_to_prefix(t_node *node);
 
 /*
 ** algo_utils
 */
 
+//push, top first
 void	top_push(t_node **src, t_node **dest);
+//push, down first
 void	back_push(t_node **src, t_node **dest);
 
 /*
 ** tree
 */
 
+//creating the tree
 t_node	*tree(t_node	*node);
 
 /*

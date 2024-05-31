@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 04:00:45 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/31 00:15:21 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/06/01 00:45:19 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,11 @@ int	heredoc_file(char *content)
 	new_cnt = NULL;
 	if (content)
 	{
-		find_replace2(content, '\n', '\a');
-		her_cnt = ft_split(content, "\a", 0);
+		her_cnt = ft_split(content, "\v", 0);
 		while (*her_cnt)
 		{
 			line = expand_heredoc(*her_cnt);
-			new_cnt = ft_strjoin(new_cnt, ft_strjoin(line, "\n", 0), 0);
+			new_cnt = ft_strjoin(new_cnt, line, 0);
 			line = NULL;
 			her_cnt++;
 		}

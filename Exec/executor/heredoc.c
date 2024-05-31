@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 05:50:24 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/31 21:43:49 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/05/31 23:07:34 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static char	*fill_file(t_redir *alter)
 			break ;
 		}
 		if (line)
-			content = ft_strjoin(content, ft_strjoin(line, "\n", 0), 0);
+			content = ft_strjoin(content, ft_strjoin(line, "\n\v", 0), 0);
 		(line) && (free(line), line = NULL);
 	}
 	if (g_sig == 2)

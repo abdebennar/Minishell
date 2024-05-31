@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/30 23:48:36 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/06/01 00:45:08 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(void)
 		term_attr(&att);
 		_exec_arch_(node);
 		g_sig = 0;
-		if (isatty(STDIN_FILENO) && tcsetattr(1, TCSANOW, &att))
+		if (isatty(STDIN_FILENO) && tcsetattr(0, TCSANOW, &att))
 			perror("termios");
 	}
 	put_err("exit\n");
@@ -48,34 +48,3 @@ int	main(void)
 	my_malloc(0, 0, 1);
 	my_malloc(0, 0, 0);
 }
-
-// FIX // TODO //
-
-/*
-** ls " > file " ////////////////
-** cat "" ls "" ...  non stable behaviour ////////////////
-*/
-
-// export l="   p" && export p=$l && echo $p ////////////////
-// $DSALKM""   					///////////
-// << l | << l					///////////
-//(<<"|)")               ////////////
-// "(")					///////////	
-//RESET THE FDS if CTRL+C on multiple heredoc `<< l | << k`		//////////////
-//<< ""   					///////////
-//cat > ''    					///////////
-//ls .... (using recursion in the parse) 	/////////////`
-//< test.c cat >> out && << ok (cat || ls)   -> << and ()   (   ls (whoami)  )
-//./minishell | ./minishell ??
-// << s>  							/////
-//echo h > ''      					///////////
-// export a=' * ' && echo $a  ??
-
-// unset with a var without value /////////////
-// top with (sig quit) ruines the readline ///////////
-
-// fd leak : multi heredoc in pipe and || ///////////
-// heredoc file change its place to /tmp or any  ///////////
-//(3232) ls
-//env -i bash --> echo $PATH
-//exit stat of SYNXT ERR is 258 not 2

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:53:26 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/05/31 21:31:43 by abennar          ###   ########.fr       */
+/*   Updated: 2024/05/31 23:46:25 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	_exec_(t_node *node)
 	{
 		close(bk_fd[0]);
 		close(bk_fd[1]);
-		perror("fork on _exec_");
+		perror("fork");
 		exit(1);
 	}
 	if (!forked)
