@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:50:12 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/31 00:16:54 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/06/04 14:37:35 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ bool	check_syntax(t_token tok, char *cmd, int i)
 	{
 		n = get_next_token(cmd, i);
 		if (!(n == NOT || is_redir(n) || n == LPR) || (tok == PIPE
-				&& (i < 2 || n == LPR)) || (tok != PIPE && i < 3) || n == END)
+				&& i < 2) || (tok != PIPE && i < 3) || n == END)
 		{
 			if ((tok == PIPE && i < 2) || (tok != PIPE && i < 3))
 				return (put_tok_err(tok));
