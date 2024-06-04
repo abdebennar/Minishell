@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:43:59 by abennar           #+#    #+#             */
-/*   Updated: 2024/05/28 19:55:50 by abennar          ###   ########.fr       */
+/*   Updated: 2024/06/04 12:36:56 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,18 @@ char	**copy(char **str, bool extra_size, int group)
 	new[j] = NULL;
 	return (new);
 }
+
+/*
+**	Here i copy the existing environment variables to a new 
+**	environment in heap. you will understand later why.
+**	Disable readline signal handling. `rl_catch_signals = 0;`
+**	as the readline has its own signals handlers.
+*/
+
+/*
+**	Note: Be cautious when running the shell without a defined environment, as
+**	this can cause a segmentation fault (`env -i ./minishell`).
+*/
 
 void	add_env(void)
 {
