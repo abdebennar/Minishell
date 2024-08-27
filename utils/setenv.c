@@ -30,7 +30,7 @@ bool	find_env(int *offset, char *name)
 	*offset = 0;
 	while (environ[*offset])
 	{
-		if (ft_strncmp(name, (environ[*offset]), ft_strlen(name)) == 0)
+		if (ft_strcmp(name, (environ[*offset])) == 0)
 			return (true);
 		(*offset)++;
 	}

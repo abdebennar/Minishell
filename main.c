@@ -3,16 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 08:22:24 by abennar           #+#    #+#             */
-/*   Updated: 2024/06/01 00:45:08 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/06/04 14:27:10 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+** Project contributors: bel-oirg and abennar
+*/
+
+
+
 int	g_sig = 0;
+/*
+**	This function takes a copy of the terminal attributes,
+**	so you can restore them after execution.
+** 
+**	Some commands modify these attributes, and without saving
+**	the original state, the terminal and stream file descriptor
+**	behaviors become undefined. for example: `top`
+*/
 
 void	term_attr(struct termios *att)
 {
